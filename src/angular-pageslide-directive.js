@@ -13,62 +13,65 @@ pageslideDirective.directive('pageslide', [
             replace: false,
             transclude: false,
             scope: {},
-            // template: '<div class="angular-leaflet-map"></div>',
             link: function ($scope, el, attrs) {
                 console.log($scope);
                 console.log(el);
                 console.log(attrs);
 
-                /* expose for debug */
-                deb = el;
-                
-                /* get the content from the div */
-                var content = document.getElementById(attrs.href.substr(1));
-                //console.log(html);
+                /* parameters */
+                var param = {};
+                param.side = attrs.pageslide || 'right';
+                param.speed = attrs.psSpeed || '0.5';
 
-                /* append the content in a new div and attach it to the dom */
+                /* init */
+                var css_class = 'ng-pageslider ps-hidden';
+                css_class += ' ps-' + param.side;
+
+                /* expose for debug */
+                //deb = el;
+                
+                /* DOM manipulation */
+                var content = document.getElementById(attrs.href.substr(1));
                 var slider = document.createElement('div');
                 slider.id = "page-slide";
-                slider.style.display = 'none';
-
+                slider.className = css_class;
+                
                 document.body.appendChild(slider);
                 slider.appendChild(content);
                 content.style.display = "block";
-                setCSS();
-
-                console.log('ok');
-
-                /* change display on */
+                
+                console.log('Pageslider done');
+                
+                /* set CSS from parameters */
+                if (param.speed){
+                slider.style.transitionDuration = param.speed + 's';
+                slider.style.webkitTransitionDuration = param.speed + 's';
+                }
 
                 /*
                 * Events
                 * */
 
                 el.bind('click',function(){
-                    slider.style.display = 'block';
+                    if (/ps-hidden/.exec(slider.className)){
+                        slider.className = slider.className.replace(' ps-hidden','');
+                        slider.className += ' ps-shown';
+                        console.log(slider.className);
+                        console.log('show');
+                    }
+
                 });
 
-                close_handler = angular.element(attrs.href + '-close');
+                var close_handler = angular.element(attrs.href + '-close');
 
                 close_handler.bind('click',function(){
-                    console.log('hide');
-                    slider.style.display = 'none';
-                })
-
-                /*
-                * Init CSS properties
-                * */
-
-                function setCSS(){
-                    slider.style.position = 'absolute';
-                    slider.style.top = '0px';
-                    slider.style.bottom = '0px';
-                    slider.style.right = '0px';
-                    slider.style.width = '300px';
-                    slider.style.background = '#00FF00';
-                }
-
-
+                    if (/ps-shown/.exec(slider.className)){
+                        slider.className = slider.className.replace(' ps-shown','');
+                        slider.className += ' ps-hidden';
+                        console.log('hide');
+                    }
+                });
             }
-        }
+        };
+
     }]);
