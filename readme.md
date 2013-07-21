@@ -1,8 +1,8 @@
 # AngularJS Pageslide directive
 
-An [AngularJS](http://angularjs.org/) directive which slides a webpage over to reveal an additional interaction pane.
+An [AngularJS](http://angularjs.org/) directive which slides another panel over your browser to reveal an additional interaction pane.
 
-Built from scratch to offer a basic sliding pane for Angular apps.
+Built from scratch to offer a basic sliding pane for Angular apps, CSS transitions and no jQuery required.
 
 ## Usage
 
@@ -32,14 +32,18 @@ Your HTML should look like this
 
 ### Options:
 
+```
 pageslide = Where the panel should appear (right,left,top,bottom)
 ps-speed = The speed of the transition
+```
 
 ## Licensing
+
 Licensed under [GPL](http://www.gnu.org/licenses/gpl.txt)
 
 ## Author
-_Daniele Piccone [@danielepiccone](https://twitter.com/danielepiccone)
+
+2013, Daniele Piccone [@danielepiccone](https://twitter.com/danielepiccone)
 
 
 
