@@ -2,7 +2,7 @@
 
 An [AngularJS](http://angularjs.org/) directive which slides another panel over your browser to reveal an additional interaction pane.
 
-Built from scratch to offer a basic sliding pane for Angular apps, CSS transitions and no jQuery required.
+
 
 ## Usage
 
