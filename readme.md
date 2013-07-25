@@ -39,7 +39,7 @@ ps-speed = The speed of the transition
 
 ## Licensing
 
-Licensed under [GPL](http://www.gnu.org/licenses/gpl.txt)
+Licensed under [MIT](http://opensource.org/licenses/MIT)
 
 ## Author
 
