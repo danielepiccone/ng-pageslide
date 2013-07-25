@@ -1,19 +1,19 @@
 /*
  * AngularJS Pageslide directive
  */
-.ng-pageslider {
+.ng-pageslide {
   background-color: #eeeeee;
   position: fixed;
   z-index: 9;
   transition-duration: 0.5s;
 }
-.ng-pageslider.ps-hidden {
+.ng-pageslide.ps-hidden {
   transition-property: width, height;
 }
-.ng-pageslider.ps-shown {
+.ng-pageslide.ps-shown {
   transition-property: width, height;
 }
-.ng-pageslider.ps-right {
+.ng-pageslide.ps-right {
   width: 300px;
   top: 0px;
   bottom: 0px;
@@ -21,13 +21,13 @@
   border-left: 1px solid #bbbbbb;
   overflow-x: hidden;
 }
-.ng-pageslider.ps-right.ps-hidden {
+.ng-pageslide.ps-right.ps-hidden {
   width: 0px;
 }
-.ng-pageslider.ps-right.ps-shown {
+.ng-pageslide.ps-right.ps-shown {
   width: 300px;
 }
-.ng-pageslider.ps-left {
+.ng-pageslide.ps-left {
   width: 300px;
   top: 0px;
   bottom: 0px;
@@ -35,13 +35,13 @@
   border-right: 1px solid #bbbbbb;
   overflow-x: hidden;
 }
-.ng-pageslider.ps-left.ps-hidden {
+.ng-pageslide.ps-left.ps-hidden {
   width: 0px;
 }
-.ng-pageslider.ps-left.ps-shown {
+.ng-pageslide.ps-left.ps-shown {
   width: 300px;
 }
-.ng-pageslider.ps-top {
+.ng-pageslide.ps-top {
   height: 200px;
   top: 0px;
   right: 0px;
@@ -49,13 +49,13 @@
   border-bottom: 1px solid #bbbbbb;
   overflow-y: hidden;
 }
-.ng-pageslider.ps-top.ps-hidden {
+.ng-pageslide.ps-top.ps-hidden {
   height: 0px;
 }
-.ng-pageslider.ps-top.ps-shown {
+.ng-pageslide.ps-top.ps-shown {
   height: 200px;
 }
-.ng-pageslider.ps-bottom {
+.ng-pageslide.ps-bottom {
   height: 200px;
   right: 0px;
   bottom: 0px;
@@ -63,9 +63,9 @@
   border-top: 1px solid #bbbbbb;
   overflow-y: hidden;
 }
-.ng-pageslider.ps-bottom.ps-hidden {
+.ng-pageslide.ps-bottom.ps-hidden {
   height: 0px;
 }
-.ng-pageslider.ps-bottom.ps-shown {
+.ng-pageslide.ps-bottom.ps-shown {
   height: 200px;
 }

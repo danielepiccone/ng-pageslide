@@ -11,7 +11,7 @@
     -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
     <script  src="../src/angular-pageslide-directive.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/angular-pageslide.less.css" >
+    <link rel="stylesheet" type="text/css" href="../css/angular-pageslide.less.css" >
     <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/foundation/4.2.3/css/foundation.min.css"> 
     <title>Demo</title>
     <script>
@@ -34,10 +34,40 @@
 
 <a  class="tiny button" pageslide="right" ps-speed="0.5" href="#demo">Open Demo</a>
 
+<a  class="tiny button" pageslide="right" ps-speed="5" href="#demo-slow">Slowmo</a>
+
+<a  class="tiny button" pageslide="right" ps-speed="0.25" href="#demo-fast">Fastmo</a>
+
+<a  class="tiny button" pageslide="bottom" ps-speed="0.5" href="#demo-down">Down by the water</a>
+
+<a  class="tiny button" pageslide="top" ps-speed="0.5" href="#demo-top">Up up and abover</a>
+
+<a  class="tiny button" pageslide="left" ps-speed="0.5" href="#demo-left">Go West</a>
+
 <div style="display:none;padding:20px" id="demo">
 	<h2>Hello Pageslide</h2>
 	<p>Put here whatever you want</p>
 	<a id="demo-close"i class="button" >Close</a>
+</div>
+<div style="display:none;padding:20px" id="demo-slow">
+	<h2>Hello Pageslide</h2>
+	<p>Put here whatever you want</p>
+	<a id="demo-slow-close" class="button" >Close</a>
+</div>
+<div style="display:none;padding:20px" id="demo-down">
+	<h2>Hello Pageslide</h2>
+	<p>Put here whatever you want</p>
+	<a id="demo-down-close" class="button" >Close</a>
+</div>
+<div style="display:none;padding:20px" id="demo-left">
+	<h2>Hello Pageslide</h2>
+	<p>Put here whatever you want</p>
+	<a id="demo-left-close" class="button" >Close</a>
+</div>
+<div style="display:none;padding:20px" id="demo-top">
+	<h2>Hello Pageslide</h2>
+	<p>Put here whatever you want</p>
+	<a id="demo-top-close" class="button" >Close</a>
 </div>
 
     </div>

@@ -25,28 +25,27 @@ pageslideDirective.directive('pageslide', [
                 param.speed = attrs.psSpeed || '0.5';
 
                 /* init */
-                var css_class = 'ng-pageslider ps-hidden';
+                var css_class = 'ng-pageslide ps-hidden';
                 css_class += ' ps-' + param.side;
 
                 /* expose for debug */
                 //deb = el;
-                
+
                 /* DOM manipulation */
                 var content = document.getElementById(attrs.href.substr(1));
                 var slider = document.createElement('div');
-                slider.id = "page-slide";
+                slider.id = "ng-pageslide";
                 slider.className = css_class;
-                
+
                 document.body.appendChild(slider);
                 slider.appendChild(content);
-                content.style.display = "block";
-                
+
                 //console.log('Pageslider Done.');
-                
+
                 /* set CSS from parameters */
                 if (param.speed){
-                slider.style.transitionDuration = param.speed + 's';
-                slider.style.webkitTransitionDuration = param.speed + 's';
+                    slider.style.transitionDuration = param.speed + 's';
+                    slider.style.webkitTransitionDuration = param.speed + 's';
                 }
 
                 /*
@@ -55,9 +54,14 @@ pageslideDirective.directive('pageslide', [
 
                 el[0].onclick = function(){
                     if (/ps-hidden/.exec(slider.className)){
+                        content.style.display = 'none';
                         slider.className = slider.className.replace(' ps-hidden','');
                         slider.className += ' ps-shown';
                         //console.log('show');
+                        setTimeout(function(){
+                            content.style.display = 'block';
+                        },(param.speed * 1000));
+
                     }
 
                 };
@@ -66,6 +70,7 @@ pageslideDirective.directive('pageslide', [
 
                 close_handler.onclick = function(){
                     if (/ps-shown/.exec(slider.className)){
+                        content.style.display = 'none';
                         slider.className = slider.className.replace(' ps-shown','');
                         slider.className += ' ps-hidden';
                         //console.log('hide');
