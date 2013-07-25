@@ -14,9 +14,10 @@ pageslideDirective.directive('pageslide', [
             transclude: false,
             scope: {},
             link: function ($scope, el, attrs) {
-                console.log($scope);
-                console.log(el);
-                console.log(attrs);
+                /* Inspect */
+                //console.log($scope);
+                //console.log(el);
+                //console.log(attrs);
 
                 /* parameters */
                 var param = {};
@@ -40,7 +41,7 @@ pageslideDirective.directive('pageslide', [
                 slider.appendChild(content);
                 content.style.display = "block";
                 
-                console.log('Pageslider done');
+                //console.log('Pageslider Done.');
                 
                 /* set CSS from parameters */
                 if (param.speed){
@@ -52,25 +53,25 @@ pageslideDirective.directive('pageslide', [
                 * Events
                 * */
 
-                el.bind('click',function(){
+                el[0].onclick = function(){
                     if (/ps-hidden/.exec(slider.className)){
                         slider.className = slider.className.replace(' ps-hidden','');
                         slider.className += ' ps-shown';
-                        console.log(slider.className);
-                        console.log('show');
+                        //console.log('show');
                     }
 
-                });
+                };
 
-                var close_handler = angular.element(attrs.href + '-close');
+                var close_handler = document.getElementById(attrs.href.substr(1) + '-close');
 
-                close_handler.bind('click',function(){
+                close_handler.onclick = function(){
                     if (/ps-shown/.exec(slider.className)){
                         slider.className = slider.className.replace(' ps-shown','');
                         slider.className += ' ps-hidden';
-                        console.log('hide');
+                        //console.log('hide');
                     }
-                });
+                };
+
             }
         };
 
