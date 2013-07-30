@@ -68,14 +68,16 @@ pageslideDirective.directive('pageslide', [
 
                 var close_handler = document.getElementById(attrs.href.substr(1) + '-close');
 
-                close_handler.onclick = function(){
-                    if (/ps-shown/.exec(slider.className)){
-                        content.style.display = 'none';
-                        slider.className = slider.className.replace(' ps-shown','');
-                        slider.className += ' ps-hidden';
-                        //console.log('hide');
-                    }
-                };
+                if (close_handler){
+                    close_handler.onclick = function(){
+                        if (/ps-shown/.exec(slider.className)){
+                            content.style.display = 'none';
+                            slider.className = slider.className.replace(' ps-shown','');
+                            slider.className += ' ps-hidden';
+                            //console.log('hide');
+                        }
+                    };
+                }
 
             }
         };
