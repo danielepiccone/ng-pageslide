@@ -52,7 +52,8 @@ pageslideDirective.directive('pageslide', [
                 * Events
                 * */
 
-                el[0].onclick = function(){
+                el[0].onclick = function(e){
+                    e.preventDefault();
                     if (/ps-hidden/.exec(slider.className)){
                         content.style.display = 'none';
                         slider.className = slider.className.replace(' ps-hidden','');
@@ -69,7 +70,8 @@ pageslideDirective.directive('pageslide', [
                 var close_handler = document.getElementById(attrs.href.substr(1) + '-close');
 
                 if (close_handler){
-                    close_handler.onclick = function(){
+                    close_handler.onclick = function(e){
+                        e.preventDefault();
                         if (/ps-shown/.exec(slider.className)){
                             content.style.display = 'none';
                             slider.className = slider.className.replace(' ps-shown','');
