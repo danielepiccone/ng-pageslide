@@ -2,7 +2,8 @@
 
 An [AngularJS](http://angularjs.org/) directive which slides another panel over your browser to reveal an additional interaction pane.
 
-
+See it in action [HERE](http://dpiccone.github.io/ng-pageslide/demo/)
+More examples in the repository.
 
 ## Usage
 
@@ -45,5 +46,5 @@ Licensed under [MIT](http://opensource.org/licenses/MIT)
 
 2013, Daniele Piccone [@danielepiccone](https://twitter.com/danielepiccone)
 
-
+[Github Page] (http://dpiccone.github.io/ng-pageslide/) 
 
