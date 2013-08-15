@@ -36,7 +36,7 @@ Your HTML should look like this
 
 ```
 pageslide = Where the panel should appear (right,left,top,bottom)
-ps-speed = The speed of the transition
+ps-speed = The speed of the transition (optional)
 ```
 
 ## Licensing
