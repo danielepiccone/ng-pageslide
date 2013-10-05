@@ -16,9 +16,18 @@
             }
         </style>
         <script>
-
             var app = angular.module("app", ["pageslide-directive"]);
 
+            app.controller('pageslideCtrl',['$scope',function($scope){
+
+                $scope.open = 'yes';
+
+            }]);
+
+            angular.element(document).ready(function(){
+
+                c = angular.element(document.querySelector('#controller-demo')).scope();
+            });
         </script>
     </head>
 
@@ -79,20 +88,37 @@
                 <a id="demo-top-close" class="button" >Close</a>
             </div>
 
+            <br/>
+
+            <div id="controller-demo" ng-controller="pageslideCtrl">
+                <h3>Opening / Closing within a controller</h3>
+                
+                <p>Check to open: <input type="checkbox" ng-model="checked" ></p><br/>
+                <pageslide ps-open="checked" ps-target="#demo-ctrl" pageslide="right" ps-speed="0.5"></pageslide> 
+                <div style="display:none;padding:20px" id="demo-ctrl">
+                    <h2>Hello Pageslide</h2>
+                    <p>Put here whatever you want</p>
+                </div>
+
+
+            </div>
+
+
         </div>
+
 
 
         <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-        </script>
-        <script type="text/javascript">
-            try {
-                var pageTracker = _gat._getTracker("UA-42627434-1");
-                pageTracker._trackPageview();
-            } catch(err) {}
-        </script>
+            </script>
+            <script type="text/javascript">
+                try {
+                    var pageTracker = _gat._getTracker("UA-42627434-1");
+                    pageTracker._trackPageview();
+                } catch(err) {}
+</script>
 
 
-    </body>
-</html>
+        </body>
+    </html>

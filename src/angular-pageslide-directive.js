@@ -1,24 +1,21 @@
 var pageslideDirective = angular.module("pageslide-directive", []);
 
 pageslideDirective.directive('pageslide', [
-    '$http', '$log', '$parse', '$rootScope', function ($http, $log, $parse, $rootScope) {
-
-        var defaults = {};
-        var str_inspect_hint = 'Add testing="testing" to inspect this object';
-
+     function (){
+        var defaults = {}
         /* Return directive definition object */
 
         return {
-            restrict: "A",
+            restrict: "EA",
             replace: false,
             transclude: false,
-            scope: {},
+            scope: true,
             link: function ($scope, el, attrs) {
                 /* Inspect */
                 //console.log($scope);
                 //console.log(el);
                 //console.log(attrs);
-
+                
                 /* parameters */
                 var param = {};
                 param.side = attrs.pageslide || 'right';
@@ -26,66 +23,75 @@ pageslideDirective.directive('pageslide', [
                 param.size = '300px';
 
                 /* DOM manipulation */
-                var content = document.getElementById(attrs.href.substr(1));
+                var content = (attrs.href) ? document.getElementById(attrs.href.substr(1)) : document.getElementById(attrs.psTarget.substr(1));
                 var slider = document.createElement('div');
-                //console.log(content);
                 slider.id = "ng-pageslide";
 
-                /* Style */
+                /* Style setup */
                 slider.style.transitionDuration = param.speed + 's';
                 slider.style.webkitTransitionDuration = param.speed + 's';
                 slider.style.zIndex = 1000;
                 slider.style.position = 'fixed';
-                slider.style.transitionProperty = 'width, height';
-
                 slider.style.width = 0;
                 slider.style.height = 0;
+                slider.style.transitionProperty = 'width, height';
+                
                 switch (param.side){
-                    case 'right':
-                        slider.style.height = '100%'; 
-                        slider.style.top = '0px';
-                        slider.style.bottom = '0px';
-                        slider.style.right = '0px';
-                        break;
-                    case 'left':
-                        slider.style.height = '100%';   
-                        slider.style.top = '0px';
-                        slider.style.bottom = '0px';
-                        slider.style.left = '0px';
-                        break;
-                    case 'top':
-                        slider.style.width = '100%';   
-                        slider.style.left = '0px';
-                        slider.style.top = '0px';
-                        slider.style.right = '0px';
-                        break;
-                    case 'bottom':
-                        slider.style.width = '100%'; 
-                        slider.style.bottom = '0px';
-                        slider.style.left = '0px';
-                        slider.style.right = '0px';
-                        break;
-                }
+                            case 'right':
+                                slider.style.height = '100%'; 
+                                slider.style.top = '0px';
+                                slider.style.bottom = '0px';
+                                slider.style.right = '0px';
+                                break;
+                            case 'left':
+                                slider.style.height = '100%';   
+                                slider.style.top = '0px';
+                                slider.style.bottom = '0px';
+                                slider.style.left = '0px';
+                                break;
+                            case 'top':
+                                slider.style.width = '100%';   
+                                slider.style.left = '0px';
+                                slider.style.top = '0px';
+                                slider.style.right = '0px';
+                                break;
+                            case 'bottom':
+                                slider.style.width = '100%'; 
+                                slider.style.bottom = '0px';
+                                slider.style.left = '0px';
+                                slider.style.right = '0px';
+                                break;
+                        }
 
 
                 /* Append */
                 document.body.appendChild(slider);
                 slider.appendChild(content);
 
-                //console.log('Pageslider Done.');
+                /* Closed */
+                function psClose(slider,param){
+                    if (slider.style.width != 0 && slider.style.width != 0){
+                        content.style.display = 'none';
+                        switch (param.side){
+                            case 'right':
+                                slider.style.width = '0px'; 
+                                break;
+                            case 'left':
+                                slider.style.width = '0px';
+                                break;
+                            case 'top':
+                                slider.style.height = '0px'; 
+                                break;
+                            case 'bottom':
+                                slider.style.height = '0px'; 
+                                break;
+                        }
+                    }
+                };
 
-                /*
-                * Events
-                * */
-                el[0].addEventListener('click',function(e){
-                    //console.log(0);
-                    e.preventDefault();
-                    var shown = slider.style.width != 0 && slider.style.width != 0;
-                    if (shown){
-                        //content.style.display = 'none';
-                        //slider.className = slider.className.replace(' ps-hidden','');
-                        //slider.className += ' ps-shown';
-                        //console.log('show');
+                /* Open */
+                function psOpen(slider,param){
+                    if (slider.style.width != 0 && slider.style.width != 0){
                         switch (param.side){
                             case 'right':
                                 slider.style.width = param.size; 
@@ -105,37 +111,39 @@ pageslideDirective.directive('pageslide', [
                         },(param.speed * 1000));
 
                     }
+                };
+                
+                /*
+                 * Watchers
+                 * */
 
+                $scope.$watch(attrs.psOpen, function (value){
+                    if (!!value) {
+                        // Open
+                        psOpen(slider,param);
+                    } else {
+                        // Close
+                        psClose(slider,param);
+                    }
                 });
 
-                var close_handler = document.getElementById(attrs.href.substr(1) + '-close');
+
+                /*
+                 * Events
+                 * */
+
+                el[0].addEventListener('click',function(e){
+                    e.preventDefault();
+                    psOpen(slider,param);                    
+                });
+
+                var close_handler = (attrs.href) ? document.getElementById(attrs.href.substr(1) + '-close') : null;
                 if (close_handler){
                     close_handler.addEventListener('click', function(e){
-                        console.log('er');
                         e.preventDefault();
-                        if (slider.style.width != 0 && slider.style.width != 0){
-                            content.style.display = 'none';
-                            //slider.className = slider.className.replace(' ps-shown','');
-                            //slider.className += ' ps-hidden';
-                            switch (param.side){
-                                case 'right':
-                                    slider.style.width = '0px'; 
-                                    break;
-                                case 'left':
-                                    slider.style.width =  '0px'; 
-                                    break;
-                                case 'top':
-                                    slider.style.height =  '0px'; 
-                                    break;
-                                case 'bottom':
-                                    slider.style.height =  '0px'; 
-                                    break;
-                            }
-                        }
+                        psClose(slider,param);
                     });
                 };
-
-
             }
         };
 
