@@ -26,10 +26,20 @@ Your HTML should look like this
 ```
 <a pageslide="right" ps-speed="0.5" href="#target">Link text</a>
 
-<div id="target" ng-controller="panelctrl" style="display:none">            
+<div id="target"  style="display:none">            
 <p>some random content...</p>
 <a id="target-close" href="#">Click to close</a>
 </div>
+```
+or you can use it like an element and open close with the ps-open attribute
+
+```
+<pageslide="right" ps-speed="0.5" ps-target="#target" ps-open="checked" href="#target"></pageslide>
+
+<div id="target"  style="display:none">            
+<p>some random content...</p>
+</div>
+
 ```
 
 ### Options:
@@ -37,6 +47,8 @@ Your HTML should look like this
 ```
 pageslide = Where the panel should appear (right,left,top,bottom)
 ps-speed = The speed of the transition (optional)
+ps-open  = true/false used to open and close the panel (optional)
+ps-target = "#target" used when using pageslide as an element
 ```
 
 ## Licensing
