@@ -8,8 +8,8 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
         <script  src="../src/angular-pageslide-directive.js"></script>
-        <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/foundation/4.2.3/css/foundation.min.css"> 
-        <title>Demo</title>
+        <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/foundation/5.0.0/css/foundation.min.css"> 
+        <title>AngularJS Pageslide directive demo</title>
         <style>
             #ng-pageslide {
                 background: #eee;
@@ -20,7 +20,7 @@
 
             app.controller('pageslideCtrl',['$scope',function($scope){
 
-                $scope.open = 'yes';
+                $scope.open;
 
             }]);
 
@@ -36,31 +36,40 @@
 
         <!-- MAIN CONTENT -->
         <div id="main_content_wrap" class="outer" style="padding:20px">
-            <section id="main_content" class="inner">
+            <header>
             <h1>
-                <a name="angularjs-pageslide-directive" class="anchor" href="#angularjs-pageslide-directive"><span class="octicon octicon-link"></span></a>AngularJS Pageslide directive</h1>
+                <a name="angularjs-pageslide-directive" class="anchor" href="#angularjs-pageslide-directive"><span class="octicon octicon-link"></span></a>AngularJS Pageslide directive
+            </h1>
+            </header>
 
-            <p>An <a href="http://angularjs.org/">AngularJS</a> directive which slides another panel over your browser to reveal an additional interaction pane.</p>
+            <section id="main_content" class="inner">
 
-            <a  class="tiny button" pageslide="right" ps-speed="0.5" href="#demo-right">Open Demo</a>
+            <p>
+                An <a href="http://angularjs.org/">AngularJS</a> directive which slides another panel over your browser to reveal an additional interaction pane.<br/>
+                It does all the css manipulation needed to position your content off canvas with html attibutes and it does not depend on jQuery
+            </p>
 
+            <a  class="large button" pageslide="right" ps-speed="0.5" href="#demo-right">Open Demo</a>
+
+            <h3>Different speeds</h3>
             <a  class="tiny button" pageslide="right" ps-speed="5" href="#demo-slow">Slowmo</a>
 
             <a  class="tiny button" pageslide="right" ps-speed="0.25" href="#demo-fast">Fastmo</a>
-
+            
+            <h3>Different directions</h3>
             <a  class="tiny button" pageslide="bottom" ps-speed="0.5" href="#demo-down">Down by the water</a>
 
-            <a  class="tiny button" pageslide="top" ps-speed="0.5" href="#demo-top">Up up and abover</a>
+            <a  class="tiny button" pageslide="top" ps-speed="0.5" href="#demo-top">Up up and above</a>
 
             <a  class="tiny button" pageslide="left" ps-speed="0.5" href="#demo-left">Go West</a>
 
-            <div style="display:none;padding:20px" id="demo-right">
+            <div style="padding:20px" id="demo-right">
                 <h2>Hello Pageslide</h2>
                 <p>Put here whatever you want</p>
                 <a id="demo-right-close"i class="button" >Close</a>
             </div>
 
-            <div style="display:none;padding:20px" id="demo-slow">
+            <div style="padding:20px" id="demo-slow">
                 <h2>Hello Pageslide</h2>
                 <p>Put here whatever you want</p>
                 <a id="demo-slow-close"i class="button" >Close</a>
@@ -99,14 +108,8 @@
                     <h2>Hello Pageslide</h2>
                     <p>Put here whatever you want</p>
                 </div>
-
-
             </div>
-
-
         </div>
-
-
 
         <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
