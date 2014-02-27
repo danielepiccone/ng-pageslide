@@ -20,7 +20,7 @@
 
             app.controller('pageslideCtrl',['$scope',function($scope){
 
-                $scope.open;
+                $scope.checked; // This will be binded using the ps-open attribute
 
             }]);
 
@@ -75,23 +75,23 @@
                 <a id="demo-slow-close"i class="button" >Close</a>
             </div>
 
-            <div style="display:none;padding:20px" id="demo-fast">
+            <div style="padding:20px" id="demo-fast">
                 <h2>Hello Pageslide</h2>
                 <p>Put here whatever you want</p>
                 <a id="demo-fast-close"i class="button" >Close</a>
             </div>
 
-            <div style="display:none;padding:20px" id="demo-down">
+            <div style="padding:20px" id="demo-down">
                 <h2>Hello Pageslide</h2>
                 <p>Put here whatever you want</p>
                 <a id="demo-down-close" class="button" >Close</a>
             </div>
-            <div style="display:none;padding:20px" id="demo-left">
+            <div style="padding:20px" id="demo-left">
                 <h2>Hello Pageslide</h2>
                 <p>Put here whatever you want</p>
                 <a id="demo-left-close" class="button" >Close</a>
             </div>
-            <div style="display:none;padding:20px" id="demo-top">
+            <div style="padding:20px" id="demo-top">
                 <h2>Hello Pageslide</h2>
                 <p>Put here whatever you want</p>
                 <a id="demo-top-close" class="button" >Close</a>
@@ -103,8 +103,8 @@
                 <h3>Opening / Closing within a controller</h3>
                 
                 <p>Check to open: <input type="checkbox" ng-model="checked" ></p><br/>
-                <pageslide ps-open="checked" ps-target="#demo-ctrl" pageslide="right" ps-speed="0.5"></pageslide> 
-                <div style="display:none;padding:20px" id="demo-ctrl">
+                <pageslide ps-open="checked" ps-target="#demo-ctrl"></pageslide> 
+                <div style="padding:20px" id="demo-ctrl">
                     <h2>Hello Pageslide</h2>
                     <p>Put here whatever you want</p>
                 </div>
