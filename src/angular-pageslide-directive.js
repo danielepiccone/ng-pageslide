@@ -129,22 +129,37 @@ pageslideDirective.directive('pageslide', [
 
 
                 /*
-                 * Events
-                 * */
-
-                el[0].addEventListener('click',function(e){
-                    e.preventDefault();
-                    psOpen(slider,param);                    
-                });
-
+                * Events
+                * */
                 var close_handler = (attrs.href) ? document.getElementById(attrs.href.substr(1) + '-close') : null;
-                if (close_handler){
-                    close_handler.addEventListener('click', function(e){
+                if (el[0].addEventListener) {
+                    el[0].addEventListener('click',function(e){
                         e.preventDefault();
-                        psClose(slider,param);
+                        psOpen(slider,param);                    
                     });
+
+                    if (close_handler){
+                        close_handler.addEventListener('click', function(e){
+                            e.preventDefault();
+                            psClose(slider,param);
+                        });
+                    }
+                } else {
+                    // IE8 Fallback code
+                    el[0].attachEvent('onclick',function(e){
+                        e.returnValue = false;
+                        psOpen(slider,param);                    
+                    });
+
+                    if (close_handler){
+                        close_handler.attachEvent('onclick', function(e){
+                            e.returnValue = false;
+                            psClose(slider,param);
+                        });
+                    }
+
                 }
             }
         };
 
-    }]);
+     }]);
