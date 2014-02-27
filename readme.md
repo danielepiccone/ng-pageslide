@@ -4,7 +4,7 @@ An [AngularJS](http://angularjs.org/) directive which slides another panel over 
 
 It does all the css manipulation needed to position your content off canvas with html attibutes and it does not depend on jQuery
 
-See it in action [HERE](http://dpiccone.github.io/ng-pageslide/demo/)
+See it in action [HERE](http://dpiccone.github.io/ng-pageslide/examples/)
 
 Examples in the repository.
 
