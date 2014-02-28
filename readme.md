@@ -45,11 +45,11 @@ and yes, it can be used like an html element also.
     <p>some random content...</p>
 </div>
 ```
-or use just the <pageslide> element and the controller like this,
+or use just the ```<pageslide>``` element and the controller like this,
 
 please note that you need an outer controller to define the scope of your **checked** model
 
-also you need an inner <div> to wrap your content in
+also you need an inner ```<div>``` to wrap your content in
 ```
 <div ... ng-controller="yourCtrl">
     <pageslide ps-open="checked">
