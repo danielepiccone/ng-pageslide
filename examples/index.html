@@ -11,7 +11,7 @@
         <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/foundation/5.0.0/css/foundation.min.css"> 
         <title>AngularJS Pageslide directive demo</title>
         <style>
-            #ng-pageslide {
+            .ng-pageslide {
                 background: #eee;
             }
         </style>
@@ -27,6 +27,12 @@
             angular.element(document).ready(function(){
 
                 c = angular.element(document.querySelector('#controller-demo')).scope();
+            });
+
+            // Test
+            angular.element(document).ready(function () {
+                if (console.assert)
+                    console.assert(document.querySelectorAll('body > .ng-pageslide').length == 8, 'Made all of them')
             });
         </script>
     </head>
@@ -101,27 +107,38 @@
 
             <div id="controller-demo" ng-controller="pageslideCtrl">
                 <h3>Opening / Closing within a controller</h3>
-                
-                <p>Check to open: <input type="checkbox" ng-model="checked" ></p><br/>
+                <p>Check to open: <input type="checkbox" ng-model="checked" ></p>
                 <pageslide ps-open="checked" ps-target="#demo-ctrl"></pageslide> 
                 <div style="padding:20px" id="demo-ctrl">
-                    <h2>Hello Pageslide</h2>
+                    <h2>Good Pageslide</h2>
                     <p>Put here whatever you want</p>
                 </div>
             </div>
+
+            <div ng-controller="pageslideCtrl">
+                <h3>As an element, without ps-target</h3>
+                <p>Check to open: <input type="checkbox" ng-model="checked" ></p> 
+                <pageslide ps-open="checked" >
+                <div style="padding:20px">
+                    <h2>Cool Pageslide</h2>
+                    <p>Put here whatever you want</p>
+                </div>
+                </pageslide> 
+            </div>
+
         </div>
 
         <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-            </script>
-            <script type="text/javascript">
-                try {
-                    var pageTracker = _gat._getTracker("UA-42627434-1");
-                    pageTracker._trackPageview();
-                } catch(err) {}
-</script>
+        </script>
+        <script type="text/javascript">
+            try {
+                var pageTracker = _gat._getTracker("UA-42627434-1");
+                pageTracker._trackPageview();
+            } catch(err) {}
+        </script>
 
 
-        </body>
-    </html>
+    </body>
+</html>

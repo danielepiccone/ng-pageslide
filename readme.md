@@ -39,12 +39,28 @@ or you can open close withing a controller using the ps-open attribute to specif
 and yes, it can be used like an html element also.
 
 ```
-<pageslide="right" ps-speed="0.5" ps-target="#target" ps-open="checked" href="#target"></pageslide>
+<pageslide="right" ps-speed="0.5" ps-target="#target" ps-open="checked"></pageslide>
 
 <div id="target">            
     <p>some random content...</p>
 </div>
 ```
+or use just the <pageslide> element and the controller like this,
+
+please note that you need an outer controller to define the scope of your **checked** model
+
+also you need an inner <div> to wrap your content in
+```
+<div ... ng-controller="yourCtrl">
+    <pageslide ps-open="checked">
+        <div>            
+            <p>some random content...</p>
+        </div>
+    </pageslide>
+</div>
+
+```
+
 
 Custom CSS:
 
