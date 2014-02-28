@@ -8,6 +8,8 @@ See it in action [HERE](http://dpiccone.github.io/ng-pageslide/examples/)
 
 Examples in the repository.
 
+UPDATE: [the 0.1.5 branch in development here](https://github.com/dpiccone/ng-pageslide/tree/v0.1.5)
+
 ## Usage
 
 Add this in your head
