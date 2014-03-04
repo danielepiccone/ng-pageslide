@@ -67,12 +67,12 @@ ps-target (required) = "#target" used when using pageslide as an element
 ps-open (optional) = true/false used to open and close the panel (optional)
 ps-speed (optional) = The speed of the transition (optional)
 auto-close (optional) = true if you want the panel to close on location change
-size = desired height/width of panel (defaults to 300px)
-custom-height = custom CSS for panel height (only applicable in 'right' or 'left' panels)
-custom-top = custom CSS for panel top (only applicable in 'right', 'left' or 'top' panels)
-custom-bottom = custom CSS for panel bottom (only applicable in 'right', 'left' or 'bottom' panels)
-custom-left = custom CSS for panel left (only applicable in 'left', 'top' or 'bottom' panels)
-custom-right = custom CSS for panel right (only applicable in 'right', 'top' or 'bottom' panels)
+size (optional) = desired height/width of panel (defaults to 300px)
+custom-height (optional) = custom CSS for panel height (only applicable in 'right' or 'left' panels)
+custom-top (optional) = custom CSS for panel top (only applicable in 'right', 'left' or 'top' panels)
+custom-bottom (optional) = custom CSS for panel bottom (only applicable in 'right', 'left' or 'bottom' panels)
+custom-left (optional) = custom CSS for panel left (only applicable in 'left', 'top' or 'bottom' panels)
+custom-right (optional) = custom CSS for panel right (only applicable in 'right', 'top' or 'bottom' panels)
 ```
 
 Licensed under [MIT](http://opensource.org/licenses/MIT)
