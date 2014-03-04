@@ -20,7 +20,7 @@ pageslideDirective.directive('pageslide', [
                 var param = {};
                 param.side = attrs.pageslide || 'right';
                 param.speed = attrs.psSpeed || '0.5';
-                param.size = '300px';
+                param.size = attrs.size || '300px';
 
                 /* DOM manipulation */
                 var content = (attrs.href) ? document.getElementById(attrs.href.substr(1)) : document.getElementById(attrs.psTarget.substr(1));
@@ -38,28 +38,28 @@ pageslideDirective.directive('pageslide', [
                 
                 switch (param.side){
                             case 'right':
-                                slider.style.height = '100%'; 
-                                slider.style.top = '0px';
-                                slider.style.bottom = '0px';
-                                slider.style.right = '0px';
+                                slider.style.height = attrs.customHeight || '100%'; 
+                                slider.style.top = attrs.customTop ||  '0px';
+                                slider.style.bottom = attrs.customBottom ||  '0px';
+                                slider.style.right = attrs.customRight ||  '0px';
                                 break;
                             case 'left':
-                                slider.style.height = '100%';   
-                                slider.style.top = '0px';
-                                slider.style.bottom = '0px';
-                                slider.style.left = '0px';
+                                slider.style.height = attrs.customHeight || '100%';   
+                                slider.style.top = attrs.customTop || '0px';
+                                slider.style.bottom = attrs.customBottom || '0px';
+                                slider.style.left = attrs.customLeft || '0px';
                                 break;
                             case 'top':
-                                slider.style.width = '100%';   
-                                slider.style.left = '0px';
-                                slider.style.top = '0px';
-                                slider.style.right = '0px';
+                                slider.style.width = attrs.customWidth || '100%';   
+                                slider.style.left = attrs.customLeft || '0px';
+                                slider.style.top = attrs.customTop || '0px';
+                                slider.style.right = attrs.customright || '0px';
                                 break;
                             case 'bottom':
-                                slider.style.width = '100%'; 
-                                slider.style.bottom = '0px';
-                                slider.style.left = '0px';
-                                slider.style.right = '0px';
+                                slider.style.width = attrs.customWidth || '100%'; 
+                                slider.style.bottom = attrs.customBottom || '0px';
+                                slider.style.left = attrs.customLeft || '0px';
+                                slider.style.right = attrs.customRight || '0px';
                                 break;
                         }
 
@@ -124,6 +124,13 @@ pageslideDirective.directive('pageslide', [
                     } else {
                         // Close
                         psClose(slider,param);
+                    }
+                });
+
+                // close panel on location change
+                $scope.$on("$locationChangeStart", function(){
+                    if(attrs.autoClose){
+                        psClose(slider, param);
                     }
                 });
 
