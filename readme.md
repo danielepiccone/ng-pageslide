@@ -46,7 +46,7 @@ and yes, it can be used like an html element also.
 </div>
 ```
 
-### Custom CSS:
+Custom CSS:
 
 ```
 <a pageslide custom-top="90%" size="50%" href="#target">Link text</a>
