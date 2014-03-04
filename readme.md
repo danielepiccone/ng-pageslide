@@ -75,6 +75,8 @@ custom-left (optional) = custom CSS for panel left (only applicable in 'left', '
 custom-right (optional) = custom CSS for panel right (only applicable in 'right', 'top' or 'bottom' panels)
 ```
 
+## Licensing
+
 Licensed under [MIT](http://opensource.org/licenses/MIT)
 
 ## Author
