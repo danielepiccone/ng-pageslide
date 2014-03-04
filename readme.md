@@ -46,6 +46,19 @@ and yes, it can be used like an html element also.
 </div>
 ```
 
+### Custom CSS:
+
+```
+<a pageslide custom-top="90%" size="50%" href="#target">Link text</a>
+
+<div id="target">            
+    <p>some random content...</p>
+    <a id="target-close" href="#">Click to close</a>
+</div>
+```
+
+
+
 ### Options:
 
 ```
@@ -53,9 +66,14 @@ pageslide (required) = Where the panel should appear (right,left,top,bottom), if
 ps-target (required) = "#target" used when using pageslide as an element
 ps-open (optional) = true/false used to open and close the panel (optional)
 ps-speed (optional) = The speed of the transition (optional)
+auto-close (optional) = true if you want the panel to close on location change
+size = desired height/width of panel (defaults to 300px)
+custom-height = custom CSS for panel height (only applicable in 'right' or 'left' panels)
+custom-top = custom CSS for panel top (only applicable in 'right', 'left' or 'top' panels)
+custom-bottom = custom CSS for panel bottom (only applicable in 'right', 'left' or 'bottom' panels)
+custom-left = custom CSS for panel left (only applicable in 'left', 'top' or 'bottom' panels)
+custom-right = custom CSS for panel right (only applicable in 'right', 'top' or 'bottom' panels)
 ```
-
-## Licensing
 
 Licensed under [MIT](http://opensource.org/licenses/MIT)
 
