@@ -1,8 +1,9 @@
 var pageslideDirective = angular.module("pageslide-directive", []);
 
 pageslideDirective.directive('pageslide', [
-     function (){
+    function (){
         var defaults = {};
+
         /* Return directive definition object */
 
         return {
@@ -15,12 +16,12 @@ pageslideDirective.directive('pageslide', [
                 //console.log($scope);
                 //console.log(el);
                 //console.log(attrs);
-                
+
                 /* parameters */
                 var param = {};
                 param.side = attrs.pageslide || 'right';
                 param.speed = attrs.psSpeed || '0.5';
-                param.size = attrs.size || '300px';
+                param.size = attrs.psSize || '300px';
 
                 /* DOM manipulation */
                 var content = (attrs.href) ? document.getElementById(attrs.href.substr(1)) : document.getElementById(attrs.psTarget.substr(1));
@@ -35,33 +36,33 @@ pageslideDirective.directive('pageslide', [
                 slider.style.width = 0;
                 slider.style.height = 0;
                 slider.style.transitionProperty = 'width, height';
-                
+
                 switch (param.side){
-                            case 'right':
-                                slider.style.height = attrs.customHeight || '100%'; 
-                                slider.style.top = attrs.customTop ||  '0px';
-                                slider.style.bottom = attrs.customBottom ||  '0px';
-                                slider.style.right = attrs.customRight ||  '0px';
-                                break;
-                            case 'left':
-                                slider.style.height = attrs.customHeight || '100%';   
-                                slider.style.top = attrs.customTop || '0px';
-                                slider.style.bottom = attrs.customBottom || '0px';
-                                slider.style.left = attrs.customLeft || '0px';
-                                break;
-                            case 'top':
-                                slider.style.width = attrs.customWidth || '100%';   
-                                slider.style.left = attrs.customLeft || '0px';
-                                slider.style.top = attrs.customTop || '0px';
-                                slider.style.right = attrs.customright || '0px';
-                                break;
-                            case 'bottom':
-                                slider.style.width = attrs.customWidth || '100%'; 
-                                slider.style.bottom = attrs.customBottom || '0px';
-                                slider.style.left = attrs.customLeft || '0px';
-                                slider.style.right = attrs.customRight || '0px';
-                                break;
-                        }
+                    case 'right':
+                        slider.style.height = attrs.psCustomHeight || '100%'; 
+                        slider.style.top = attrs.psCustomTop ||  '0px';
+                        slider.style.bottom = attrs.psCustomBottom ||  '0px';
+                        slider.style.right = attrs.psCustomRight ||  '0px';
+                        break;
+                    case 'left':
+                        slider.style.height = attrs.psCustomHeight || '100%';   
+                        slider.style.top = attrs.psCustomTop || '0px';
+                        slider.style.bottom = attrs.psCustomBottom || '0px';
+                        slider.style.left = attrs.psCustomLeft || '0px';
+                        break;
+                    case 'top':
+                        slider.style.width = attrs.psCustomWidth || '100%';   
+                        slider.style.left = attrs.psCustomLeft || '0px';
+                        slider.style.top = attrs.psCustomTop || '0px';
+                        slider.style.right = attrs.psCustomRight || '0px';
+                        break;
+                    case 'bottom':
+                        slider.style.width = attrs.psCustomWidth || '100%'; 
+                        slider.style.bottom = attrs.psCustomBottom || '0px';
+                        slider.style.left = attrs.psCustomLeft || '0px';
+                        slider.style.right = attrs.psCustomRight || '0px';
+                        break;
+                }
 
 
                 /* Append */
@@ -112,10 +113,10 @@ pageslideDirective.directive('pageslide', [
 
                     }
                 }
-                
+
                 /*
-                 * Watchers
-                 * */
+                * Watchers
+                * */
 
                 $scope.$watch(attrs.psOpen, function (value){
                     if (!!value) {
@@ -129,7 +130,7 @@ pageslideDirective.directive('pageslide', [
 
                 // close panel on location change
                 $scope.$on("$locationChangeStart", function(){
-                    if(attrs.autoClose){
+                    if(attrs.pSAutoClose){
                         psClose(slider, param);
                     }
                 });
@@ -164,9 +165,9 @@ pageslideDirective.directive('pageslide', [
                             psClose(slider,param);
                         });
                     }
-
                 }
+
             }
         };
-
-     }]);
+    }
+]);
