@@ -4,6 +4,7 @@ module.exports = function (config) {
         // Karma configuration
         // Generated on Mon Aug 05 2013 12:43:06 GMT+0200 (W. Europe Daylight Time)
 
+        frameworks: ['jasmine'],
 
         // base path, that will be used to resolve files and exclude
         basePath: '',
@@ -11,10 +12,7 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            JASMINE,
-            JASMINE_ADAPTER,
             // Libs
-
             'components/angular/*.js',
             'components/angular-mocks/*.js',
 
@@ -49,11 +47,6 @@ module.exports = function (config) {
         colors: true,
 
 
-        // level of logging
-        // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-        logLevel: LOG_INFO,
-
-
         // enable / disable watching file and executing tests whenever any file changes
         autoWatch: true,
 
@@ -77,4 +70,10 @@ module.exports = function (config) {
         // if true, it capture browsers, run tests and exit
         singleRun: false,
     });
+
+    // level of logging
+    // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
+
+    config.LOG_INFO;
 }
+
