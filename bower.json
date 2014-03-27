@@ -1,6 +1,6 @@
 {
     "name": "angular-pageslide-directive",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "main": "build/angular-pageslide-directive.min.js",
     "authors": [
         "Daniele Piccone <mail@danielepiccone.com> (http://www.danielepiccone.com)",
