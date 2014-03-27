@@ -41,9 +41,9 @@ also you need an inner ```<div>``` to wrap your content in
 
 ```
 
-or you can use on you anchors referencing a <div> in your document like:
+or you can use on you anchors referencing a ```<div>``` in your document like:
 
-and yes, it can be used like an html element referencing a <div> also.
+and yes, it can be used like an html element referencing a ```<div>``` also.
 
 ```
 <pageslide="right" ps-speed="0.5" ps-target="#target" ps-open="checked"></pageslide>
