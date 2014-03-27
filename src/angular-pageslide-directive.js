@@ -25,10 +25,11 @@ pageslideDirective.directive('pageslide', [
 
                 /* DOM manipulation */
                 //console.log(el);
+                var content = null;
                 if (el.children() && el.children().length) {
-                    var content = el.children()[0];  
+                    content = el.children()[0];  
                 } else {
-                    var content = (attrs.href) ? document.getElementById(attrs.href.substr(1)) : document.getElementById(attrs.psTarget.substr(1));
+                    content = (attrs.href) ? document.getElementById(attrs.href.substr(1)) : document.getElementById(attrs.psTarget.substr(1));
                 }
                 //console.log(content);
                 // Check for content
