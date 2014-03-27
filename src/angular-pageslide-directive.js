@@ -24,13 +24,16 @@ pageslideDirective.directive('pageslide', [
                 param.size = attrs.psSize || '300px';
 
                 /* DOM manipulation */
-                console.log(el);
-                e = el;
+                //console.log(el);
                 if (el.children() && el.children().length) {
-                    var content = e.children()[0];  
+                    var content = el.children()[0];  
                 } else {
                     var content = (attrs.href) ? document.getElementById(attrs.href.substr(1)) : document.getElementById(attrs.psTarget.substr(1));
                 }
+                //console.log(content);
+                // Check for content
+                if (!content) 
+                    throw new Error('You have to elements inside the <pageslide> or you have not specified a target href');
                 var slider = document.createElement('div');
                 slider.className = "ng-pageslide";
 
@@ -135,12 +138,13 @@ pageslideDirective.directive('pageslide', [
                 });
 
                 // close panel on location change
-                $scope.$on("$locationChangeStart", function(){
-                    if(attrs.pSAutoClose){
+                if(attrs.pSAutoClose){
+                    $scope.$on("$locationchangestart", function(){
                         psClose(slider, param);
-                    }
-                });
+                    });
+                }
 
+               
 
                 /*
                 * Events

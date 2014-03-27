@@ -8,8 +8,6 @@ See it in action [HERE](http://dpiccone.github.io/ng-pageslide/examples/)
 
 Examples in the repository.
 
-UPDATE: [the 0.1.5 branch in development here](https://github.com/dpiccone/ng-pageslide/tree/v0.1.5)
-
 ## Usage
 
 Add this in your head
@@ -24,7 +22,38 @@ Use within your Angular app
 var app = angular.module("app", ["pageslide-directive"]);
 ```
 
-Your HTML should look like this
+Just use the ```<pageslide>``` element or attribute inside a controller scope like this:
+
+please note that you need an outer controller to define the scope of your **checked** model
+
+also you need an inner ```<div>``` to wrap your content in
+
+```
+<div ... ng-controller="yourCtrl">
+    ...
+    <pageslide ps-open="checked">
+        <div>            
+            <p>some random content...</p>
+        </div>
+    </pageslide>
+    ...
+</div>
+
+```
+
+or you can use on you anchors referencing a <div> in your document like:
+
+and yes, it can be used like an html element referencing a <div> also.
+
+```
+<pageslide="right" ps-speed="0.5" ps-target="#target" ps-open="checked"></pageslide>
+
+<div id="target">            
+    <p>some random content...</p>
+</div>
+```
+
+or you can open close without a controller, just using a **target**:
 
 ```
 <a pageslide href="#target">Link text</a>
@@ -34,53 +63,13 @@ Your HTML should look like this
     <a id="target-close" href="#">Click to close</a>
 </div>
 ```
-or you can open close withing a controller using the ps-open attribute to specify the model in your controller scope
-
-and yes, it can be used like an html element also.
-
-```
-<pageslide="right" ps-speed="0.5" ps-target="#target" ps-open="checked"></pageslide>
-
-<div id="target">            
-    <p>some random content...</p>
-</div>
-```
-or use just the ```<pageslide>``` element and the controller like this,
-
-please note that you need an outer controller to define the scope of your **checked** model
-
-also you need an inner ```<div>``` to wrap your content in
-```
-<div ... ng-controller="yourCtrl">
-    <pageslide ps-open="checked">
-        <div>            
-            <p>some random content...</p>
-        </div>
-    </pageslide>
-</div>
-
-```
-
-
-Custom CSS:
-
-```
-<a pageslide custom-top="90%" size="50%" href="#target">Link text</a>
-
-<div id="target">            
-    <p>some random content...</p>
-    <a id="target-close" href="#">Click to close</a>
-</div>
-```
-
-
 
 ### Options:
 
 ```
 pageslide (required) = Where the panel should appear (right,left,top,bottom), if empty defaults to "right"
-ps-target (required) = "#target" used when using pageslide as an element
-ps-open (optional) = true/false used to open and close the panel (optional)
+ps-target (optional) = "#target" used when using pageslide as an element
+ps-open (optional) = Boolean true/false used to open and close the panel (optional)
 ps-speed (optional) = The speed of the transition (optional)
 ps-auto-close (optional) = true if you want the panel to close on location change
 ps-size (optional) = desired height/width of panel (defaults to 300px)
