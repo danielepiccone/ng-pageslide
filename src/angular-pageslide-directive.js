@@ -139,8 +139,11 @@ pageslideDirective.directive('pageslide', [
                 });
 
                 // close panel on location change
-                if(attrs.pSAutoClose){
-                    $scope.$on("$locationchangestart", function(){
+                if(attrs.psAutoClose){
+                    $scope.$on("$locationChangeStart", function(){
+                        psClose(slider, param);
+                    });
+                    $scope.$on("$stateChangeStart", function(){
                         psClose(slider, param);
                     });
                 }
