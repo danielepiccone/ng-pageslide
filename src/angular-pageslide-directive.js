@@ -22,6 +22,7 @@ pageslideDirective.directive('pageslide', [
                 param.side = attrs.pageslide || 'right';
                 param.speed = attrs.psSpeed || '0.5';
                 param.size = attrs.psSize || '300px';
+                param.overflow = attrs.psOverflow || '';
 
                 /* DOM manipulation */
                 //console.log(el);
@@ -41,6 +42,7 @@ pageslideDirective.directive('pageslide', [
                 /* Style setup */
                 slider.style.transitionDuration = param.speed + 's';
                 slider.style.webkitTransitionDuration = param.speed + 's';
+                slider.style.overflow = param.overflow;
                 slider.style.zIndex = 1000;
                 slider.style.position = 'fixed';
                 slider.style.width = 0;
