@@ -32,7 +32,7 @@
             // Test
             angular.element(document).ready(function () {
                 if (console.assert)
-                    console.assert(document.querySelectorAll('body > .ng-pageslide').length == 8, 'Made all of them')
+                    console.assert(document.querySelectorAll('body > .ng-pageslide').length == 9, 'Made all of them')
             });
         </script>
     </head>
@@ -125,6 +125,18 @@
                 </div>
                 </pageslide> 
             </div>
+
+            <div ng-controller="pageslideCtrl">
+                <h3>With custom styles</h3>
+                <p>Check to open: <input type="checkbox" ng-model="checked" ></p> 
+                <pageslide ps-class="panel" ps-open="checked" >
+                <div>
+                    <h2>Rad Pageslide</h2>
+                    <p>Put here whatever you want</p>
+                </div>
+                </pageslide> 
+            </div>
+
 
         </div>
 

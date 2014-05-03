@@ -22,6 +22,7 @@ pageslideDirective.directive('pageslide', [
                 param.side = attrs.pageslide || 'right';
                 param.speed = attrs.psSpeed || '0.5';
                 param.size = attrs.psSize || '300px';
+                param.className = attrs.psClass || 'ng-pageslide';
 
                 /* DOM manipulation */
                 //console.log(el);
@@ -36,7 +37,7 @@ pageslideDirective.directive('pageslide', [
                 if (!content) 
                     throw new Error('You have to elements inside the <pageslide> or you have not specified a target href');
                 var slider = document.createElement('div');
-                slider.className = "ng-pageslide";
+                slider.className = param.className;
 
                 /* Style setup */
                 slider.style.transitionDuration = param.speed + 's';
