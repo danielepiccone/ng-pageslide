@@ -1,7 +1,7 @@
 {
     "name": "angular-pageslide-directive",
-    "version": "0.1.6",
-    "main": "build/angular-pageslide-directive.min.js",
+    "version": "0.1.7",
+    "main": "dist/angular-pageslide-directive.js",
     "authors": [
         "Daniele Piccone <mail@danielepiccone.com> (http://www.danielepiccone.com)",
         "Tim Borny <bornytm@gmail.com>"
@@ -20,5 +20,3 @@
         "grunt-contrib-uglify": "~0.2.2"
     }
 }
-
-
