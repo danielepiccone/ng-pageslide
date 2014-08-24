@@ -10,7 +10,9 @@ pageslideDirective.directive('pageslide', [
             restrict: "EA",
             replace: false,
             transclude: false,
-            scope: true,
+            scope: {
+                psOpen: "=?"
+            },
             link: function ($scope, el, attrs) {
                 /* Inspect */
                 //console.log($scope);
@@ -99,6 +101,7 @@ pageslideDirective.directive('pageslide', [
                                 break;
                         }
                     }
+                    $scope.psOpen = false
                 }
 
                 /* Open */
@@ -129,7 +132,7 @@ pageslideDirective.directive('pageslide', [
                 * Watchers
                 * */
 
-                $scope.$watch(attrs.psOpen, function (value){
+                $scope.$watch("psOpen", function (value){
                     if (!!value) {
                         // Open
                         psOpen(slider,param);
