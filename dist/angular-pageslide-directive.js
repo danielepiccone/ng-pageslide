@@ -25,14 +25,13 @@ pageslideDirective.directive('pageslide', [
                 param.className = attrs.psClass || 'ng-pageslide';
 
                 /* DOM manipulation */
-                //console.log(el);
                 var content = null;
-                if (el.children() && el.children().length) {
+                if (!attrs.href && el.children() && el.children().length) {
                     content = el.children()[0];  
                 } else {
                     content = (attrs.href) ? document.getElementById(attrs.href.substr(1)) : document.getElementById(attrs.psTarget.substr(1));
                 }
-                //console.log(content);
+                
                 // Check for content
                 if (!content) 
                     throw new Error('You have to elements inside the <pageslide> or you have not specified a target href');
@@ -186,3 +185,4 @@ pageslideDirective.directive('pageslide', [
         };
     }
 ]);
+
