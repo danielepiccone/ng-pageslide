@@ -13,9 +13,10 @@ describe('ng-pageslide: ', function(){
     }));
 
     afterEach(function(){
-        // clean dom
-        document.body.removeChild(document.querySelector('.ng-pageslide'));
+        // try to clean Dom
+        var slider = document.querySelector('.ng-pageslide');
         var pageslide = document.querySelector('[pageslide=right]');
+        slider && document.body.removeChild(slider);
         pageslide && pageslide.parentNode.removeChild(pageslide);
 
     });
@@ -159,6 +160,37 @@ describe('ng-pageslide: ', function(){
         var el = document.querySelector('.ng-pageslide'); 
         var attached_to = el.parentNode.localName;
         expect(attached_to).toBe('body'); 
+
+    }));
+
+    it('Should remove slider when pageslide\' scope be destroyed', inject(function(_$rootScope_){
+        $rootScope = _$rootScope_;
+        $rootScope.is_open = true;
+        $rootScope.$digest();
+
+        // Create template DOM for directive
+        var html = (
+            '<div>'
+            + '<a pageslide="right" ps-open="is_open" ps-speed="0.5" href="#target">Link text</a>'
+            + '<div id="target">'
+            + '<p>some random content...</p>'
+            + '<a id="target-close" href="#">Click to close</a>'
+            + '</div>'
+            + '</div>'
+        );
+
+        var elm = document.createElement('div');
+        elm.innerHTML = html;
+        document.body.appendChild(elm);
+
+        // Compile DOM        
+        var template = angular.element(elm);
+        $compile(template)($rootScope);
+        $rootScope.$apply();
+
+        var pageslideScope = angular.element(document.querySelector('[pageslide]')).isolateScope();
+
+        pageslideScope.$destroy();
 
     }));
 
