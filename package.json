@@ -1,6 +1,6 @@
 {
   "name": "angular-pageslide-directive",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-concat": "~0.3",
