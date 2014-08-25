@@ -1,22 +1,19 @@
 {
-    "name": "angular-pageslide-directive",
-    "version": "0.1.7",
-    "main": "dist/angular-pageslide-directive.js",
-    "authors": [
-        "Daniele Piccone <mail@danielepiccone.com> (http://www.danielepiccone.com)",
-        "Tim Borny <bornytm@gmail.com>"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:dpiccone/ng-pageslide.git"
-    },
-    "dependencies": {
-        "angular": ">=1.0.7"
-    },
-    "devDependencies": {
-        "grunt": "~0.4.1",
-        "grunt-contrib-concat": "~0.3",
-        "grunt-contrib-jshint": "~0.6.0",
-        "grunt-contrib-uglify": "~0.2.2"
-    }
+  "name": "angular-pageslide-directive",
+  "version": "0.1.7",
+  "main": "dist/angular-pageslide-directive.js",
+  "authors": [
+    "Daniele Piccone <mail@danielepiccone.com> (http://www.danielepiccone.com)",
+    "Tim Borny <bornytm@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dpiccone/ng-pageslide.git"
+  },
+  "dependencies": {
+    "angular": "~1.2.23"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.23"
+  }
 }
