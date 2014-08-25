@@ -100,7 +100,7 @@ pageslideDirective.directive('pageslide', [
                                 break;
                         }
                     }
-                    $scope.psOpen = false
+                    $scope.psOpen = false;
                 }
 
                 /* Open */
