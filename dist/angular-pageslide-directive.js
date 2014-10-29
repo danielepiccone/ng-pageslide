@@ -23,9 +23,10 @@ pageslideDirective.directive('pageslide', [
                 /* parameters */
                 var param = {};
 
-                param.side = attrs.pageslide || 'right';
+                param.side = attrs.psSide || 'right';
                 param.speed = attrs.psSpeed || '0.5';
                 param.size = attrs.psSize || '300px';
+                param.zindex = attrs.psZindex || 1000;
                 param.className = attrs.psClass || 'ng-pageslide';
                 
                 /* DOM manipulation */
@@ -49,19 +50,14 @@ pageslideDirective.directive('pageslide', [
                 // Check for content
                 if (!content) 
                     throw new Error('You have to elements inside the <pageslide> or you have not specified a target href');
-<<<<<<< HEAD
-                
-                var slider = document.createElement('div');
-=======
 
                 slider = slider || document.createElement('div');
->>>>>>> 585c346268ddc1cca771021160c7f4b6eb500740
                 slider.className = param.className;
 
                 /* Style setup */
                 slider.style.transitionDuration = param.speed + 's';
                 slider.style.webkitTransitionDuration = param.speed + 's';
-                slider.style.zIndex = 1000;
+                slider.style.zIndex = param.zindex;
                 slider.style.position = 'fixed';
                 slider.style.width = 0;
                 slider.style.height = 0;
