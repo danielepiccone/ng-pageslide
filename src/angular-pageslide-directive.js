@@ -23,7 +23,7 @@ pageslideDirective.directive('pageslide', [
                 /* parameters */
                 var param = {};
 
-                param.side = attrs.pageslide || 'right';
+                param.side = attrs.psSide || 'right';
                 param.speed = attrs.psSpeed || '0.5';
                 param.size = attrs.psSize || '300px';
                 param.zindex = attrs.psZindex || 1000;
