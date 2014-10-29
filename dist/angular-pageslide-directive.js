@@ -11,7 +11,8 @@ pageslideDirective.directive('pageslide', [
             replace: false,
             transclude: false,
             scope: {
-                psOpen: "=?"
+                psOpen: "=?",
+                psAutoClose: "=?"
             },
             link: function ($scope, el, attrs) {
                 /* Inspect */
@@ -129,6 +130,11 @@ pageslideDirective.directive('pageslide', [
                     }
                 }
 
+                function isFunction(functionToCheck){
+                    var getType = {};
+                    return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+                }
+
                 /*
                 * Watchers
                 * */
@@ -155,12 +161,18 @@ pageslideDirective.directive('pageslide', [
                 });
 
                 // close panel on location change
-                if(attrs.psAutoClose){
+                if($scope.psAutoClose){
                     $scope.$on("$locationChangeStart", function(){
                         psClose(slider, param);
+                        if(isFunction($scope.psAutoClose)) {
+                            $scope.psAutoClose();
+                        }
                     });
                     $scope.$on("$stateChangeStart", function(){
                         psClose(slider, param);
+                        if(isFunction($scope.psAutoClose)) {
+                            $scope.psAutoClose();
+                        }
                     });
                 }
 
