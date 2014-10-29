@@ -30,17 +30,32 @@ pageslideDirective.directive('pageslide', [
                 
                 /* DOM manipulation */
                 var content = null;
+                var slider = null;
+
                 if (!attrs.href && el.children() && el.children().length) {
                     content = el.children()[0];  
                 } else {
-                    content = (attrs.href) ? document.getElementById(attrs.href.substr(1)) : document.getElementById(attrs.psTarget.substr(1));
+
+                    var targetId = (attrs.href || attrs.psTarget).substr(1);
+                    content = document.getElementById(targetId);
+                    slider = document.getElementById('pageslide-target-' + targetId);
+
+                    if (!slider) {
+                        slider = document.createElement('div');
+                        slider.id = 'pageslide-target-' + targetId;
+                    }
                 }
                 
                 // Check for content
                 if (!content) 
                     throw new Error('You have to elements inside the <pageslide> or you have not specified a target href');
+<<<<<<< HEAD
                 
                 var slider = document.createElement('div');
+=======
+
+                slider = slider || document.createElement('div');
+>>>>>>> 585c346268ddc1cca771021160c7f4b6eb500740
                 slider.className = param.className;
 
                 /* Style setup */
