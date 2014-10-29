@@ -26,6 +26,7 @@ pageslideDirective.directive('pageslide', [
                 param.side = attrs.pageslide || 'right';
                 param.speed = attrs.psSpeed || '0.5';
                 param.size = attrs.psSize || '300px';
+                param.zindex = attrs.psZindex || 1000;
                 param.className = attrs.psClass || 'ng-pageslide';
                 
                 /* DOM manipulation */
@@ -46,7 +47,7 @@ pageslideDirective.directive('pageslide', [
                 /* Style setup */
                 slider.style.transitionDuration = param.speed + 's';
                 slider.style.webkitTransitionDuration = param.speed + 's';
-                slider.style.zIndex = 1000;
+                slider.style.zIndex = param.zindex;
                 slider.style.position = 'fixed';
                 slider.style.width = 0;
                 slider.style.height = 0;
