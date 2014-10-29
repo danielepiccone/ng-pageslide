@@ -1,7 +1,7 @@
 var pageslideDirective = angular.module("pageslide-directive", []);
 
-pageslideDirective.directive('pageslide', ['$rootScope',
-    function ($rootScope){
+pageslideDirective.directive('pageslide', [
+    function (){
         var defaults = {};
 
         /* Return directive definition object */
