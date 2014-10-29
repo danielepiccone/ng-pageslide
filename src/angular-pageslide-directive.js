@@ -1,7 +1,7 @@
 var pageslideDirective = angular.module("pageslide-directive", []);
 
-pageslideDirective.directive('pageslide', [
-    function (){
+pageslideDirective.directive('pageslide', ['$rootScope',
+    function ($rootScope){
         var defaults = {};
 
         /* Return directive definition object */
@@ -21,11 +21,12 @@ pageslideDirective.directive('pageslide', [
 
                 /* parameters */
                 var param = {};
+
                 param.side = attrs.pageslide || 'right';
                 param.speed = attrs.psSpeed || '0.5';
                 param.size = attrs.psSize || '300px';
                 param.className = attrs.psClass || 'ng-pageslide';
-
+                
                 /* DOM manipulation */
                 var content = null;
                 if (!attrs.href && el.children() && el.children().length) {
@@ -37,6 +38,7 @@ pageslideDirective.directive('pageslide', [
                 // Check for content
                 if (!content) 
                     throw new Error('You have to elements inside the <pageslide> or you have not specified a target href');
+                
                 var slider = document.createElement('div');
                 slider.className = param.className;
 
@@ -83,7 +85,7 @@ pageslideDirective.directive('pageslide', [
 
                 /* Closed */
                 function psClose(slider,param){
-                    if (slider.style.width !== 0 && slider.style.width !== 0){
+                    if (slider && slider.style.width !== 0 && slider.style.width !== 0){
                         content.style.display = 'none';
                         switch (param.side){
                             case 'right':
@@ -130,6 +132,17 @@ pageslideDirective.directive('pageslide', [
                 /*
                 * Watchers
                 * */
+
+                if(attrs.psSize){
+                    $scope.$watch(function(){
+                        return attrs.psSize;
+                    }, function(newVal,oldVal) {
+                        param.size = newVal;
+                        if($scope.psOpen) {
+                            psOpen(slider,param);
+                        }
+                    });
+                }
 
                 $scope.$watch("psOpen", function (value){
                     if (!!value) {
