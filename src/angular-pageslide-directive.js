@@ -62,6 +62,7 @@ pageslideDirective.directive('pageslide', [
                 slider.style.width = 0;
                 slider.style.height = 0;
                 slider.style.transitionProperty = 'width, height';
+                slider.style.overflow = 'auto';
 
                 switch (param.side){
                     case 'right':
