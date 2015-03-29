@@ -148,17 +148,6 @@ angular.module("pageslide-directive", [])
                 * Watchers
                 * */
 
-                if(attrs.psSize){
-                    $scope.$watch(function(){
-                        return attrs.psSize;
-                    }, function(newVal,oldVal) {
-                        param.size = newVal;
-                        if($scope.psOpen) {
-                            psOpen(slider,param);
-                        }
-                    });
-                }
-
                 $scope.$watch("psOpen", function (value){
                     if (!!value) {
                         // Open
