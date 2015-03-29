@@ -65,6 +65,7 @@ ps-custom-right (optional) = custom CSS for panel right (only applicable in 'rig
 
 Version 1.0.0
 
+- The directive is now only EC and it works only for <div> elements
 - Removed ps-target and href= for opening the pageslide
 - Added ps-cloak and ps-squeeze
 
