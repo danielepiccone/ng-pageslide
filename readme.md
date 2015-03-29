@@ -51,6 +51,8 @@ ps-speed (optional) = The speed of the transition (optional)
 ps-class (optional) = The class for the pageslide (default: "ng-pageslide")
 ps-auto-close (optional) = true if you want the panel to close on location change
 ps-size (optional) = desired height/width of panel (defaults to 300px)
+ps-squeeze (optional) = squeeze body to fit the panel (defaults to false)
+ps-cloak (optional) = hides the content until the panel is open (defaults to true)
 
 ps-custom-height (optional) = custom CSS for panel height (only applicable in 'right' or 'left' panels)
 ps-custom-top (optional) = custom CSS for panel top (only applicable in 'right', 'left' or 'top' panels)
@@ -64,6 +66,7 @@ ps-custom-right (optional) = custom CSS for panel right (only applicable in 'rig
 Version 1.0.0
 
 - Removed ps-target and href= for opening the pageslide
+- Added ps-cloak and ps-squeeze
 
 ## Licensing
 
