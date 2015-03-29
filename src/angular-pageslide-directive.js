@@ -1,19 +1,22 @@
-var pageslideDirective = angular.module("pageslide-directive", []);
+angular.module("pageslide-directive", [])
 
-pageslideDirective.directive('pageslide', [
-    function (){
+.directive('pageslide', [
+    function () {
         var defaults = {};
 
         /* Return directive definition object */
 
         return {
-            restrict: "EA",
-            replace: false,
-            transclude: false,
+            restrict: "AC",
+            transclude: true,
             scope: {
                 psOpen: "=?",
-                psAutoClose: "=?"
+                psAutoClose: "=?",
+                psSide: "=?",
+                psSpeed: "=?",
+                psClass: "=?"
             },
+            template: '<div class="transcluded" ng-transclude></div>',
             link: function ($scope, el, attrs) {
                 /* Inspect */
                 //console.log($scope);
@@ -23,36 +26,32 @@ pageslideDirective.directive('pageslide', [
                 /* parameters */
                 var param = {};
 
-                param.side = attrs.psSide || 'right';
-                param.speed = attrs.psSpeed || '0.5';
-                param.size = attrs.psSize || '300px';
-                param.zindex = attrs.psZindex || 1000;
-                param.className = attrs.psClass || 'ng-pageslide';
+                param.side = $scope.psSide || 'right';
+                param.speed = $scope.psSpeed || '0.5';
+                param.size = $scope.psSize || '300px';
+                param.zindex = $scope.psZindex || 1000;
+                param.className = $scope.psClass || 'ng-pageslide';
                 
+                // Apply Class
+                el.addClass(param.className);
+
                 /* DOM manipulation */
                 var content = null;
                 var slider = null;
 
-                if (!attrs.href && el.children() && el.children().length) {
-                    content = el.children()[0];  
-                } else {
+                slider = el[0];
 
-                    var targetId = (attrs.href || attrs.psTarget).substr(1);
-                    content = document.getElementById(targetId);
-                    slider = document.getElementById('pageslide-target-' + targetId);
-
-                    if (!slider) {
-                        slider = document.createElement('div');
-                        slider.id = 'pageslide-target-' + targetId;
-                    }
-                }
-                
                 // Check for content
-                if (!content) 
-                    throw new Error('You have to elements inside the <pageslide> or you have not specified a target href');
+                if (slider.children.length === 0) 
+                    throw new Error('You have to content inside the <pageslide>');
+                
+                // Check for div tag
+                if (slider.tagName.toLowerCase() !== 'div')
+                    throw new Error('Pageslide can only be applied to <div> elements');
 
-                slider = slider || document.createElement('div');
-                slider.className = param.className;
+
+                /* Append */
+                document.body.appendChild(slider);
 
                 /* Style setup */
                 slider.style.transitionDuration = param.speed + 's';
@@ -91,14 +90,10 @@ pageslideDirective.directive('pageslide', [
                 }
 
 
-                /* Append */
-                document.body.appendChild(slider);
-                slider.appendChild(content);
-
                 /* Closed */
                 function psClose(slider,param){
                     if (slider && slider.style.width !== 0 && slider.style.width !== 0){
-                        content.style.display = 'none';
+                        //content.style.display = 'none';
                         switch (param.side){
                             case 'right':
                                 slider.style.width = '0px'; 
@@ -171,23 +166,6 @@ pageslideDirective.directive('pageslide', [
                     }
                 });
 
-                // close panel on location change
-                if($scope.psAutoClose){
-                    $scope.$on("$locationChangeStart", function(){
-                        psClose(slider, param);
-                        if(isFunction($scope.psAutoClose)) {
-                            $scope.psAutoClose();
-                        }
-                    });
-                    $scope.$on("$stateChangeStart", function(){
-                        psClose(slider, param);
-                        if(isFunction($scope.psAutoClose)) {
-                            $scope.psAutoClose();
-                        }
-                    });
-                }
-
-
 
                 /*
                 * Events
@@ -197,34 +175,15 @@ pageslideDirective.directive('pageslide', [
                     document.body.removeChild(slider);
                 });
 
-                var close_handler = (attrs.href) ? document.getElementById(attrs.href.substr(1) + '-close') : null;
-                if (el[0].addEventListener) {
-                    el[0].addEventListener('click',function(e){
-                        e.preventDefault();
-                        psOpen(slider,param);                    
+                if($scope.psAutoClose){
+                    $scope.$on("$locationChangeStart", function(){
+                        psClose(slider, param);
+                    });
+                    $scope.$on("$stateChangeStart", function(){
+                        psClose(slider, param);
                     });
 
-                    if (close_handler){
-                        close_handler.addEventListener('click', function(e){
-                            e.preventDefault();
-                            psClose(slider,param);
-                        });
-                    }
-                } else {
-                    // IE8 Fallback code
-                    el[0].attachEvent('onclick',function(e){
-                        e.returnValue = false;
-                        psOpen(slider,param);                    
-                    });
-
-                    if (close_handler){
-                        close_handler.attachEvent('onclick', function(e){
-                            e.returnValue = false;
-                            psClose(slider,param);
-                        });
-                    }
                 }
-
             }
         };
     }
