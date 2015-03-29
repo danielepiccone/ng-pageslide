@@ -8,29 +8,31 @@ angular.module("pageslide-directive", [])
 
         return {
             restrict: "AC",
-            transclude: true,
+            transclude: false,
             scope: {
                 psOpen: "=?",
                 psAutoClose: "=?",
-                psSide: "=?",
-                psSpeed: "=?",
-                psClass: "=?"
+                psSide: "@",
+                psSpeed: "@",
+                psClass: "@",
+                psSize: "@"
             },
-            template: '<div class="transcluded" ng-transclude></div>',
+            //template: '<div class="pageslide-content" ng-transclude></div>',
             link: function ($scope, el, attrs) {
                 /* Inspect */
                 //console.log($scope);
                 //console.log(el);
                 //console.log(attrs);
 
-                /* parameters */
+                /* Parameters */
                 var param = {};
 
                 param.side = $scope.psSide || 'right';
                 param.speed = $scope.psSpeed || '0.5';
                 param.size = $scope.psSize || '300px';
-                param.zindex = $scope.psZindex || 1000;
+                param.zindex = 1000; // Override with custom CSS
                 param.className = $scope.psClass || 'ng-pageslide';
+                param.cloak = $scope.psCloak || true;
                 
                 // Apply Class
                 el.addClass(param.className);
@@ -41,14 +43,15 @@ angular.module("pageslide-directive", [])
 
                 slider = el[0];
 
-                // Check for content
-                if (slider.children.length === 0) 
-                    throw new Error('You have to content inside the <pageslide>');
-                
                 // Check for div tag
                 if (slider.tagName.toLowerCase() !== 'div')
                     throw new Error('Pageslide can only be applied to <div> elements');
 
+                // Check for content
+                if (slider.children.length === 0) 
+                    throw new Error('You have to content inside the <pageslide>');
+                
+                content = angular.element(slider.children)
 
                 /* Append */
                 document.body.appendChild(slider);
@@ -93,7 +96,7 @@ angular.module("pageslide-directive", [])
                 /* Closed */
                 function psClose(slider,param){
                     if (slider && slider.style.width !== 0 && slider.style.width !== 0){
-                        //content.style.display = 'none';
+                        if (param.cloak) content.css('display', 'none');
                         switch (param.side){
                             case 'right':
                                 slider.style.width = '0px'; 
@@ -130,7 +133,7 @@ angular.module("pageslide-directive", [])
                                 break;
                         }
                         setTimeout(function(){
-                            content.style.display = 'block';
+                            if (param.cloak) content.css('display', 'block');
                         },(param.speed * 1000));
 
                     }
