@@ -1,67 +1,80 @@
-var pageslideDirective = angular.module("pageslide-directive", []);
+angular.module("pageslide-directive", [])
 
-pageslideDirective.directive('pageslide', [
-    function (){
+.directive('pageslide', [
+    function () {
         var defaults = {};
 
         /* Return directive definition object */
 
         return {
-            restrict: "EA",
-            replace: false,
+            restrict: "AC",
             transclude: false,
             scope: {
                 psOpen: "=?",
-                psAutoClose: "=?"
+                psAutoClose: "=?",
+                psSide: "@",
+                psSpeed: "@",
+                psClass: "@",
+                psSize: "@",
+                psSqueeze: "@",
+                psCloak: "@"
             },
+            //template: '<div class="pageslide-content" ng-transclude></div>',
             link: function ($scope, el, attrs) {
                 /* Inspect */
                 //console.log($scope);
                 //console.log(el);
                 //console.log(attrs);
 
-                /* parameters */
+                /* Parameters */
                 var param = {};
 
-                param.side = attrs.psSide || 'right';
-                param.speed = attrs.psSpeed || '0.5';
-                param.size = attrs.psSize || '300px';
-                param.zindex = attrs.psZindex || 1000;
-                param.className = attrs.psClass || 'ng-pageslide';
+                param.side = $scope.psSide || 'right';
+                param.speed = $scope.psSpeed || '0.5';
+                param.size = $scope.psSize || '300px';
+                param.zindex = 1000; // Override with custom CSS
+                param.className = $scope.psClass || 'ng-pageslide';
+                param.cloak = $scope.psCloak && $scope.psCloak.toLowerCase() == 'false' ? false : true;
+                param.squeeze = Boolean($scope.psSqueeze) || false;
                 
+                // Apply Class
+                el.addClass(param.className);
+
                 /* DOM manipulation */
                 var content = null;
                 var slider = null;
+                var body = document.body;
 
-                if (!attrs.href && el.children() && el.children().length) {
-                    content = el.children()[0];  
-                } else {
+                slider = el[0];
 
-                    var targetId = (attrs.href || attrs.psTarget).substr(1);
-                    content = document.getElementById(targetId);
-                    slider = document.getElementById('pageslide-target-' + targetId);
+                // Check for div tag
+                if (slider.tagName.toLowerCase() !== 'div')
+                    throw new Error('Pageslide can only be applied to <div> elements');
 
-                    if (!slider) {
-                        slider = document.createElement('div');
-                        slider.id = 'pageslide-target-' + targetId;
-                    }
-                }
-                
                 // Check for content
-                if (!content) 
-                    throw new Error('You have to elements inside the <pageslide> or you have not specified a target href');
+                if (slider.children.length === 0) 
+                    throw new Error('You have to content inside the <pageslide>');
+                
+                content = angular.element(slider.children)
 
-                slider = slider || document.createElement('div');
-                slider.className = param.className;
+                /* Append */
+                body.appendChild(slider);
 
                 /* Style setup */
-                slider.style.transitionDuration = param.speed + 's';
-                slider.style.webkitTransitionDuration = param.speed + 's';
                 slider.style.zIndex = param.zindex;
-                slider.style.position = 'fixed';
+                slider.style.position = 'fixed'; // this is fixed because has to cover full page
                 slider.style.width = 0;
                 slider.style.height = 0;
+                slider.style.overflow = 'hidden';
+                slider.style.transitionDuration = param.speed + 's';
+                slider.style.webkitTransitionDuration = param.speed + 's';
                 slider.style.transitionProperty = 'width, height';
+                if (param.squeeze) {
+                    body.style.position = 'absolute' 
+                    body.style.transitionDuration = param.speed + 's';
+                    body.style.webkitTransitionDuration = param.speed + 's';
+                    body.style.transitionProperty = 'top, bottom, left, right';
+                }
 
                 switch (param.side){
                     case 'right':
@@ -91,26 +104,26 @@ pageslideDirective.directive('pageslide', [
                 }
 
 
-                /* Append */
-                document.body.appendChild(slider);
-                slider.appendChild(content);
-
                 /* Closed */
                 function psClose(slider,param){
                     if (slider && slider.style.width !== 0 && slider.style.width !== 0){
-                        content.style.display = 'none';
+                        if (param.cloak) content.css('display', 'none');
                         switch (param.side){
                             case 'right':
                                 slider.style.width = '0px'; 
+                                if (param.squeeze) body.style.right = '0px'; 
                                 break;
                             case 'left':
                                 slider.style.width = '0px';
+                                if (param.squeeze) body.style.left = '0px'; 
                                 break;
                             case 'top':
                                 slider.style.height = '0px'; 
+                                if (param.squeeze) body.style.top = '0px'; 
                                 break;
                             case 'bottom':
                                 slider.style.height = '0px'; 
+                                if (param.squeeze) body.style.bottom = '0px'; 
                                 break;
                         }
                     }
@@ -123,19 +136,23 @@ pageslideDirective.directive('pageslide', [
                         switch (param.side){
                             case 'right':
                                 slider.style.width = param.size; 
+                                if (param.squeeze) body.style.right = param.size; 
                                 break;
                             case 'left':
                                 slider.style.width = param.size; 
+                                if (param.squeeze) body.style.left = param.size; 
                                 break;
                             case 'top':
                                 slider.style.height = param.size; 
+                                if (param.squeeze) body.style.top = param.size; 
                                 break;
                             case 'bottom':
                                 slider.style.height = param.size; 
+                                if (param.squeeze) body.style.bottom = param.size; 
                                 break;
                         }
                         setTimeout(function(){
-                            content.style.display = 'block';
+                            if (param.cloak) content.css('display', 'block');
                         },(param.speed * 1000));
 
                     }
@@ -150,17 +167,6 @@ pageslideDirective.directive('pageslide', [
                 * Watchers
                 * */
 
-                if(attrs.psSize){
-                    $scope.$watch(function(){
-                        return attrs.psSize;
-                    }, function(newVal,oldVal) {
-                        param.size = newVal;
-                        if($scope.psOpen) {
-                            psOpen(slider,param);
-                        }
-                    });
-                }
-
                 $scope.$watch("psOpen", function (value){
                     if (!!value) {
                         // Open
@@ -171,23 +177,6 @@ pageslideDirective.directive('pageslide', [
                     }
                 });
 
-                // close panel on location change
-                if($scope.psAutoClose){
-                    $scope.$on("$locationChangeStart", function(){
-                        psClose(slider, param);
-                        if(isFunction($scope.psAutoClose)) {
-                            $scope.psAutoClose();
-                        }
-                    });
-                    $scope.$on("$stateChangeStart", function(){
-                        psClose(slider, param);
-                        if(isFunction($scope.psAutoClose)) {
-                            $scope.psAutoClose();
-                        }
-                    });
-                }
-
-
 
                 /*
                 * Events
@@ -197,34 +186,15 @@ pageslideDirective.directive('pageslide', [
                     document.body.removeChild(slider);
                 });
 
-                var close_handler = (attrs.href) ? document.getElementById(attrs.href.substr(1) + '-close') : null;
-                if (el[0].addEventListener) {
-                    el[0].addEventListener('click',function(e){
-                        e.preventDefault();
-                        psOpen(slider,param);                    
+                if($scope.psAutoClose){
+                    $scope.$on("$locationChangeStart", function(){
+                        psClose(slider, param);
+                    });
+                    $scope.$on("$stateChangeStart", function(){
+                        psClose(slider, param);
                     });
 
-                    if (close_handler){
-                        close_handler.addEventListener('click', function(e){
-                            e.preventDefault();
-                            psClose(slider,param);
-                        });
-                    }
-                } else {
-                    // IE8 Fallback code
-                    el[0].attachEvent('onclick',function(e){
-                        e.returnValue = false;
-                        psOpen(slider,param);                    
-                    });
-
-                    if (close_handler){
-                        close_handler.attachEvent('onclick', function(e){
-                            e.returnValue = false;
-                            psClose(slider,param);
-                        });
-                    }
                 }
-
             }
         };
     }

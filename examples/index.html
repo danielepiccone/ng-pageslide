@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 
     <head>
@@ -6,8 +6,8 @@
         <meta http-equiv="X-UA-Compatible" content="chrome=1" />
         <meta name="description" content="Ng-pageslide : AngularJS sliding panel for serving additional content" />
 
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
-        <script  src="../src/angular-pageslide-directive.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+        <script src="../src/angular-pageslide-directive.js"></script>
         <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/foundation/5.0.0/css/foundation.min.css"> 
         <title>AngularJS Pageslide directive demo</title>
         <style>
@@ -20,7 +20,11 @@
 
             app.controller('pageslideCtrl',['$scope',function($scope){
 
-                $scope.checked; // This will be binded using the ps-open attribute
+                $scope.checked = false; // This will be binded using the ps-open attribute
+
+                $scope.toggle = function(){
+                    $scope.checked = !$scope.checked
+                }
 
             }]);
 
@@ -54,76 +58,98 @@
                 An <a href="http://angularjs.org/">AngularJS</a> directive which slides another panel over your browser to reveal an additional interaction pane.<br/>
                 It does all the css manipulation needed to position your content off canvas with html attibutes and it does not depend on jQuery
             </p>
-
-            <a  class="large button" pageslide  ps-side="right" ps-speed="0.5" href="#demo-right">Open Demo</a>
-
+            
+            <div ng-controller="pageslideCtrl">
+                <a class="large button" href="" ng-click="toggle()">Open Demo</a>
+                <div pageslide ps-open="checked">
+                    <div style="padding:20px" id="demo-right">
+                        <h2>Hello Pageslide</h2>
+                        <p>Put here whatever you want</p>
+                        <a ng-click="toggle()" class="button" >Close</a>
+                    </div>
+                </div>
+            </div>
+            
             <h3>Different speeds</h3>
-            <a  class="tiny button" pageslide ps-side="right" ps-speed="5" href="#demo-slow">Slowmo</a>
-
-            <a  class="tiny button" pageslide  ps-side="right" ps-speed="0.25" href="#demo-fast">Fastmo</a>
+            <div ng-controller="pageslideCtrl">
+                <a class="tiny button" href="" ng-click="toggle()">Slowmo</a>
+                <div pageslide ps-open="checked" ps-speed="2">
+                    <div style="padding:20px" id="demo-right">
+                        <h2>Hello Pageslidoo</h2>
+                        <p>Put here whatever you want</p>
+                        <a ng-click="toggle()" class="button" >Close</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div ng-controller="pageslideCtrl">
+                <a class="tiny button" href="" ng-click="toggle()">Fastbro</a>
+                <div pageslide ps-open="checked" ps-speed="0.25">
+                    <div style="padding:20px" id="demo-right">
+                        <h2>Hello Pageslidoy</h2>
+                        <p>Put here whatever you want</p>
+                        <a ng-click="toggle()" class="button" >Close</a>
+                    </div>
+                </div>
+            </div>
             
             <h3>Different directions</h3>
-            <a  class="tiny button" pageslide  ps-side="bottom" ps-speed="0.5" href="#demo-down">Down by the water</a>
-
-            <a  class="tiny button" pageslide  ps-side="top" ps-speed="0.5" href="#demo-top">Up up and above</a>
-
-            <a  class="tiny button" pageslide  ps-side="left" ps-speed="0.5" href="#demo-left">Go West</a>
-
-            <div style="padding:20px" id="demo-right">
-                <h2>Hello Pageslide</h2>
-                <p>Put here whatever you want</p>
-                <a id="demo-right-close"i class="button" >Close</a>
+            <div ng-controller="pageslideCtrl">
+                <a class="tiny button" href="" ng-click="toggle()">Up up and above</a>
+                <div pageslide ps-open="checked" ps-side="top">
+                    <div style="padding:20px" id="demo-right">
+                        <h2>Hello Pageslide</h2>
+                        <p>Put here whatever you want</p>
+                        <a ng-click="toggle()" class="button" >Close</a>
+                    </div>
+                </div>
             </div>
-
-            <div style="padding:20px" id="demo-slow">
-                <h2>Hello Pageslide</h2>
-                <p>Put here whatever you want</p>
-                <a id="demo-slow-close"i class="button" >Close</a>
+            
+            <div ng-controller="pageslideCtrl">
+                <a class="tiny button" href="" ng-click="toggle()">Go west</a>
+                <div pageslide ps-open="checked" ps-side="left">
+                    <div style="padding:20px" id="demo-right">
+                        <h2>Hello Pageslide</h2>
+                        <p>Put here whatever you want</p>
+                        <a ng-click="toggle()" class="button" >Close</a>
+                    </div>
+                </div>
             </div>
-
-            <div style="padding:20px" id="demo-fast">
-                <h2>Hello Pageslide</h2>
-                <p>Put here whatever you want</p>
-                <a id="demo-fast-close"i class="button" >Close</a>
+            
+            <h3>Squeeze content</h3>
+            <div ng-controller="pageslideCtrl">
+                <a class="tiny button" href="" ng-click="toggle()">Open Sidebar</a>
+                <div pageslide ps-open="checked" ps-side="left" ps-squeeze="true" ps-cloak="false">
+                    <div style="padding:20px" id="demo-right">
+                        <h2>Hello Pageslide</h2>
+                        <p>Put here whatever you want</p>
+                        <a ng-click="toggle()" class="button" >Close</a>
+                    </div>
+                </div>
             </div>
-
-            <div style="padding:20px" id="demo-down">
-                <h2>Hello Pageslide</h2>
-                <p>Put here whatever you want</p>
-                <a id="demo-down-close" class="button" >Close</a>
-            </div>
-            <div style="padding:20px" id="demo-left">
-                <h2>Hello Pageslide</h2>
-                <p>Put here whatever you want</p>
-                <a id="demo-left-close" class="button" >Close</a>
-            </div>
-            <div style="padding:20px" id="demo-top">
-                <h2>Hello Pageslide</h2>
-                <p>Put here whatever you want</p>
-                <a id="demo-top-close" class="button" >Close</a>
-            </div>
-
+            
             <br/>
 
-            <div id="controller-demo" ng-controller="pageslideCtrl">
-                <h3>Opening / Closing within a controller</h3>
+            <div ng-controller="pageslideCtrl">
+                <h3>As a class</h3>
                 <p>Check to open: <input type="checkbox" ng-model="checked" ></p>
-                <pageslide ps-open="checked" ps-target="#demo-ctrl"></pageslide> 
-                <div style="padding:20px" id="demo-ctrl">
-                    <h2>Good Pageslide</h2>
-                    <p>Put here whatever you want</p>
+                <div class="pageslide" ps-open="checked" >
+                    <div style="padding:20px" id="demo-ctrl">
+                        <h2>Good Pageslide</h2>
+                        <p>Put here whatever you want</p>
+                    </div>
                 </div>
             </div>
 
             <div ng-controller="pageslideCtrl">
-                <h3>As an element, without ps-target</h3>
+                <h3>As an attribute</h3>
                 <p>Check to open: <input type="checkbox" ng-model="checked" ></p> 
-                <pageslide ps-open="checked" >
+                <div pageslide ps-open="checked" >
                 <div style="padding:20px">
                     <h2>Cool Pageslide</h2>
                     <p>Put here whatever you want</p>
                 </div>
-                </pageslide> 
+                </div> 
             </div>
             
             <!--
