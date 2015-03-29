@@ -15,7 +15,9 @@ angular.module("pageslide-directive", [])
                 psSide: "@",
                 psSpeed: "@",
                 psClass: "@",
-                psSize: "@"
+                psSize: "@",
+                psSqueeze: "@",
+                psCloak: "@"
             },
             //template: '<div class="pageslide-content" ng-transclude></div>',
             link: function ($scope, el, attrs) {
@@ -32,7 +34,8 @@ angular.module("pageslide-directive", [])
                 param.size = $scope.psSize || '300px';
                 param.zindex = 1000; // Override with custom CSS
                 param.className = $scope.psClass || 'ng-pageslide';
-                param.cloak = $scope.psCloak || true;
+                param.cloak = $scope.psCloak && $scope.psCloak.toLowerCase() == 'false' ? false : true;
+                param.squeeze = Boolean($scope.psSqueeze) || false;
                 
                 // Apply Class
                 el.addClass(param.className);
@@ -40,6 +43,7 @@ angular.module("pageslide-directive", [])
                 /* DOM manipulation */
                 var content = null;
                 var slider = null;
+                var body = document.body;
 
                 slider = el[0];
 
@@ -54,16 +58,23 @@ angular.module("pageslide-directive", [])
                 content = angular.element(slider.children)
 
                 /* Append */
-                document.body.appendChild(slider);
+                body.appendChild(slider);
 
                 /* Style setup */
-                slider.style.transitionDuration = param.speed + 's';
-                slider.style.webkitTransitionDuration = param.speed + 's';
                 slider.style.zIndex = param.zindex;
-                slider.style.position = 'fixed';
+                slider.style.position = 'fixed'; // this is fixed because has to cover full page
                 slider.style.width = 0;
                 slider.style.height = 0;
+                slider.style.overflow = 'hidden';
+                slider.style.transitionDuration = param.speed + 's';
+                slider.style.webkitTransitionDuration = param.speed + 's';
                 slider.style.transitionProperty = 'width, height';
+                if (param.squeeze) {
+                    body.style.position = 'absolute' 
+                    body.style.transitionDuration = param.speed + 's';
+                    body.style.webkitTransitionDuration = param.speed + 's';
+                    body.style.transitionProperty = 'top, bottom, left, right';
+                }
 
                 switch (param.side){
                     case 'right':
@@ -100,15 +111,19 @@ angular.module("pageslide-directive", [])
                         switch (param.side){
                             case 'right':
                                 slider.style.width = '0px'; 
+                                if (param.squeeze) body.style.right = '0px'; 
                                 break;
                             case 'left':
                                 slider.style.width = '0px';
+                                if (param.squeeze) body.style.left = '0px'; 
                                 break;
                             case 'top':
                                 slider.style.height = '0px'; 
+                                if (param.squeeze) body.style.top = '0px'; 
                                 break;
                             case 'bottom':
                                 slider.style.height = '0px'; 
+                                if (param.squeeze) body.style.bottom = '0px'; 
                                 break;
                         }
                     }
@@ -121,15 +136,19 @@ angular.module("pageslide-directive", [])
                         switch (param.side){
                             case 'right':
                                 slider.style.width = param.size; 
+                                if (param.squeeze) body.style.right = param.size; 
                                 break;
                             case 'left':
                                 slider.style.width = param.size; 
+                                if (param.squeeze) body.style.left = param.size; 
                                 break;
                             case 'top':
                                 slider.style.height = param.size; 
+                                if (param.squeeze) body.style.top = param.size; 
                                 break;
                             case 'bottom':
                                 slider.style.height = param.size; 
+                                if (param.squeeze) body.style.bottom = param.size; 
                                 break;
                         }
                         setTimeout(function(){

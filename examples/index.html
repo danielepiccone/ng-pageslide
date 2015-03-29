@@ -115,10 +115,22 @@
                     </div>
                 </div>
             </div>
-
+            
+            <h3>Squeeze content</h3>
+            <div ng-controller="pageslideCtrl">
+                <a class="tiny button" href="" ng-click="toggle()">Open Sidebar</a>
+                <div pageslide ps-open="checked" ps-side="left" ps-squeeze="true" ps-cloak="false">
+                    <div style="padding:20px" id="demo-right">
+                        <h2>Hello Pageslide</h2>
+                        <p>Put here whatever you want</p>
+                        <a ng-click="toggle()" class="button" >Close</a>
+                    </div>
+                </div>
+            </div>
+            
             <br/>
 
-            <div id="controller-demo" ng-controller="pageslideCtrl">
+            <div ng-controller="pageslideCtrl">
                 <h3>As a class</h3>
                 <p>Check to open: <input type="checkbox" ng-model="checked" ></p>
                 <div class="pageslide" ps-open="checked" >
