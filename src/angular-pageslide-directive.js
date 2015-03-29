@@ -55,7 +55,7 @@ angular.module("pageslide-directive", [])
                 if (slider.children.length === 0) 
                     throw new Error('You have to content inside the <pageslide>');
                 
-                content = angular.element(slider.children)
+                content = angular.element(slider.children);
 
                 /* Append */
                 body.appendChild(slider);
@@ -70,7 +70,7 @@ angular.module("pageslide-directive", [])
                 slider.style.webkitTransitionDuration = param.speed + 's';
                 slider.style.transitionProperty = 'width, height';
                 if (param.squeeze) {
-                    body.style.position = 'absolute' 
+                    body.style.position = 'absolute';
                     body.style.transitionDuration = param.speed + 's';
                     body.style.webkitTransitionDuration = param.speed + 's';
                     body.style.transitionProperty = 'top, bottom, left, right';
