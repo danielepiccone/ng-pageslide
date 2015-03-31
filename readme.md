@@ -51,8 +51,10 @@ ps-speed (optional) = The speed of the transition (optional)
 ps-class (optional) = The class for the pageslide (default: "ng-pageslide")
 ps-auto-close (optional) = true if you want the panel to close on location change
 ps-size (optional) = desired height/width of panel (defaults to 300px)
-ps-squeeze (optional) = squeeze body to fit the panel (defaults to false)
 ps-cloak (optional) = hides the content until the panel is open (defaults to true)
+
+ps-push (optional) = push the main body to show the panel (defaults to false)*
+ps-squeeze (optional) = squeeze body to fit the panel (defaults to false)*
 
 ps-custom-height (optional) = custom CSS for panel height (only applicable in 'right' or 'left' panels)
 ps-custom-top (optional) = custom CSS for panel top (only applicable in 'right', 'left' or 'top' panels)
@@ -60,6 +62,8 @@ ps-custom-bottom (optional) = custom CSS for panel bottom (only applicable in 'r
 ps-custom-left (optional) = custom CSS for panel left (only applicable in 'left', 'top' or 'bottom' panels)
 ps-custom-right (optional) = custom CSS for panel right (only applicable in 'right', 'top' or 'bottom' panels)
 ```
+
+* these options make assumptions about the layout, will set body positioning to absolute
 
 ### Changelog
 

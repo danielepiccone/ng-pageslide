@@ -11,6 +11,11 @@
         <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/foundation/5.0.0/css/foundation.min.css"> 
         <title>AngularJS Pageslide directive demo</title>
         <style>
+            /* Needed for hiding crollbars when pushing */
+            html {
+                overflow: hidden;
+            }
+
             .ng-pageslide {
                 background: #eee;
             }
@@ -116,6 +121,18 @@
                 </div>
             </div>
             
+            <h3>Push content</h3>
+            <div ng-controller="pageslideCtrl">
+                <a class="tiny button" href="" ng-click="toggle()">Open Sidebar</a>
+                <div pageslide ps-open="checked" ps-side="left" ps-push="true" >
+                    <div style="padding:20px" id="demo-right">
+                        <h2>Hello Pageslide</h2>
+                        <p>Put here whatever you want</p>
+                        <a ng-click="toggle()" class="button" >Close</a>
+                    </div>
+                </div>
+            </div>
+
             <h3>Squeeze content</h3>
             <div ng-controller="pageslideCtrl">
                 <a class="tiny button" href="" ng-click="toggle()">Open Sidebar</a>
