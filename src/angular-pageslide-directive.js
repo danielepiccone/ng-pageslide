@@ -7,7 +7,7 @@ angular.module("pageslide-directive", [])
         /* Return directive definition object */
 
         return {
-            restrict: "AC",
+            restrict: "EAC",
             transclude: false,
             scope: {
                 psOpen: "=?",
