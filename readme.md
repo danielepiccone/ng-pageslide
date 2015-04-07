@@ -31,11 +31,11 @@ also you need an inner ```<div>``` to wrap your content in
 ```
 <div ... ng-controller="yourCtrl">
     ...
-    <pageslide ps-open="checked">
+    <div pageslide ps-open="checked">
         <div>            
             <p>some random content...</p>
         </div>
-    </pageslide>
+    </div>
     ...
 </div>
 
