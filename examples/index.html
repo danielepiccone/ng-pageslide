@@ -169,6 +169,17 @@
                 </div> 
             </div>
             
+            <div ng-controller="pageslideCtrl">
+                <h3>As an element</h3>
+                <p>Check to open: <input type="checkbox" ng-model="checked" ></p> 
+                <pageslide ps-open="checked" >
+                <div style="padding:20px">
+                    <h2>Yes Pageslide</h2>
+                    <p>Put here whatever you want</p>
+                </div>
+                </pageslide> 
+            </div>
+            
             <!--
             <div ng-controller="pageslideCtrl">
                 <h3>With custom styles</h3>

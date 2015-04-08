@@ -7,7 +7,7 @@ angular.module("pageslide-directive", [])
         /* Return directive definition object */
 
         return {
-            restrict: "AC",
+            restrict: "EAC",
             transclude: false,
             scope: {
                 psOpen: "=?",
@@ -50,8 +50,9 @@ angular.module("pageslide-directive", [])
                 slider = el[0];
 
                 // Check for div tag
-                if (slider.tagName.toLowerCase() !== 'div')
-                    throw new Error('Pageslide can only be applied to <div> elements');
+                if (slider.tagName.toLowerCase() !== 'div' &&
+                    slider.tagName.toLowerCase() !== 'pageslide')
+                    throw new Error('Pageslide can only be applied to <div> or <pageslide> elements');
 
                 // Check for content
                 if (slider.children.length === 0) 
