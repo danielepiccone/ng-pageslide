@@ -8,7 +8,7 @@ See it in action [HERE](http://dpiccone.github.io/ng-pageslide/examples/)
 
 Examples in the repository.
 
-![build](https://travis-ci.org/dpiccone/ng-pageslide.svg?branch=master)
+[![Build Status](https://travis-ci.org/dpiccone/ng-pageslide.svg?branch=master)](https://travis-ci.org/dpiccone/ng-pageslide)
 
 ## Usage
 
