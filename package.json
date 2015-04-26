@@ -9,5 +9,8 @@
     "karma": "^0.12.22",
     "karma-jasmine": "^0.1.5",
     "karma-phantomjs-launcher": "^0.1.4"
+  },
+  "dependencies": {
+    "grunt-karma": "^0.10.1"
   }
 }

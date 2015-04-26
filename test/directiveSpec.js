@@ -15,9 +15,9 @@ describe('ng-pageslide: ', function(){
     afterEach(function(){
         // try to clean Dom
         var slider = document.querySelector('.ng-pageslide');
-        var pageslide = document.querySelector('[pageslide=right]');
+        var pageslide = document.querySelector('#test-pageslide');
         slider && document.body.removeChild(slider);
-        pageslide && pageslide.parentNode.removeChild(pageslide);
+        //pageslide && pageslide.remove();
 
     });
 
@@ -28,10 +28,11 @@ describe('ng-pageslide: ', function(){
         // Create template DOM for directive
         var html = (
             '<div>'
-            + '<a pageslide="right" ps-open="is_open" ps-speed="0.5" href="#target">Link text</a>'
+            + '<div pageslide="right" ps-open="is_open" ps-speed="-1.5">'
             + '<div id="target">'
             + '<p>some random content...</p>'
             + '<a id="target-close" href="#">Click to close</a>'
+            + '</div>'
             + '</div>'
             + '</div>'
         );
@@ -47,12 +48,11 @@ describe('ng-pageslide: ', function(){
 
         // Check for DOM Manipulation
         var el = document.querySelector('.ng-pageslide'); 
-        var attached_to = el.parentNode.localName;
-        expect(attached_to).toBe('body'); 
+        var attached_to = el.parentElement.tagName;
+        expect(attached_to).toBe('BODY'); 
 
     }));
 
-    
     it('Should open and close watching for ps-open', inject(function(_$rootScope_){
         $rootScope = _$rootScope_;
         $rootScope.is_open = true;
@@ -61,10 +61,11 @@ describe('ng-pageslide: ', function(){
         // Create template DOM for directive
         var html = (
             '<div>'
-            + '<a pageslide="right" ps-open="is_open" ps-speed="0.5" href="#target">Link text</a>'
+            + '<div pageslide="right" ps-open="is_open" ps-speed="0.5" href="#target">'
             + '<div id="target">'
             + '<p>some random content...</p>'
             + '<a id="target-close" href="#">Click to close</a>'
+            + '</div>'
             + '</div>'
             + '</div>'
         );
@@ -90,6 +91,7 @@ describe('ng-pageslide: ', function(){
 
     }));
 
+    /*
     it('Should sync ps-open state between pageslide\' scope and parent scope', inject(function(_$rootScope_){
         $rootScope = _$rootScope_;
         $rootScope.is_open = true;
@@ -162,6 +164,7 @@ describe('ng-pageslide: ', function(){
         expect(attached_to).toBe('body'); 
 
     }));
+    */
 
     it('Should remove slider when pageslide\' scope be destroyed', inject(function(_$rootScope_){
         $rootScope = _$rootScope_;
@@ -171,10 +174,11 @@ describe('ng-pageslide: ', function(){
         // Create template DOM for directive
         var html = (
             '<div>'
-            + '<a pageslide="right" ps-open="is_open" ps-speed="0.5" href="#target">Link text</a>'
+            + '<div pageslide="right" ps-open="is_open" ps-speed="0.5" href="#target">'
             + '<div id="target">'
             + '<p>some random content...</p>'
             + '<a id="target-close" href="#">Click to close</a>'
+            + '</div>'
             + '</div>'
             + '</div>'
         );
@@ -193,6 +197,5 @@ describe('ng-pageslide: ', function(){
         pageslideScope.$destroy();
 
     }));
-
 
 });
