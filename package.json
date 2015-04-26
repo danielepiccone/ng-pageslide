@@ -12,5 +12,8 @@
   },
   "dependencies": {
     "grunt-karma": "^0.10.1"
+  },
+  "scripts": {
+      "test": "grunt test"
   }
 }
