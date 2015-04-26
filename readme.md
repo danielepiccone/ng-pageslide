@@ -8,6 +8,8 @@ See it in action [HERE](http://dpiccone.github.io/ng-pageslide/examples/)
 
 Examples in the repository.
 
+![build](https://travis-ci.org/dpiccone/ng-pageslide.svg?branch=master)
+
 ## Usage
 
 Add this in your head
