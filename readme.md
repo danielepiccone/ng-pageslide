@@ -46,8 +46,9 @@ also you need an inner ```<div>``` to wrap your content in
 ### Options:
 
 ```
-pageslide (required) = Where the panel should appear (right,left,top,bottom), if empty defaults to "right"
+pageslide (required) 
 
+ps-side (optional) = Where the panel should appear (right,left,top,bottom), if empty defaults to "right"
 ps-open (optional) = Boolean true/false used to open and close the panel (optional)
 ps-speed (optional) = The speed of the transition (optional)
 ps-class (optional) = The class for the pageslide (default: "ng-pageslide")
