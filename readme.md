@@ -64,6 +64,7 @@ ps-custom-top (optional) = custom CSS for panel top (only applicable in 'right',
 ps-custom-bottom (optional) = custom CSS for panel bottom (only applicable in 'right', 'left' or 'bottom' panels)
 ps-custom-left (optional) = custom CSS for panel left (only applicable in 'left', 'top' or 'bottom' panels)
 ps-custom-right (optional) = custom CSS for panel right (only applicable in 'right', 'top' or 'bottom' panels)
+ps-container (optional) = custom CSS ID selector to which the slider div appends (e.g: <div id='myDiv'/> -> ps-container="myDiv")
 ```
 
 * these options make assumptions about the layout, will set body positioning to absolute
