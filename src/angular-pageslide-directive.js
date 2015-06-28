@@ -46,7 +46,7 @@ angular.module("pageslide-directive", [])
                 /* DOM manipulation */
                 var content = null;
                 var slider = null;
-                var body = param.container !== false ? document.getElementById(param.container) : document.body;
+                var body = param.container ? document.getElementById(param.container) : document.body;
 
                 slider = el[0];
 
