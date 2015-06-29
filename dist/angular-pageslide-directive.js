@@ -39,7 +39,8 @@ angular.module("pageslide-directive", [])
                 param.cloak = $scope.psCloak && $scope.psCloak.toLowerCase() == 'false' ? false : true;
                 param.squeeze = Boolean($scope.psSqueeze) || false;
                 param.push = Boolean($scope.psPush) || false;
-                
+                param.container = $scope.psContainer || false; 
+
                 // Apply Class
                 el.addClass(param.className);
 
