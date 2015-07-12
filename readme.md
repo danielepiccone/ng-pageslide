@@ -55,6 +55,7 @@ ps-class (optional) = The class for the pageslide (default: "ng-pageslide")
 ps-auto-close (optional) = true if you want the panel to close on location change
 ps-size (optional) = desired height/width of panel (defaults to 300px)
 ps-cloak (optional) = hides the content until the panel is open (defaults to true)
+ps-key-listener (optional) = close the sidebar with the ESC key (defaults to false)
 
 ps-push (optional) = push the main body to show the panel (defaults to false)*
 ps-squeeze (optional) = squeeze body to fit the panel (defaults to false)*
