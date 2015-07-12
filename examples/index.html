@@ -8,7 +8,7 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
         <script src="../src/angular-pageslide-directive.js"></script>
-        <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/foundation/5.0.0/css/foundation.min.css"> 
+        <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/foundation/5.0.0/css/foundation.min.css">
         <title>AngularJS Pageslide directive demo</title>
         <style>
             /* Needed for hiding crollbars when pushing */
@@ -63,7 +63,7 @@
                 An <a href="http://angularjs.org/">AngularJS</a> directive which slides another panel over your browser to reveal an additional interaction pane.<br/>
                 It does all the css manipulation needed to position your content off canvas with html attibutes and it does not depend on jQuery
             </p>
-            
+
             <div ng-controller="pageslideCtrl">
                 <a class="large button" href="" ng-click="toggle()">Open Demo</a>
                 <div pageslide ps-open="checked">
@@ -74,7 +74,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <h3>Different speeds</h3>
             <div ng-controller="pageslideCtrl">
                 <a class="tiny button" href="" ng-click="toggle()">Slowmo</a>
@@ -86,7 +86,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div ng-controller="pageslideCtrl">
                 <a class="tiny button" href="" ng-click="toggle()">Fastbro</a>
                 <div pageslide ps-open="checked" ps-speed="0.25">
@@ -97,7 +97,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <h3>Different directions</h3>
             <div ng-controller="pageslideCtrl">
                 <a class="tiny button" href="" ng-click="toggle()">Up up and above</a>
@@ -109,7 +109,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div ng-controller="pageslideCtrl">
                 <a class="tiny button" href="" ng-click="toggle()">Go west</a>
                 <div pageslide ps-open="checked" ps-side="left">
@@ -120,7 +120,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <h3>Push content</h3>
             <div ng-controller="pageslideCtrl">
                 <a class="tiny button" href="" ng-click="toggle()">Open Sidebar</a>
@@ -144,7 +144,19 @@
                     </div>
                 </div>
             </div>
-            
+
+            <h3>Escape key to close</h3>
+            <div ng-controller="pageslideCtrl">
+                <a class="tiny button" href="" ng-click="toggle()">Open sidebar</a>
+                <div pageslide ps-open="checked" ps-key-listener="true">
+                    <div style="padding:20px" id="demo-right">
+                        <h2>Hello Pageslide</h2>
+                        <p>hit the escape key to close the sidebar</p>
+                        <a ng-click="toggle()" class="button" >Close</a>
+                    </div>
+                </div>
+            </div>
+
             <br/>
 
             <div ng-controller="pageslideCtrl">
@@ -160,36 +172,36 @@
 
             <div ng-controller="pageslideCtrl">
                 <h3>As an attribute</h3>
-                <p>Check to open: <input type="checkbox" ng-model="checked" ></p> 
+                <p>Check to open: <input type="checkbox" ng-model="checked" ></p>
                 <div pageslide ps-open="checked" >
                 <div style="padding:20px">
                     <h2>Cool Pageslide</h2>
                     <p>Put here whatever you want</p>
                 </div>
-                </div> 
+                </div>
             </div>
-            
+
             <div ng-controller="pageslideCtrl">
                 <h3>As an element</h3>
-                <p>Check to open: <input type="checkbox" ng-model="checked" ></p> 
+                <p>Check to open: <input type="checkbox" ng-model="checked" ></p>
                 <pageslide ps-open="checked" >
                 <div style="padding:20px">
                     <h2>Yes Pageslide</h2>
                     <p>Put here whatever you want</p>
                 </div>
-                </pageslide> 
+                </pageslide>
             </div>
-            
+
             <!--
             <div ng-controller="pageslideCtrl">
                 <h3>With custom styles</h3>
-                <p>Check to open: <input type="checkbox" ng-model="checked" ></p> 
+                <p>Check to open: <input type="checkbox" ng-model="checked" ></p>
                 <pageslide ps-class="panel" ps-open="checked" >
                 <div>
                     <h2>Rad Pageslide</h2>
                     <p>Put here whatever you want</p>
                 </div>
-                </pageslide> 
+                </pageslide>
             </div>
             -->
 
