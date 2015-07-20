@@ -237,6 +237,14 @@ angular.module("pageslide-directive", [])
                         psClose(slider, param);
                     }
                 });
+                
+                $scope.$watch("psSize", function(newValue, oldValue) {
+                    if (oldValue !== newValue) {
+                        // when the psSize attribute is changed, resize the pageslide
+                        param.size = newValue;
+                        psOpen(slider, param);
+                    }
+                });
 
 
                 /*
