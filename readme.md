@@ -18,7 +18,7 @@ Add this in your head
 <script src="dist/angular-pageslide-directive.min.js"></script>
 ```
 
-Use within your Angular app 
+Use within your Angular app
 
 ```
 var app = angular.module("app", ["pageslide-directive"]);
@@ -34,7 +34,7 @@ also you need an inner ```<div>``` to wrap your content in
 <div ... ng-controller="yourCtrl">
     ...
     <pageslide ps-open="checked">
-        <div>            
+        <div>
             <p>some random content...</p>
         </div>
     </pageslide>
@@ -46,7 +46,7 @@ also you need an inner ```<div>``` to wrap your content in
 ### Options:
 
 ```
-pageslide (required) 
+pageslide (required)
 
 ps-side (optional) = Where the panel should appear (right,left,top,bottom), if empty defaults to "right"
 ps-open (optional) = Boolean true/false used to open and close the panel (optional)
@@ -66,6 +66,7 @@ ps-custom-bottom (optional) = custom CSS for panel bottom (only applicable in 'r
 ps-custom-left (optional) = custom CSS for panel left (only applicable in 'left', 'top' or 'bottom' panels)
 ps-custom-right (optional) = custom CSS for panel right (only applicable in 'right', 'top' or 'bottom' panels)
 ps-container (optional) = custom CSS ID selector to which the slider div appends (e.g: <div id='myDiv'/> -> ps-container="myDiv")
+ps-body-class (optional) = if true adds a class on the container body reflecting the state of the pageslide
 ```
 
 * these options make assumptions about the layout, will set body positioning to absolute

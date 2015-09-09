@@ -1,7 +1,7 @@
 angular.module("pageslide-directive", [])
 
-.directive('pageslide', [
-    function () {
+.directive('pageslide', ['$document',
+    function ($document) {
         var defaults = {};
 
         /* Return directive definition object */
@@ -19,7 +19,9 @@ angular.module("pageslide-directive", [])
                 psSqueeze: "@",
                 psCloak: "@",
                 psPush: "@",
-                psContainer: "@"
+                psContainer: "@",
+                psKeyListener: '@',
+                psBodyClass: "@"
             },
             //template: '<div class="pageslide-content" ng-transclude></div>',
             link: function ($scope, el, attrs) {
@@ -39,7 +41,9 @@ angular.module("pageslide-directive", [])
                 param.cloak = $scope.psCloak && $scope.psCloak.toLowerCase() == 'false' ? false : true;
                 param.squeeze = Boolean($scope.psSqueeze) || false;
                 param.push = Boolean($scope.psPush) || false;
-                param.container = $scope.psContainer || false; 
+                param.container = $scope.psContainer || false;
+                param.keyListener = Boolean($scope.psKeyListener) || false;
+                param.bodyClass = $scope.psBodyClass || false;
 
                 // Apply Class
                 el.addClass(param.className);
@@ -49,12 +53,23 @@ angular.module("pageslide-directive", [])
                 var slider = null;
                 var body = param.container ? document.getElementById(param.container) : document.body;
 
+                function setBodyClass(value){
+                    if (param.bodyClass) {
+                        var bodyClass = param.className + '-body';
+                        var bodyClassRe = new RegExp(" " + bodyClass + "-closed| " + bodyClass + "-open");
+                        body.className = body.className.replace(bodyClassRe, '');
+                        body.className += ' ' + bodyClass + '-' + value;
+                    }
+                }
+
+                setBodyClass('closed');
+
                 slider = el[0];
 
                 // Check for div tag
                 if (slider.tagName.toLowerCase() !== 'div' &&
-                    slider.tagName.toLowerCase() !== 'pageslide')
-                    throw new Error('Pageslide can only be applied to <div> or <pageslide> elements');
+                slider.tagName.toLowerCase() !== 'pageslide')
+                throw new Error('Pageslide can only be applied to <div> or <pageslide> elements');
 
                 // Check for content
                 if (slider.children.length === 0)
@@ -74,6 +89,7 @@ angular.module("pageslide-directive", [])
                 slider.style.transitionDuration = param.speed + 's';
                 slider.style.webkitTransitionDuration = param.speed + 's';
                 slider.style.transitionProperty = 'width, height';
+
                 if (param.squeeze) {
                     body.style.position = 'absolute';
                     body.style.transitionDuration = param.speed + 's';
@@ -142,13 +158,19 @@ angular.module("pageslide-directive", [])
                                 slider.style.height = '0px';
                                 if (param.squeeze) body.style.bottom = '0px';
                                 if (param.push) {
-                                    body.style.bottom = '0px'; 
-                                    body.style.top = '0px'; 
+                                    body.style.bottom = '0px';
+                                    body.style.top = '0px';
                                 }
                                 break;
                         }
                     }
                     $scope.psOpen = false;
+
+                    if (param.keyListener) {
+                        $document.off('keydown', keyListener);
+                    }
+
+                    setBodyClass('closed');
                 }
 
                 /* Open */
@@ -192,12 +214,29 @@ angular.module("pageslide-directive", [])
                             if (param.cloak) content.css('display', 'block');
                         }, (param.speed * 1000));
 
+                        if (param.keyListener) {
+                            $document.on('keydown', keyListener);
+                        }
+
+                        setBodyClass('open');
                     }
                 }
 
                 function isFunction(functionToCheck) {
                     var getType = {};
                     return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+                }
+
+                /**
+                * close the sidebar if the 'esc' key is pressed
+                */
+                function keyListener(e) {
+                    var ESC_KEY = 27;
+                    var key = e.keyCode || e.which;
+
+                    if (key === ESC_KEY) {
+                        psClose(slider, param);
+                    }
                 }
 
                 /*
@@ -211,6 +250,14 @@ angular.module("pageslide-directive", [])
                     } else {
                         // Close
                         psClose(slider, param);
+                    }
+                });
+
+                $scope.$watch("psSize", function(newValue, oldValue) {
+                    if (oldValue !== newValue) {
+                        // when the psSize attribute is changed, resize the pageslide
+                        param.size = newValue;
+                        psOpen(slider, param);
                     }
                 });
 

@@ -20,7 +20,8 @@ angular.module("pageslide-directive", [])
                 psCloak: "@",
                 psPush: "@",
                 psContainer: "@",
-                psKeyListener: '@'
+                psKeyListener: '@',
+                psBodyClass: "@"
             },
             //template: '<div class="pageslide-content" ng-transclude></div>',
             link: function ($scope, el, attrs) {
@@ -42,6 +43,7 @@ angular.module("pageslide-directive", [])
                 param.push = Boolean($scope.psPush) || false;
                 param.container = $scope.psContainer || false;
                 param.keyListener = Boolean($scope.psKeyListener) || false;
+                param.bodyClass = $scope.psBodyClass || false;
 
                 // Apply Class
                 el.addClass(param.className);
@@ -51,12 +53,23 @@ angular.module("pageslide-directive", [])
                 var slider = null;
                 var body = param.container ? document.getElementById(param.container) : document.body;
 
+                function setBodyClass(value){
+                    if (param.bodyClass) {
+                        var bodyClass = param.className + '-body';
+                        var bodyClassRe = new RegExp(" " + bodyClass + "-closed| " + bodyClass + "-open");
+                        body.className = body.className.replace(bodyClassRe, '');
+                        body.className += ' ' + bodyClass + '-' + value;
+                    }
+                }
+
+                setBodyClass('closed');
+
                 slider = el[0];
 
                 // Check for div tag
                 if (slider.tagName.toLowerCase() !== 'div' &&
-                    slider.tagName.toLowerCase() !== 'pageslide')
-                    throw new Error('Pageslide can only be applied to <div> or <pageslide> elements');
+                slider.tagName.toLowerCase() !== 'pageslide')
+                throw new Error('Pageslide can only be applied to <div> or <pageslide> elements');
 
                 // Check for content
                 if (slider.children.length === 0)
@@ -157,6 +170,7 @@ angular.module("pageslide-directive", [])
                         $document.off('keydown', keyListener);
                     }
 
+                    setBodyClass('closed');
                 }
 
                 /* Open */
@@ -204,6 +218,7 @@ angular.module("pageslide-directive", [])
                             $document.on('keydown', keyListener);
                         }
 
+                        setBodyClass('open');
                     }
                 }
 
@@ -213,8 +228,8 @@ angular.module("pageslide-directive", [])
                 }
 
                 /**
-                 * close the sidebar if the 'esc' key is pressed
-                 */
+                * close the sidebar if the 'esc' key is pressed
+                */
                 function keyListener(e) {
                     var ESC_KEY = 27;
                     var key = e.keyCode || e.which;
@@ -237,7 +252,7 @@ angular.module("pageslide-directive", [])
                         psClose(slider, param);
                     }
                 });
-                
+
                 $scope.$watch("psSize", function(newValue, oldValue) {
                     if (oldValue !== newValue) {
                         // when the psSize attribute is changed, resize the pageslide
