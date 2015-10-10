@@ -1,5 +1,6 @@
 {
   "name": "angular-pageslide-directive",
+  "main": "dist/angular-pageslide-directive.js",
   "version": "1.0.3",
   "devDependencies": {
     "grunt": "~0.4.1",
