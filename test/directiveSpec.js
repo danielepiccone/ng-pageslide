@@ -41,15 +41,15 @@ describe('ng-pageslide: ', function(){
         elm.innerHTML = html;
         document.body.appendChild(elm);
 
-        // Compile DOM        
+        // Compile DOM
         var template = angular.element(elm);
         $compile(template)($rootScope);
         $rootScope.$apply();
 
         // Check for DOM Manipulation
-        var el = document.querySelector('.ng-pageslide'); 
+        var el = document.querySelector('.ng-pageslide');
         var attached_to = el.parentElement.tagName;
-        expect(attached_to).toBe('BODY'); 
+        expect(attached_to).toBe('BODY');
 
     }));
 
@@ -74,19 +74,17 @@ describe('ng-pageslide: ', function(){
         elm.innerHTML = html;
         document.body.appendChild(elm);
 
-        // Compile DOM        
+        // Compile DOM
         var template = angular.element(elm);
         $compile(template)($rootScope);
         $rootScope.$apply();
 
         var w = document.querySelector('.ng-pageslide').style.width;
-        console.log(w);
         expect(w).toBe('300px');
-        
+
         $rootScope.is_open = false;
         $rootScope.$apply();
         var w = document.querySelector('.ng-pageslide').style.width;
-        console.log(w);
         expect(w).toBe('0px');
 
     }));
@@ -112,7 +110,7 @@ describe('ng-pageslide: ', function(){
         elm.innerHTML = html;
         document.body.appendChild(elm);
 
-        // Compile DOM        
+        // Compile DOM
         var template = angular.element(elm);
         $compile(template)($rootScope);
         $rootScope.$apply();
@@ -120,7 +118,7 @@ describe('ng-pageslide: ', function(){
         var pageslideScope = angular.element(document.querySelector('[pageslide]')).isolateScope();
 
         expect(pageslideScope.psOpen).toBe(true);
-        
+
         $rootScope.is_open = false;
         $rootScope.$apply();
 
@@ -153,15 +151,15 @@ describe('ng-pageslide: ', function(){
         elm.innerHTML = html;
         document.body.appendChild(elm);
 
-        // Compile DOM        
+        // Compile DOM
         var template = angular.element(elm);
         $compile(template)($rootScope);
         $rootScope.$apply();
 
         // Check for DOM Manipulation
-        var el = document.querySelector('.ng-pageslide'); 
+        var el = document.querySelector('.ng-pageslide');
         var attached_to = el.parentNode.localName;
-        expect(attached_to).toBe('body'); 
+        expect(attached_to).toBe('body');
 
     }));
     */
@@ -187,7 +185,7 @@ describe('ng-pageslide: ', function(){
         elm.innerHTML = html;
         document.body.appendChild(elm);
 
-        // Compile DOM        
+        // Compile DOM
         var template = angular.element(elm);
         $compile(template)($rootScope);
         $rootScope.$apply();

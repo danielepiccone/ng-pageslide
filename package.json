@@ -12,9 +12,11 @@
     "karma-phantomjs-launcher": "^0.1.4"
   },
   "dependencies": {
+    "angular": "^1.4.7",
+    "angular-mocks": "^1.4.7",
     "grunt-karma": "^0.10.1"
   },
   "scripts": {
-      "test": "grunt test"
+    "test": "grunt test"
   }
 }
