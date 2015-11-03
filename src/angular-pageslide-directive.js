@@ -80,7 +80,7 @@ angular.module('pageslide-directive', [])
                 body.appendChild(slider);
 
                 /* Slider Style setup */
-                slider.style.zIndex = param.zindex;
+                slider.style['z-index'] = param.zIndex;
                 slider.style.position = param.container !== false ? 'absolute' : 'fixed';
                 slider.style.width = 0;
                 slider.style.height = 0;
