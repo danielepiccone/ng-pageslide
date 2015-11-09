@@ -1,7 +1,7 @@
 angular.module('pageslide-directive', [])
 
-.directive('pageslide', ['$document',
-    function ($document) {
+.directive('pageslide', ['$document', '$timeout',
+    function ($document, $timeout) {
         var defaults = {};
 
         return {
@@ -22,12 +22,6 @@ angular.module('pageslide-directive', [])
                 psBodyClass: '@'
             },
             link: function ($scope, el, attrs) {
-                /* Inspect */
-
-                //console.log($scope);
-                //console.log(el);
-                //console.log(attrs);
-
                 /* Parameters */
                 var param = {};
 
@@ -51,6 +45,7 @@ angular.module('pageslide-directive', [])
                 var slider = null;
                 var body = param.container ? document.getElementById(param.container) : document.body;
 
+                //TODO: verify that we are meaning to use the param.className and not the param.bodyClass
                 function setBodyClass(value){
                     if (param.bodyClass) {
                         var bodyClass = param.className + '-body';
@@ -125,7 +120,7 @@ angular.module('pageslide-directive', [])
 
                 /* Closed */
                 function psClose(slider, param) {
-                    if (slider && slider.style.width !== 0 && slider.style.width !== 0) {
+                    if (slider && slider.style.width !== 0) {
                         if (param.cloak) content.css('display', 'none');
                         switch (param.side) {
                             case 'right':
@@ -173,7 +168,7 @@ angular.module('pageslide-directive', [])
 
                 /* Open */
                 function psOpen(slider, param) {
-                    if (slider.style.width !== 0 && slider.style.width !== 0) {
+                    if (slider.style.width !== 0) {
                         switch (param.side) {
                             case 'right':
                                 slider.style.width = param.size;
@@ -208,9 +203,11 @@ angular.module('pageslide-directive', [])
                                 }
                                 break;
                         }
-                        setTimeout(function() {
+                        $timeout(function() {
                             if (param.cloak) content.css('display', 'block');
                         }, (param.speed * 1000));
+
+                        $scope.psOpen = true;
 
                         if (param.keyListener) {
                             $document.on('keydown', keyListener);
@@ -277,4 +274,3 @@ angular.module('pageslide-directive', [])
         };
     }
 ]);
-
