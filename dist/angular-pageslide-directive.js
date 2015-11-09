@@ -22,7 +22,13 @@ angular.module('pageslide-directive', [])
                 psBodyClass: '@'
             },
             link: function ($scope, el, attrs) {
-                /* Parameters */
+
+                /* Inspect */
+
+                //console.log($scope);
+                //console.log(el);
+                //console.log(attrs);
+
                 var param = {};
 
                 param.side = $scope.psSide || 'right';
@@ -37,15 +43,16 @@ angular.module('pageslide-directive', [])
                 param.keyListener = Boolean($scope.psKeyListener) || false;
                 param.bodyClass = $scope.psBodyClass || false;
 
-                // Apply Class
                 el.addClass(param.className);
 
                 /* DOM manipulation */
+
                 var content = null;
                 var slider = null;
                 var body = param.container ? document.getElementById(param.container) : document.body;
 
-                //TODO: verify that we are meaning to use the param.className and not the param.bodyClass
+                // TODO verify that we are meaning to use the param.className and not the param.bodyClass
+
                 function setBodyClass(value){
                     if (param.bodyClass) {
                         var bodyClass = param.className + '-body';
@@ -61,8 +68,8 @@ angular.module('pageslide-directive', [])
 
                 // Check for div tag
                 if (slider.tagName.toLowerCase() !== 'div' &&
-                slider.tagName.toLowerCase() !== 'pageslide')
-                throw new Error('Pageslide can only be applied to <div> or <pageslide> elements');
+                    slider.tagName.toLowerCase() !== 'pageslide')
+                    throw new Error('Pageslide can only be applied to <div> or <pageslide> elements');
 
                 // Check for content
                 if (slider.children.length === 0)
@@ -203,6 +210,7 @@ angular.module('pageslide-directive', [])
                                 }
                                 break;
                         }
+
                         $timeout(function() {
                             if (param.cloak) content.css('display', 'block');
                         }, (param.speed * 1000));
@@ -222,9 +230,10 @@ angular.module('pageslide-directive', [])
                     return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
                 }
 
-                /**
+                /*
                 * Close the sidebar if the 'esc' key is pressed
-                */
+                * */
+
                 function keyListener(e) {
                     var ESC_KEY = 27;
                     var key = e.keyCode || e.which;
