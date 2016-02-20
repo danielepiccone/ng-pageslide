@@ -43,7 +43,7 @@ also you need an inner ```<div>``` to wrap your content in
 
 ```
 
-If you're using Browserify, just use:
+If you're using Browserify, just add:
 
 ``` require('angular-pageslide-directive'); ```
 
