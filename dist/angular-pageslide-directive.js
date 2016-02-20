@@ -90,11 +90,12 @@ angular.module('pageslide-directive', [])
                 slider.style.webkitTransitionDuration = param.speed + 's';
                 slider.style.transitionProperty = 'width, height';
 
-                if (param.squeeze) {
+                if (param.squeeze || param.push) {
                     body.style.position = 'absolute';
                     body.style.transitionDuration = param.speed + 's';
                     body.style.webkitTransitionDuration = param.speed + 's';
                     body.style.transitionProperty = 'top, bottom, left, right';
+                    body.style.overflow = 'hidden';
                 }
 
                 switch (param.side) {
