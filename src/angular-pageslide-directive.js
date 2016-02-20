@@ -95,6 +95,7 @@ angular.module('pageslide-directive', [])
                     body.style.transitionDuration = param.speed + 's';
                     body.style.webkitTransitionDuration = param.speed + 's';
                     body.style.transitionProperty = 'top, bottom, left, right';
+                    body.style.overflow = 'hidden';
                 }
 
                 switch (param.side) {
