@@ -2,18 +2,18 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        
+
         concat: {
             dist :{
                 src: ['src/*.js'],
                 dest: 'dist/<%= pkg.name %>.js'
             }
         },
-        
+
         jshint: {
             files: ['src/*.js']
         },
-        
+
         uglify: {
             options: {
                 banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
@@ -30,7 +30,6 @@ module.exports = function(grunt) {
                     configFile: 'karma.conf.js',
                     runnerPort: 9999,
                     singleRun: true,
-                    browsers: ['PhantomJS'],
                     logLevel: 'ERROR'
                 }
             }

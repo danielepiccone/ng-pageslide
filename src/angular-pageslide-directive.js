@@ -267,7 +267,9 @@ angular.module('pageslide-directive', [])
                 * */
 
                 $scope.$on('$destroy', function () {
-                    body.removeChild(slider);
+                    if (slider.parentNode === body) {
+                        body.removeChild(slider);
+                    }
                 });
 
                 if ($scope.psAutoClose) {
