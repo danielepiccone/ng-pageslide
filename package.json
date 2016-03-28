@@ -3,19 +3,20 @@
   "main": "dist/angular-pageslide-directive.js",
   "version": "1.0.8",
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-concat": "~0.3",
-    "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-uglify": "~0.2.2",
-    "karma": "^0.13.15",
-    "karma-coverage": "^0.5.3",
-    "karma-jasmine": "^0.3.6",
-    "karma-phantomjs-launcher": "^0.1.4"
+    "grunt": "0.4.5",
+    "grunt-contrib-concat": "0.3.0",
+    "grunt-contrib-jshint": "0.6.5",
+    "grunt-contrib-uglify": "0.2.7",
+    "jasmine-core": "2.4.1",
+    "karma": "0.13.22",
+    "karma-coverage": "0.5.5",
+    "karma-jasmine": "0.3.8",
+    "karma-phantomjs-launcher": "0.1.4"
   },
   "dependencies": {
-    "angular": "^1.4.7",
-    "angular-mocks": "^1.4.7",
-    "grunt-karma": "^0.12.1"
+    "angular": "1.4.7",
+    "angular-mocks": "1.4.7",
+    "grunt-karma": "0.12.2"
   },
   "scripts": {
     "test": "grunt test"
