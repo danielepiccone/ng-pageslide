@@ -14,6 +14,7 @@ angular.module('pageslide-directive', [])
                 psSpeed: '@',
                 psClass: '@',
                 psSize: '@',
+                psZindex: '@',
                 psSqueeze: '@',
                 psCloak: '@',
                 psPush: '@',
