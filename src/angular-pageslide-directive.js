@@ -34,7 +34,7 @@ angular.module('pageslide-directive', [])
                 param.side = $scope.psSide || 'right';
                 param.speed = $scope.psSpeed || '0.5';
                 param.size = $scope.psSize || '300px';
-                param.zindex = 1000; // Override with custom CSS
+                param.zindex = $scope.psZindex || 1000;
                 param.className = $scope.psClass || 'ng-pageslide';
                 param.cloak = $scope.psCloak && $scope.psCloak.toLowerCase() == 'false' ? false : true;
                 param.squeeze = Boolean($scope.psSqueeze) || false;

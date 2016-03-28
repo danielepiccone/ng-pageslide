@@ -48,15 +48,22 @@ also you need an inner ```<div>``` to wrap your content in
 ```
 pageslide (required)
 
+// Configuration
 ps-side (optional) = Where the panel should appear (right,left,top,bottom), if empty defaults to "right"
+
+// Interaction
 ps-open (optional) = Boolean true/false used to open and close the panel (optional)
-ps-speed (optional) = The speed of the transition (optional)
-ps-class (optional) = The class for the pageslide (default: "ng-pageslide")
-ps-auto-close (optional) = true if you want the panel to close on location change
-ps-size (optional) = desired height/width of panel (defaults to 300px)
 ps-cloak (optional) = hides the content until the panel is open (defaults to true)
+ps-auto-close (optional) = true if you want the panel to close on location change
 ps-key-listener (optional) = close the sidebar with the ESC key (defaults to false)
 
+// Style
+ps-class (optional) = The class for the pageslide (default: "ng-pageslide")
+ps-speed (optional) = The speed of the transition (optional)
+ps-size (optional) = desired height/width of panel (defaults to 300px)
+ps-zindex (optional) = desired z-index (defaults to 1000)
+
+// Effects
 ps-push (optional) = push the main body to show the panel (defaults to false)*
 ps-squeeze (optional) = squeeze body to fit the panel (defaults to false)*
 
