@@ -53,7 +53,6 @@ ps-side (optional) = Where the panel should appear (right,left,top,bottom), if e
 
 // Interaction
 ps-open (optional) = Boolean true/false used to open and close the panel (optional)
-ps-cloak (optional) = hides the content until the panel is open (defaults to true)
 ps-auto-close (optional) = true if you want the panel to close on location change
 ps-key-listener (optional) = close the sidebar with the ESC key (defaults to false)
 
@@ -64,8 +63,8 @@ ps-size (optional) = desired height/width of panel (defaults to 300px)
 ps-zindex (optional) = desired z-index (defaults to 1000)
 
 // Effects
-ps-push (optional) = push the main body to show the panel (defaults to false)*
-ps-squeeze (optional) = squeeze body to fit the panel (defaults to false)*
+ps-push (optional) = push the main body to show the panel (defaults to false)
+ps-squeeze (optional) = squeeze body to fit the panel (defaults to false)
 
 ps-custom-height (optional) = custom CSS for panel height (only applicable in 'right' or 'left' panels)
 ps-custom-top (optional) = custom CSS for panel top (only applicable in 'right', 'left' or 'top' panels)

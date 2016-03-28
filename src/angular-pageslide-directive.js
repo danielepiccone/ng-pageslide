@@ -37,7 +37,6 @@ angular.module('pageslide-directive', [])
                 param.size = $scope.psSize || '300px';
                 param.zindex = $scope.psZindex || 1000;
                 param.className = $scope.psClass || 'ng-pageslide';
-                param.cloak = $scope.psCloak && $scope.psCloak.toLowerCase() == 'false' ? false : true;
                 param.squeeze = Boolean($scope.psSqueeze) || false;
                 param.push = Boolean($scope.psPush) || false;
                 param.container = $scope.psContainer || false;
@@ -86,7 +85,6 @@ angular.module('pageslide-directive', [])
                 slider.style.position = param.container !== false ? 'absolute' : 'fixed';
                 slider.style.width = 0;
                 slider.style.height = 0;
-                slider.style.overflow = 'hidden';
                 slider.style.transitionDuration = param.speed + 's';
                 slider.style.webkitTransitionDuration = param.speed + 's';
                 slider.style.transitionProperty = 'width, height';
@@ -129,7 +127,7 @@ angular.module('pageslide-directive', [])
                 /* Closed */
                 function psClose(slider, param) {
                     if (slider && slider.style.width !== 0) {
-                        if (param.cloak) content.css('display', 'none');
+                        content.css('display', 'none');
                         switch (param.side) {
                             case 'right':
                                 slider.style.width = '0px';
@@ -213,7 +211,7 @@ angular.module('pageslide-directive', [])
                         }
 
                         $timeout(function() {
-                            if (param.cloak) content.css('display', 'block');
+                            content.css('display', 'block');
                         }, (param.speed * 1000));
 
                         $scope.psOpen = true;

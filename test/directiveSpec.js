@@ -59,54 +59,8 @@ describe('ng-pageslide: ', function() {
         });
       });
     });
+
     describe('when the element is valid', function () {
-      describe('psCloak', function () {
-        describe('when set to false', function () {
-          beforeEach(function (done) {
-            compilePageslide([
-              '<pageslide ps-cloak="false" ps-open="is_open">',
-              '<div>test</div>',
-              '</pageslide>'
-            ].join(''));
-            done();
-          });
-
-          it('should not set the display to none', function (done) {
-            scope.is_open = true;
-            scope.$digest();
-            expect(element.html()).not.toContain('display: none;');
-            done();
-          });
-          it('should not set the display to block after the timeout finishes', function (done) {
-            scope.is_open = true;
-            scope.$digest();
-            $timeout.flush();
-            scope.$digest();
-            expect(element.html()).not.toContain('display: block;');
-            done();
-          });
-        });
-        describe('by default', function () {
-          beforeEach(function (done) {
-            compilePageslide([
-              '<pageslide ps-open="is_open">',
-              '<div>test</div>',
-              '</pageslide>'
-            ].join(''));
-            done();
-          });
-
-          it('should set the display to block after the timeout finishes', function (done) {
-            scope.is_open = true;
-            scope.$digest();
-            $timeout.flush();
-            scope.$digest();
-            expect(angular.element(document.body).html()).toContain('display: block;');
-            done();
-          });
-        });
-      });
-
       describe('and has defined the container', function () {
         beforeEach(function (done) {
           angular.element(document.body).append('<div id="customContainer">custom container text</div>');
