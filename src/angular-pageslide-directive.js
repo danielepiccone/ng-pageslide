@@ -20,7 +20,8 @@ angular.module('pageslide-directive', [])
                 psPush: '@',
                 psContainer: '@',
                 psKeyListener: '@',
-                psBodyClass: '@'
+                psBodyClass: '@',
+                psZindex: '@'
             },
             link: function ($scope, el, attrs) {
 
