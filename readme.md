@@ -63,8 +63,9 @@ ps-size (optional) = desired height/width of panel (defaults to 300px)
 ps-zindex (optional) = desired z-index (defaults to 1000)
 
 // Effects
-ps-push (optional) = push the main body to show the panel (defaults to false)
-ps-squeeze (optional) = squeeze body to fit the panel (defaults to false)
+ps-push (optional) = push the main body to show the panel (defaults to false)*
+ps-squeeze (optional) = squeeze body to fit the panel (defaults to false)*
+* these options make assumptions about the layout, will set body positioning to absolute
 
 ps-custom-height (optional) = custom CSS for panel height (only applicable in 'right' or 'left' panels)
 ps-custom-top (optional) = custom CSS for panel top (only applicable in 'right', 'left' or 'top' panels)
@@ -75,9 +76,15 @@ ps-container (optional) = custom CSS ID selector to which the slider div appends
 ps-body-class (optional) = if true adds a class on the container body reflecting the state of the pageslide
 ```
 
-* these options make assumptions about the layout, will set body positioning to absolute
 
 ### Changelog
+
+Version 1.1.0
+
+- Removed ps-cloak, default behavior is to hide the content until the animation is over
+- Added ps-container, specifies the pageslide container id if not body
+- Added ps-push, pushes the body outside of the viewport when the panel slides in
+
 
 Version 1.0.0
 
