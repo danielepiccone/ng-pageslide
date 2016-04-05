@@ -15,7 +15,7 @@ angular.module('pageslide-directive', [])
                 psClass: '@',
                 psSize: '@',
                 psZindex: '@',
-                psSqueeze: '@',
+                psSqueeze: '=?',
                 psCloak: '@',
                 psPush: '@',
                 psContainer: '@',
@@ -37,7 +37,6 @@ angular.module('pageslide-directive', [])
                 param.size = $scope.psSize || '300px';
                 param.zindex = $scope.psZindex || 1000;
                 param.className = $scope.psClass || 'ng-pageslide';
-                param.squeeze = Boolean($scope.psSqueeze) || false;
                 param.push = Boolean($scope.psPush) || false;
                 param.container = $scope.psContainer || false;
                 param.keyListener = Boolean($scope.psKeyListener) || false;
@@ -89,13 +88,6 @@ angular.module('pageslide-directive', [])
                 slider.style.webkitTransitionDuration = param.speed + 's';
                 slider.style.transitionProperty = 'width, height';
 
-                if (param.squeeze) {
-                    body.style.position = 'absolute';
-                    body.style.transitionDuration = param.speed + 's';
-                    body.style.webkitTransitionDuration = param.speed + 's';
-                    body.style.transitionProperty = 'top, bottom, left, right';
-                }
-
                 switch (param.side) {
                     case 'right':
                         slider.style.height = attrs.psCustomHeight || '100%';
@@ -131,7 +123,7 @@ angular.module('pageslide-directive', [])
                         switch (param.side) {
                             case 'right':
                                 slider.style.width = '0px';
-                                if (param.squeeze) body.style.right = '0px';
+                                if ($scope.psSqueeze) body.style.right = '0px';
                                 if (param.push) {
                                     body.style.right = '0px';
                                     body.style.left = '0px';
@@ -139,7 +131,7 @@ angular.module('pageslide-directive', [])
                                 break;
                             case 'left':
                                 slider.style.width = '0px';
-                                if (param.squeeze) body.style.left = '0px';
+                                if ($scope.psSqueeze) body.style.left = '0px';
                                 if (param.push) {
                                     body.style.left = '0px';
                                     body.style.right = '0px';
@@ -147,7 +139,7 @@ angular.module('pageslide-directive', [])
                                 break;
                             case 'top':
                                 slider.style.height = '0px';
-                                if (param.squeeze) body.style.top = '0px';
+                                if ($scope.psSqueeze) body.style.top = '0px';
                                 if (param.push) {
                                     body.style.top = '0px';
                                     body.style.bottom = '0px';
@@ -155,7 +147,7 @@ angular.module('pageslide-directive', [])
                                 break;
                             case 'bottom':
                                 slider.style.height = '0px';
-                                if (param.squeeze) body.style.bottom = '0px';
+                                if ($scope.psSqueeze) body.style.bottom = '0px';
                                 if (param.push) {
                                     body.style.bottom = '0px';
                                     body.style.top = '0px';
@@ -178,7 +170,7 @@ angular.module('pageslide-directive', [])
                         switch (param.side) {
                             case 'right':
                                 slider.style.width = param.size;
-                                if (param.squeeze) body.style.right = param.size;
+                                if ($scope.psSqueeze) body.style.right = param.size;
                                 if (param.push) {
                                     body.style.right = param.size;
                                     body.style.left = '-' + param.size;
@@ -186,7 +178,7 @@ angular.module('pageslide-directive', [])
                                 break;
                             case 'left':
                                 slider.style.width = param.size;
-                                if (param.squeeze) body.style.left = param.size;
+                                if ($scope.psSqueeze) body.style.left = param.size;
                                 if (param.push) {
                                     body.style.left = param.size;
                                     body.style.right = '-' + param.size;
@@ -194,7 +186,7 @@ angular.module('pageslide-directive', [])
                                 break;
                             case 'top':
                                 slider.style.height = param.size;
-                                if (param.squeeze) body.style.top = param.size;
+                                if ($scope.psSqueeze) body.style.top = param.size;
                                 if (param.push) {
                                     body.style.top = param.size;
                                     body.style.bottom = '-' + param.size;
@@ -202,7 +194,7 @@ angular.module('pageslide-directive', [])
                                 break;
                             case 'bottom':
                                 slider.style.height = param.size;
-                                if (param.squeeze) body.style.bottom = param.size;
+                                if ($scope.psSqueeze) body.style.bottom = param.size;
                                 if (param.push) {
                                     body.style.bottom = param.size;
                                     body.style.top = '-' + param.size;
@@ -243,6 +235,36 @@ angular.module('pageslide-directive', [])
                 }
 
                 /*
+                 * set body style necessary for squeeze function to work
+                 * */
+                function psSetSqueeze() {
+                    body.style.position = 'absolute';
+                    body.style.transitionDuration = param.speed + 's';
+                    body.style.webkitTransitionDuration = param.speed + 's';
+                    body.style.transitionProperty = 'top, bottom, left, right';
+                    // ignite open to ensure all body styles are loaded if slider was already open
+                    if ($scope.psOpen) {
+                        psOpen(slider, param);
+                    }
+                    $scope.psSqueeze = true;
+                }
+
+                /*
+                 * clean up body styles when disabling squeeze
+                 * */
+                function psUnsetSqueeze() {
+                    body.style.position = '';
+                    body.style.transitionDuration = '';
+                    body.style.webkitTransitionDuration = '';
+                    body.style.transitionProperty = '';
+                    body.style.left = '';
+                    body.style.right = '';
+                    body.style.top = '';
+                    body.style.bottom = '';
+                    $scope.psSqueeze = false;
+                }
+
+                /*
                 * Watchers
                 * */
 
@@ -251,6 +273,14 @@ angular.module('pageslide-directive', [])
                         psOpen(slider, param);
                     } else {
                         psClose(slider, param);
+                    }
+                });
+
+                $scope.$watch('psSqueeze', function(value) {
+                    if (!!value) {
+                        psSetSqueeze();
+                    } else {
+                        psUnsetSqueeze();
                     }
                 });
 
