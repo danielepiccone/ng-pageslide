@@ -51,6 +51,21 @@ angular.module('pageslide-directive', [])
                 var slider = null;
                 var body = param.container ? document.getElementById(param.container) : document.body;
 
+                var isOpen = false;
+                function onBodyClick(e) {
+                    // Close when clicking outside of pageslide.
+                    // This is tough because you can't detect clicks on pseudo elements but you can hack around it like so:
+                    if(isOpen && !slider.contains(e.target)) {
+                        isOpen = false;
+                        $scope.psOpen = false;
+                        $scope.$apply();
+                    }
+
+                    if($scope.psOpen) {
+                        isOpen = true;
+                    }
+                }
+
                 // TODO verify that we are meaning to use the param.className and not the param.bodyClass
 
                 function setBodyClass(value){
@@ -169,6 +184,8 @@ angular.module('pageslide-directive', [])
                         $document.off('keydown', keyListener);
                     }
 
+                    document.body.removeEventListener('click', onBodyClick);
+                    isOpen = false;
                     setBodyClass('closed');
                 }
 
@@ -220,6 +237,7 @@ angular.module('pageslide-directive', [])
                             $document.on('keydown', keyListener);
                         }
 
+                        document.body.addEventListener('click', onBodyClick);
                         setBodyClass('open');
                     }
                 }
@@ -267,6 +285,7 @@ angular.module('pageslide-directive', [])
 
                 $scope.$on('$destroy', function () {
                     if (slider.parentNode === body) {
+                        document.body.removeEventListener('click', onBodyClick);
                         body.removeChild(slider);
                     }
                 });
