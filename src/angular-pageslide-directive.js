@@ -1,5 +1,5 @@
-angular.module('pageslide-directive', [])
-
+angular
+.module('pageslide-directive', [])
 .directive('pageslide', ['$document', '$timeout',
     function ($document, $timeout) {
         var defaults = {};
@@ -20,7 +20,8 @@ angular.module('pageslide-directive', [])
                 psPush: '@',
                 psContainer: '@',
                 psKeyListener: '@',
-                psBodyClass: '@'
+                psBodyClass: '@',
+                psClickOutside: '@'
             },
             link: function ($scope, el, attrs) {
 
@@ -42,19 +43,18 @@ angular.module('pageslide-directive', [])
                 param.container = $scope.psContainer || false;
                 param.keyListener = Boolean($scope.psKeyListener) || false;
                 param.bodyClass = $scope.psBodyClass || false;
+                param.clickOutside = $scope.psClickOutside === false ? false : true;
 
                 el.addClass(param.className);
 
                 /* DOM manipulation */
 
-                var content = null;
-                var slider = null;
-                var body = param.container ? document.getElementById(param.container) : document.body;
+                var content, slider, body;
+
+                body = param.container ? $document[0].getElementById(param.container) : $document[0].body;
 
                 var isOpen = false;
                 function onBodyClick(e) {
-                    // Close when clicking outside of pageslide.
-                    // This is tough because you can't detect clicks on pseudo elements but you can hack around it like so:
                     if(isOpen && !slider.contains(e.target)) {
                         isOpen = false;
                         $scope.psOpen = false;
@@ -65,8 +65,6 @@ angular.module('pageslide-directive', [])
                         isOpen = true;
                     }
                 }
-
-                // TODO verify that we are meaning to use the param.className and not the param.bodyClass
 
                 function setBodyClass(value){
                     if (param.bodyClass) {
@@ -81,12 +79,10 @@ angular.module('pageslide-directive', [])
 
                 slider = el[0];
 
-                // Check for div tag
                 if (slider.tagName.toLowerCase() !== 'div' &&
                     slider.tagName.toLowerCase() !== 'pageslide')
                     throw new Error('Pageslide can only be applied to <div> or <pageslide> elements');
 
-                // Check for content
                 if (slider.children.length === 0)
                     throw new Error('You have to content inside the <pageslide>');
 
@@ -181,10 +177,12 @@ angular.module('pageslide-directive', [])
                     $scope.psOpen = false;
 
                     if (param.keyListener) {
-                        $document.off('keydown', keyListener);
+                        $document.off('keydown', handleKeyDown);
                     }
 
-                    document.body.removeEventListener('click', onBodyClick);
+                    if (param.clickOutside) {
+                        $document.off('click', onBodyClick);
+                    }
                     isOpen = false;
                     setBodyClass('closed');
                 }
@@ -234,24 +232,17 @@ angular.module('pageslide-directive', [])
                         $scope.psOpen = true;
 
                         if (param.keyListener) {
-                            $document.on('keydown', keyListener);
+                            $document.on('keydown', handleKeyDown);
                         }
 
-                        document.body.addEventListener('click', onBodyClick);
+                        if (param.clickOutside) {
+                            $document.on('click', onBodyClick);
+                        }
                         setBodyClass('open');
                     }
                 }
 
-                function isFunction(functionToCheck) {
-                    var getType = {};
-                    return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
-                }
-
-                /*
-                * Close the sidebar if the 'esc' key is pressed
-                * */
-
-                function keyListener(e) {
+                function handleKeyDown(e) {
                     var ESC_KEY = 27;
                     var key = e.keyCode || e.which;
 
@@ -285,7 +276,9 @@ angular.module('pageslide-directive', [])
 
                 $scope.$on('$destroy', function () {
                     if (slider.parentNode === body) {
-                        document.body.removeEventListener('click', onBodyClick);
+                        if (param.clickOutside) {
+                            $document.off('click', onBodyClick);
+                        }
                         body.removeChild(slider);
                     }
                 });
