@@ -51,7 +51,7 @@ angular
 
                 var content, slider, body;
 
-                body = param.container ? $document[0].getElementById(param.container) : $document[0].body;
+                body = param.container ? document.getElementById(param.container) : document.body;
 
                 var isOpen = false;
                 function onBodyClick(e) {

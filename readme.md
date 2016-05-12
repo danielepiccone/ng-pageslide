@@ -55,6 +55,7 @@ ps-side (optional) = Where the panel should appear (right,left,top,bottom), if e
 ps-open (optional) = Boolean true/false used to open and close the panel (optional)
 ps-auto-close (optional) = true if you want the panel to close on location change
 ps-key-listener (optional) = close the sidebar with the ESC key (defaults to false)
+ps-click-outside (optional) = close the sidebar by clicking outside (defaults to true)
 
 // Style
 ps-class (optional) = The class for the pageslide (default: "ng-pageslide")
