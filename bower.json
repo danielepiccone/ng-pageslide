@@ -1,6 +1,10 @@
 {
   "name": "angular-pageslide-directive",
+<<<<<<< HEAD
   "version": "1.1.2",
+=======
+  "version": "1.2.0",
+>>>>>>> dpiccone/master
   "main": "dist/angular-pageslide-directive.js",
   "authors": [
     "Daniele Piccone <mail@danielepiccone.com> (http://www.danielepiccone.com)",
