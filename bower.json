@@ -1,6 +1,6 @@
 {
   "name": "angular-pageslide-directive",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "dist/angular-pageslide-directive.js",
   "authors": [
     "Daniele Piccone <mail@danielepiccone.com> (http://www.danielepiccone.com)",
@@ -11,9 +11,9 @@
     "url": "git@github.com:dpiccone/ng-pageslide.git"
   },
   "dependencies": {
-    "angular": "1.4.6"
+    "angular": "1.5.5"
   },
   "devDependencies": {
-    "angular-mocks": "1.4.6"
+    "angular-mocks": "1.5.5"
   }
 }
