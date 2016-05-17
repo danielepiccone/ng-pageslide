@@ -41,9 +41,9 @@ angular
                 param.squeeze = Boolean($scope.psSqueeze) || false;
                 param.push = Boolean($scope.psPush) || false;
                 param.container = $scope.psContainer || false;
-                param.keyListener = Boolean($scope.psKeyListener) || false;
+                param.keyListener = $scope.psKeyListener === 'true';    // right member should be default value
                 param.bodyClass = $scope.psBodyClass || false;
-                param.clickOutside = $scope.psClickOutside === false ? false : true;
+                param.clickOutside = $scope.psClickOutside !== 'false'; // right member should be default value
 
                 el.addClass(param.className);
 
