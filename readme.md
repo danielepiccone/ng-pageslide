@@ -50,6 +50,8 @@ pageslide (required)
 
 // Configuration
 ps-side (optional) = Where the panel should appear (right,left,top,bottom), if empty defaults to "right"
+ps-container (optional) = custom CSS ID selector to which the slider div appends (e.g: <div id='myDiv'/> -> ps-container="myDiv")
+ps-body-class (optional) = if true adds a class on the container body reflecting the state of the pageslide
 
 // Interaction
 ps-open (optional) = Boolean true/false used to open and close the panel (optional)
@@ -68,13 +70,6 @@ ps-push (optional) = push the main body to show the panel (defaults to false)*
 ps-squeeze (optional) = squeeze body to fit the panel (defaults to false)*
 * these options make assumptions about the layout, will set body positioning to absolute
 
-ps-custom-height (optional) = custom CSS for panel height (only applicable in 'right' or 'left' panels)
-ps-custom-top (optional) = custom CSS for panel top (only applicable in 'right', 'left' or 'top' panels)
-ps-custom-bottom (optional) = custom CSS for panel bottom (only applicable in 'right', 'left' or 'bottom' panels)
-ps-custom-left (optional) = custom CSS for panel left (only applicable in 'left', 'top' or 'bottom' panels)
-ps-custom-right (optional) = custom CSS for panel right (only applicable in 'right', 'top' or 'bottom' panels)
-ps-container (optional) = custom CSS ID selector to which the slider div appends (e.g: <div id='myDiv'/> -> ps-container="myDiv")
-ps-body-class (optional) = if true adds a class on the container body reflecting the state of the pageslide
 ```
 
 

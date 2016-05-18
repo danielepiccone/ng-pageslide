@@ -46,7 +46,6 @@
                 right: 0;
                 bottom: 0;
                 z-index: 1;
-                pointer-events: none;
             }
         </style>
         <script>
@@ -70,7 +69,7 @@
             // Test
             angular.element(document).ready(function () {
                 if (console.assert)
-                    console.assert(document.querySelectorAll('body > .ng-pageslide').length == 12, 'Made all of them')
+                    console.assert(document.querySelectorAll('body > .ng-pageslide').length == 13, 'Made all of them')
             });
         </script>
     </head>
@@ -232,6 +231,19 @@
                 </div>
                 </pageslide>
             </div>
+
+            <div ng-controller="pageslideCtrl">
+                <h3>Avoid click outside</h3>
+                <p>Check to open: <input type="checkbox" ng-model="checked" ></p>
+                <pageslide ps-open="checked" ps-body-class="true" ps-click-outside="false">
+                <div style="padding:20px">
+                    <h2>Yo Pageslide</h2>
+                    <p>Put here whatever you want</p>
+                    <p><a ng-click="toggle()" class="button" >Close</a></p>
+                </div>
+                </pageslide>
+            </div>
+
 
             <!--
             <div ng-controller="pageslideCtrl">

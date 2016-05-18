@@ -25,12 +25,6 @@ angular
             },
             link: function ($scope, el, attrs) {
 
-                /* Inspect */
-
-                //console.log($scope);
-                //console.log(el);
-                //console.log(attrs);
-
                 var param = {};
 
                 param.side = $scope.psSide || 'right';
@@ -43,7 +37,7 @@ angular
                 param.container = $scope.psContainer || false;
                 param.keyListener = Boolean($scope.psKeyListener) || false;
                 param.bodyClass = $scope.psBodyClass || false;
-                param.clickOutside = $scope.psClickOutside === false ? false : true;
+                param.clickOutside = $scope.psClickOutside === 'false' ? false : true;
 
                 el.addClass(param.className);
 
@@ -54,6 +48,7 @@ angular
                 body = param.container ? document.getElementById(param.container) : document.body;
 
                 var isOpen = false;
+
                 function onBodyClick(e) {
                     if(isOpen && !slider.contains(e.target)) {
                         isOpen = false;
