@@ -25,12 +25,6 @@ angular
             },
             link: function ($scope, el, attrs) {
 
-                /* Inspect */
-
-                //console.log($scope);
-                //console.log(el);
-                //console.log(attrs);
-
                 var param = {};
 
                 param.side = $scope.psSide || 'right';
@@ -38,12 +32,12 @@ angular
                 param.size = $scope.psSize || '300px';
                 param.zindex = $scope.psZindex || 1000;
                 param.className = $scope.psClass || 'ng-pageslide';
-                param.squeeze = Boolean($scope.psSqueeze) || false;
-                param.push = Boolean($scope.psPush) || false;
+                param.squeeze = $scope.psSqueeze === 'true';
+                param.push = $scope.psPush === 'true';
                 param.container = $scope.psContainer || false;
-                param.keyListener = $scope.psKeyListener === 'true';    // right member should be default value
+                param.keyListener = $scope.psKeyListener === 'true';
                 param.bodyClass = $scope.psBodyClass || false;
-                param.clickOutside = $scope.psClickOutside !== 'false'; // right member should be default value
+                param.clickOutside = $scope.psClickOutside !== 'false';
 
                 el.addClass(param.className);
 
@@ -54,6 +48,7 @@ angular
                 body = param.container ? document.getElementById(param.container) : document.body;
 
                 var isOpen = false;
+
                 function onBodyClick(e) {
                     if(isOpen && !slider.contains(e.target)) {
                         isOpen = false;

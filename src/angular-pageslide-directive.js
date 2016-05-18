@@ -32,12 +32,12 @@ angular
                 param.size = $scope.psSize || '300px';
                 param.zindex = $scope.psZindex || 1000;
                 param.className = $scope.psClass || 'ng-pageslide';
-                param.squeeze = Boolean($scope.psSqueeze) || false;
-                param.push = Boolean($scope.psPush) || false;
+                param.squeeze = $scope.psSqueeze === 'true';
+                param.push = $scope.psPush === 'true';
                 param.container = $scope.psContainer || false;
-                param.keyListener = Boolean($scope.psKeyListener) || false;
+                param.keyListener = $scope.psKeyListener === 'true';
                 param.bodyClass = $scope.psBodyClass || false;
-                param.clickOutside = $scope.psClickOutside === 'false' ? false : true;
+                param.clickOutside = $scope.psClickOutside !== 'false';
 
                 el.addClass(param.className);
 
