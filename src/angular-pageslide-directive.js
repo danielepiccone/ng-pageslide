@@ -8,8 +8,8 @@ angular
             restrict: 'EAC',
             transclude: false,
             scope: {
-                psOpen: '=?',
-                psAutoClose: '=?',
+                psOpen: '=',
+                psAutoClose: '=',
                 psSide: '@',
                 psSpeed: '@',
                 psClass: '@',
@@ -46,7 +46,6 @@ angular
                 var content, slider, body;
 
                 body = param.container ? document.getElementById(param.container) : document.body;
-
                 var isOpen = false;
 
                 function onBodyClick(e) {
@@ -95,7 +94,7 @@ angular
                 slider.style.webkitTransitionDuration = param.speed + 's';
                 slider.style.transitionProperty = 'width, height';
 
-                if (param.squeeze) {
+                if (param.squeeze || params.push) {
                     body.style.position = 'absolute';
                     body.style.transitionDuration = param.speed + 's';
                     body.style.webkitTransitionDuration = param.speed + 's';
@@ -169,8 +168,6 @@ angular
                                 break;
                         }
                     }
-                    $scope.psOpen = false;
-
                     if (param.keyListener) {
                         $document.off('keydown', handleKeyDown);
                     }
@@ -180,6 +177,7 @@ angular
                     }
                     isOpen = false;
                     setBodyClass('closed');
+                    $scope.psOpen = false;
                 }
 
                 /* Open */
