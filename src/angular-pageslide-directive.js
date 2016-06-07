@@ -259,7 +259,9 @@ angular
                 $scope.$watch('psSize', function(newValue, oldValue) {
                     if (oldValue !== newValue) {
                         param.size = newValue;
-                        psOpen(slider, param);
+                        if ($scope.psOpen) {
+                            psOpen(slider, param);
+                        }
                     }
                 });
 
