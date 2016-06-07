@@ -56,7 +56,8 @@
 
             app.controller('pageslideCtrl',['$scope',function($scope){
 
-                $scope.checked = false; // This will be binded using the ps-open attribute
+                $scope.checked = false;
+                $scope.size = 100;
 
                 $scope.toggle = function(){
                     $scope.checked = !$scope.checked
@@ -244,6 +245,18 @@
                     <p>Put here whatever you want</p>
                     <p><a ng-click="toggle()" class="button" >Close</a></p>
                 </div>
+                </pageslide>
+            </div>
+
+            <div ng-controller="pageslideCtrl">
+                <h3>Dynamic psSize</h3>
+                <p>Check to open: <input type="checkbox" ng-model="checked" ></p>
+                <p>psSize <input type="text" ng-model="size" ></p>
+                <pageslide ps-open="checked" ps-size="size">
+                    <div style="padding:20px">
+                        <h2>Yo Pageslide</h2>
+                        <p>Put here whatever you want</p>
+                    </div>
                 </pageslide>
             </div>
 
