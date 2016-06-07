@@ -8,8 +8,8 @@ angular
             restrict: 'EAC',
             transclude: false,
             scope: {
-                psOpen: '=',
-                psAutoClose: '=',
+                psOpen: '=?',
+                psAutoClose: '=?',
                 psSide: '@',
                 psSpeed: '@',
                 psClass: '@',
