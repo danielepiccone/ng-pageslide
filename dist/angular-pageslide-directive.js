@@ -9,7 +9,7 @@ angular
             transclude: false,
             scope: {
                 psOpen: '=?',
-                psAutoClose: '=?',
+                psAutoClose: '@',
                 psSide: '@',
                 psSpeed: '@',
                 psClass: '@',
@@ -78,7 +78,7 @@ angular
                     throw new Error('Pageslide can only be applied to <div> or <pageslide> elements');
 
                 if (slider.children.length === 0)
-                    throw new Error('You have to content inside the <pageslide>');
+                    throw new Error('You need to have content inside the <pageslide>');
 
                 content = angular.element(slider.children);
 
@@ -285,8 +285,8 @@ angular
                     $scope.$on('$stateChangeStart', function() {
                         psClose(slider, param);
                     });
-
                 }
+
             }
         };
     }

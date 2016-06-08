@@ -9,7 +9,7 @@ angular
             transclude: false,
             scope: {
                 psOpen: '=?',
-                psAutoClose: '=?',
+                psAutoClose: '@',
                 psSide: '@',
                 psSpeed: '@',
                 psClass: '@',
@@ -241,7 +241,6 @@ angular
 
                     if (key === ESC_KEY) {
                         psClose(slider, param);
-                        $scope.$apply();
                     }
                 }
 
