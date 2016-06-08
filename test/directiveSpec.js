@@ -163,13 +163,15 @@ describe('ng-pageslide: ', function() {
           ].join(''));
           done();
         });
-        it('should set the size accordingly', function (done) {
+        it('should set the size accordingly without opening the pageslide', function (done) {
           scope.is_open = false;
           scope.$digest();
           expect(isolateScope.psOpen).toEqual(false);
           scope.size = '150px';
           scope.$digest();
-          expect(isolateScope.psOpen).toEqual(true);
+          expect(isolateScope.psOpen).toEqual(false);
+          scope.is_open = true;
+          scope.$digest();
           var body = angular.element(document.body);
           expect(body.html()).toContain('width: 150px;');
           done();

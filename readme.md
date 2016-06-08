@@ -2,7 +2,7 @@
 
 An [AngularJS](http://angularjs.org/) directive which slides another panel over your browser to reveal an additional interaction pane.
 
-It does all the css manipulation needed to position your content off canvas with html attibutes and it does not depend on jQuery
+It does all the css manipulation needed to position your content off canvas.
 
 See it in action [HERE](http://dpiccone.github.io/ng-pageslide/examples/)
 
@@ -11,12 +11,6 @@ Examples in the repository.
 [![Build Status](https://travis-ci.org/dpiccone/ng-pageslide.svg?branch=master)](https://travis-ci.org/dpiccone/ng-pageslide)
 
 ## Usage
-
-Add this in your head
-
-```
-<script src="dist/angular-pageslide-directive.min.js"></script>
-```
 
 Use within your Angular app
 
@@ -68,25 +62,9 @@ ps-zindex (optional) = desired z-index (defaults to 1000)
 // Effects
 ps-push (optional) = push the main body to show the panel (defaults to false)*
 ps-squeeze (optional) = squeeze body to fit the panel (defaults to false)*
-* these options make assumptions about the layout, will set body positioning to absolute
+* these options make assumptions about the layout, will set attributes on body
 
 ```
-
-
-### Changelog
-
-Version 1.1.0
-
-- Removed ps-cloak, default behavior is to hide the content until the animation is over
-- Added ps-container, specifies the pageslide container id if not body
-- Added ps-push, pushes the body outside of the viewport when the panel slides in
-
-
-Version 1.0.0
-
-- The directive is AEC and it works only for block elements
-- Removed ps-target and href= for opening the pageslide
-- Added ps-cloak and ps-squeeze
 
 ## Licensing
 
