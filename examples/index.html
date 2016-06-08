@@ -59,10 +59,13 @@
                 $scope.checked = false;
                 $scope.size = '100px';
 
-                $scope.toggle = function(){
+                $scope.toggle = function() {
                     $scope.checked = !$scope.checked
                 }
 
+                $scope.mockRouteChange = function () {
+                    $scope.$broadcast('$locationChangeStart');
+                }
             }]);
 
             angular.element(document).ready(function(){
@@ -256,6 +259,18 @@
                     <div style="padding:20px">
                         <h2>Yo Pageslide</h2>
                         <p>Put here whatever you want</p>
+                    </div>
+                </pageslide>
+            </div>
+
+            <div ng-controller="pageslideCtrl">
+                <h3>Auto close</h3>
+                <p>Check to open: <input type="checkbox" ng-model="checked" ></p>
+                <pageslide ps-open="checked" ps-auto-close="true" >
+                    <div style="padding:20px">
+                        <h2>Yo Pageslide</h2>
+                        <p>Put here whatever you want</p>
+                        <button ng-click="mockRouteChange()">Change Route</button>
                     </div>
                 </pageslide>
             </div>

@@ -286,8 +286,8 @@ angular
                     $scope.$on('$stateChangeStart', function() {
                         psClose(slider, param);
                     });
-
                 }
+
             }
         };
     }
