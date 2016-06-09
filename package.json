@@ -1,7 +1,16 @@
 {
   "name": "angular-pageslide-directive",
+  "author": "Daniele Piccone <mail@danielepiccone.com>",
   "main": "dist/angular-pageslide-directive.js",
+  "keywords": [
+      "angular",
+      "pageslide",
+      "offcanvas",
+      "modal",
+      "pane"
+  ],
   "version": "1.3.2",
+  "licese": "MIT",
   "devDependencies": {
     "grunt": "0.4.5",
     "grunt-contrib-concat": "0.3.0",
