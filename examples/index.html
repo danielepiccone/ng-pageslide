@@ -32,11 +32,12 @@
                 z-index: 1;
                 opacity: 0.5;
                 transition: opacity 1s;
+                opacity: 0.5;
+                pointer-events: all;
             }
 
             body.ng-pageslide-body-closed::before {
                 transition: opacity 1s;
-                opacity: 0;
                 content: '.';
                 display: block;
                 position: absolute;
@@ -46,6 +47,7 @@
                 right: 0;
                 bottom: 0;
                 z-index: 1;
+                opacity: 0;
                 pointer-events: none;
             }
         </style>
@@ -54,12 +56,16 @@
 
             app.controller('pageslideCtrl',['$scope',function($scope){
 
-                $scope.checked = false; // This will be binded using the ps-open attribute
+                $scope.checked = false;
+                $scope.size = '100px';
 
-                $scope.toggle = function(){
+                $scope.toggle = function() {
                     $scope.checked = !$scope.checked
                 }
 
+                $scope.mockRouteChange = function () {
+                    $scope.$broadcast('$locationChangeStart');
+                }
             }]);
 
             angular.element(document).ready(function(){
@@ -70,7 +76,7 @@
             // Test
             angular.element(document).ready(function () {
                 if (console.assert)
-                    console.assert(document.querySelectorAll('body > .ng-pageslide').length == 12, 'Made all of them')
+                    console.assert(document.querySelectorAll('body > .ng-pageslide').length == 14, 'Made all of them')
             });
         </script>
     </head>
@@ -233,18 +239,41 @@
                 </pageslide>
             </div>
 
-            <!--
             <div ng-controller="pageslideCtrl">
-                <h3>With custom styles</h3>
+                <h3>Avoid click outside</h3>
                 <p>Check to open: <input type="checkbox" ng-model="checked" ></p>
-                <pageslide ps-class="panel" ps-open="checked" >
-                <div>
-                    <h2>Rad Pageslide</h2>
+                <pageslide ps-open="checked" ps-body-class="true" ps-click-outside="false">
+                <div style="padding:20px">
+                    <h2>Yo Pageslide</h2>
                     <p>Put here whatever you want</p>
+                    <p><a ng-click="toggle()" class="button" >Close</a></p>
                 </div>
                 </pageslide>
             </div>
-            -->
+
+            <div ng-controller="pageslideCtrl">
+                <h3>Dynamic psSize</h3>
+                <p>Check to open: <input type="checkbox" ng-model="checked" ></p>
+                <p>psSize <input type="text" ng-model="size" ></p>
+                <pageslide ps-open="checked" ps-click-outside="false" ps-size="{{size}}">
+                    <div style="padding:20px">
+                        <h2>Yo Pageslide</h2>
+                        <p>Put here whatever you want</p>
+                    </div>
+                </pageslide>
+            </div>
+
+            <div ng-controller="pageslideCtrl">
+                <h3>Auto close</h3>
+                <p>Check to open: <input type="checkbox" ng-model="checked" ></p>
+                <pageslide ps-open="checked" ps-auto-close="true" >
+                    <div style="padding:20px">
+                        <h2>Yo Pageslide</h2>
+                        <p>Put here whatever you want</p>
+                        <button ng-click="mockRouteChange()">Change Route</button>
+                    </div>
+                </pageslide>
+            </div>
 
         </div>
 

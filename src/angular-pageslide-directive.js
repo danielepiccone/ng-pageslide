@@ -9,7 +9,7 @@ angular
             transclude: false,
             scope: {
                 psOpen: '=?',
-                psAutoClose: '=?',
+                psAutoClose: '@',
                 psSide: '@',
                 psSpeed: '@',
                 psClass: '@',
@@ -25,12 +25,6 @@ angular
             },
             link: function ($scope, el, attrs) {
 
-                /* Inspect */
-
-                //console.log($scope);
-                //console.log(el);
-                //console.log(attrs);
-
                 var param = {};
 
                 param.side = $scope.psSide || 'right';
@@ -38,12 +32,12 @@ angular
                 param.size = $scope.psSize || '300px';
                 param.zindex = $scope.psZindex || 1000;
                 param.className = $scope.psClass || 'ng-pageslide';
-                param.squeeze = Boolean($scope.psSqueeze) || false;
-                param.push = Boolean($scope.psPush) || false;
+                param.squeeze = $scope.psSqueeze === 'true';
+                param.push = $scope.psPush === 'true';
                 param.container = $scope.psContainer || false;
-                param.keyListener = Boolean($scope.psKeyListener) || false;
+                param.keyListener = $scope.psKeyListener === 'true';
                 param.bodyClass = $scope.psBodyClass || false;
-                param.clickOutside = $scope.psClickOutside === false ? false : true;
+                param.clickOutside = $scope.psClickOutside !== 'false';
 
                 el.addClass(param.className);
 
@@ -52,8 +46,8 @@ angular
                 var content, slider, body;
 
                 body = param.container ? document.getElementById(param.container) : document.body;
-
                 var isOpen = false;
+
                 function onBodyClick(e) {
                     if(isOpen && !slider.contains(e.target)) {
                         isOpen = false;
@@ -84,7 +78,7 @@ angular
                     throw new Error('Pageslide can only be applied to <div> or <pageslide> elements');
 
                 if (slider.children.length === 0)
-                    throw new Error('You have to content inside the <pageslide>');
+                    throw new Error('You need to have content inside the <pageslide>');
 
                 content = angular.element(slider.children);
 
@@ -100,7 +94,7 @@ angular
                 slider.style.webkitTransitionDuration = param.speed + 's';
                 slider.style.transitionProperty = 'width, height';
 
-                if (param.squeeze) {
+                if (param.squeeze || param.push) {
                     body.style.position = 'absolute';
                     body.style.transitionDuration = param.speed + 's';
                     body.style.webkitTransitionDuration = param.speed + 's';
@@ -174,8 +168,6 @@ angular
                                 break;
                         }
                     }
-                    $scope.psOpen = false;
-
                     if (param.keyListener) {
                         $document.off('keydown', handleKeyDown);
                     }
@@ -185,6 +177,7 @@ angular
                     }
                     isOpen = false;
                     setBodyClass('closed');
+                    $scope.psOpen = false;
                 }
 
                 /* Open */
@@ -266,7 +259,9 @@ angular
                 $scope.$watch('psSize', function(newValue, oldValue) {
                     if (oldValue !== newValue) {
                         param.size = newValue;
-                        psOpen(slider, param);
+                        if ($scope.psOpen) {
+                            psOpen(slider, param);
+                        }
                     }
                 });
 
@@ -290,8 +285,8 @@ angular
                     $scope.$on('$stateChangeStart', function() {
                         psClose(slider, param);
                     });
-
                 }
+
             }
         };
     }
