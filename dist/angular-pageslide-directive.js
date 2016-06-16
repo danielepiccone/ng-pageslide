@@ -241,6 +241,13 @@ angular
 
                     if (key === ESC_KEY) {
                         psClose(slider, param);
+
+                        // FIXME check with tests
+                        // http://stackoverflow.com/questions/12729122/angularjs-prevent-error-digest-already-in-progress-when-calling-scope-apply
+
+                        $timeout(function () {
+                            $scope.$apply();
+                        });
                     }
                 }
 
