@@ -198,6 +198,45 @@ describe('ng-pageslide: ', function() {
           done();
         });
       });
+
+      describe('when onopen is set', function () {
+        beforeEach(function (done) {
+          compilePageslide([
+            '<pageslide onopen="callback" ps-open="is_open">',
+            '<div>test</div>',
+            '</pageslide>'
+          ].join(''));
+          done();
+        });
+        it('should call onopen callback after transition', function (done) {
+          scope.is_open = true;
+          scope.callback = jasmine.createSpy('callback');
+          scope.$digest();
+          element[0].dispatchEvent(new Event('transitionend'));
+          expect(scope.callback).toHaveBeenCalled();
+          done();
+        });
+      });
+
+      describe('when onclose is set', function () {
+        beforeEach(function (done) {
+          compilePageslide([
+            '<pageslide onclose="callback" ps-open="is_open">',
+            '<div>test</div>',
+            '</pageslide>'
+          ].join(''));
+          done();
+        });
+        it('should call onOpen callback after transition', function (done) {
+          scope.is_open = false;
+          scope.callback = jasmine.createSpy('callback');
+          scope.$digest();
+          element[0].dispatchEvent(new Event('transitionend'));
+          expect(scope.callback).toHaveBeenCalled();
+          done();
+        });
+      });
+
     });
   });
 

@@ -66,6 +66,14 @@
                 $scope.mockRouteChange = function () {
                     $scope.$broadcast('$locationChangeStart');
                 }
+
+                $scope.onopen = function () {
+                    alert('Open');
+                }
+
+                $scope.onclose = function () {
+                    alert('Close');
+                }
             }]);
 
             angular.element(document).ready(function(){
@@ -271,6 +279,17 @@
                         <h2>Yo Pageslide</h2>
                         <p>Put here whatever you want</p>
                         <button ng-click="mockRouteChange()">Change Route</button>
+                    </div>
+                </pageslide>
+            </div>
+
+            <div ng-controller="pageslideCtrl">
+                <h3>Open Close callbacks</h3>
+                <p>Check to open: <input type="checkbox" ng-model="checked" ></p>
+                <pageslide ps-open="checked" onopen="onopen" onclose="onclose" >
+                    <div style="padding:20px">
+                        <h2>Yo Pageslide</h2>
+                        <p>meh</p>
                     </div>
                 </pageslide>
             </div>
