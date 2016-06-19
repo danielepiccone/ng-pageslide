@@ -21,7 +21,9 @@ angular
                 psContainer: '@',
                 psKeyListener: '@',
                 psBodyClass: '@',
-                psClickOutside: '@'
+                psClickOutside: '@',
+                onopen: '=',
+                onclose: '='
             },
             link: function ($scope, el, attrs) {
 
@@ -43,10 +45,16 @@ angular
 
                 /* DOM manipulation */
 
-                var content, slider, body;
+                var content, slider, body, isOpen = false;
 
                 body = param.container ? document.getElementById(param.container) : document.body;
-                var isOpen = false;
+
+                if (param.squeeze || param.push) {
+                    body.style.position = 'absolute';
+                    body.style.transitionDuration = param.speed + 's';
+                    body.style.webkitTransitionDuration = param.speed + 's';
+                    body.style.transitionProperty = 'top, bottom, left, right';
+                }
 
                 function onBodyClick(e) {
                     if(isOpen && !slider.contains(e.target)) {
@@ -94,12 +102,19 @@ angular
                 slider.style.webkitTransitionDuration = param.speed + 's';
                 slider.style.transitionProperty = 'width, height';
 
-                if (param.squeeze || param.push) {
-                    body.style.position = 'absolute';
-                    body.style.transitionDuration = param.speed + 's';
-                    body.style.webkitTransitionDuration = param.speed + 's';
-                    body.style.transitionProperty = 'top, bottom, left, right';
+                function onTransitionEnd() {
+                    if ($scope.psOpen) {
+                        if (typeof $scope.onopen === 'function') {
+                            $scope.onopen();
+                        }
+                    } else {
+                        if (typeof $scope.onclose === 'function') {
+                            $scope.onclose();
+                        }
+                    }
                 }
+
+                slider.addEventListener('transitionend', onTransitionEnd);
 
                 switch (param.side) {
                     case 'right':
@@ -283,6 +298,8 @@ angular
                         }
                         body.removeChild(slider);
                     }
+
+                    slider.removeEventListener('transitionend', onTransitionEnd);
                 });
 
                 if ($scope.psAutoClose) {
