@@ -62,6 +62,7 @@ ps-zindex (optional) = desired z-index (defaults to 1000)
 // Effects
 ps-push (optional) = push the main body to show the panel (defaults to false)*
 ps-squeeze (optional) = squeeze body to fit the panel (defaults to false)*
+ps-move (optional) = same as regular effect just move the content into it's place
 * these options make assumptions about the layout, will set attributes on body
 
 ```
