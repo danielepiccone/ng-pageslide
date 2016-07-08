@@ -18,6 +18,7 @@ angular
                 psSqueeze: '@',
                 psCloak: '@',
                 psPush: '@',
+                psMove: '@',
                 psContainer: '@',
                 psKeyListener: '@',
                 psBodyClass: '@',
@@ -36,6 +37,7 @@ angular
                 param.className = $scope.psClass || 'ng-pageslide';
                 param.squeeze = $scope.psSqueeze === 'true';
                 param.push = $scope.psPush === 'true';
+                param.move = $scope.psMove === 'true';
                 param.container = $scope.psContainer || false;
                 param.keyListener = $scope.psKeyListener === 'true';
                 param.bodyClass = $scope.psBodyClass || false;
@@ -102,6 +104,12 @@ angular
                 slider.style.webkitTransitionDuration = param.speed + 's';
                 slider.style.transitionProperty = 'width, height';
 
+                if(param.move){
+                    slider.style.width = param.size;
+                    slider.style.height = param.size;
+                    slider.style.transitionProperty = 'top, bottom, left, right';
+                }
+
                 function onTransitionEnd() {
                     if ($scope.psOpen) {
                         if (typeof $scope.onopen === 'function') {
@@ -147,38 +155,60 @@ angular
                 /* Closed */
                 function psClose(slider, param) {
                     if (slider && slider.style.width !== 0) {
-                        content.css('display', 'none');
+                        if (!param.move) {
+                            content.css('display', 'none');
+                        }
                         switch (param.side) {
                             case 'right':
-                                slider.style.width = '0px';
-                                if (param.squeeze) body.style.right = '0px';
-                                if (param.push) {
-                                    body.style.right = '0px';
-                                    body.style.left = '0px';
+                                if (!param.move) {
+                                    slider.style.width = '0px';
+                                    if (param.squeeze) body.style.right = '0px';
+                                    if (param.push) {
+                                        body.style.right = '0px';
+                                        body.style.left = '0px';
+                                    }
+                                }
+                                else { 
+                                    slider.style.right = "-" + slider.style.width;
                                 }
                                 break;
                             case 'left':
-                                slider.style.width = '0px';
-                                if (param.squeeze) body.style.left = '0px';
-                                if (param.push) {
-                                    body.style.left = '0px';
-                                    body.style.right = '0px';
+                                if (!param.move) {
+                                    slider.style.width = '0px';
+                                    if (param.squeeze) body.style.left = '0px';
+                                    if (param.push) {
+                                        body.style.left = '0px';
+                                        body.style.right = '0px';
+                                    }
+                                }
+                                else {
+                                    slider.style.left = "-" + slider.style.width;
                                 }
                                 break;
                             case 'top':
-                                slider.style.height = '0px';
-                                if (param.squeeze) body.style.top = '0px';
-                                if (param.push) {
-                                    body.style.top = '0px';
-                                    body.style.bottom = '0px';
+                                if (!param.move) {
+                                    slider.style.height = '0px';
+                                    if (param.squeeze) body.style.top = '0px';
+                                    if (param.push) {
+                                        body.style.top = '0px';
+                                        body.style.bottom = '0px';
+                                    }
+                                }
+                                else {
+                                    slider.style.top = "-" + slider.style.height;
                                 }
                                 break;
                             case 'bottom':
-                                slider.style.height = '0px';
-                                if (param.squeeze) body.style.bottom = '0px';
-                                if (param.push) {
-                                    body.style.bottom = '0px';
-                                    body.style.top = '0px';
+                                if (!param.move) {
+                                    slider.style.height = '0px';
+                                    if (param.squeeze) body.style.bottom = '0px';
+                                    if (param.push) {
+                                        body.style.bottom = '0px';
+                                        body.style.top = '0px';
+                                    }
+                                }
+                                else {
+                                    slider.style.bottom = "-" + slider.style.height;
                                 }
                                 break;
                         }
@@ -200,35 +230,55 @@ angular
                     if (slider.style.width !== 0) {
                         switch (param.side) {
                             case 'right':
-                                slider.style.width = param.size;
-                                if (param.squeeze) body.style.right = param.size;
-                                if (param.push) {
-                                    body.style.right = param.size;
-                                    body.style.left = '-' + param.size;
+                                if (!param.move) {
+                                    slider.style.width = param.size;
+                                    if (param.squeeze) body.style.right = param.size;
+                                    if (param.push) {
+                                        body.style.right = param.size;
+                                        body.style.left = '-' + param.size;
+                                    }
+                                }
+                                else {
+                                    slider.style.right = "0px";
                                 }
                                 break;
                             case 'left':
-                                slider.style.width = param.size;
-                                if (param.squeeze) body.style.left = param.size;
-                                if (param.push) {
-                                    body.style.left = param.size;
-                                    body.style.right = '-' + param.size;
+                                if (!param.move) {
+                                    slider.style.width = param.size;
+                                    if (param.squeeze) body.style.left = param.size;
+                                    if (param.push) {
+                                        body.style.left = param.size;
+                                        body.style.right = '-' + param.size;
+                                    }
+                                }
+                                else {
+                                    slider.style.left = "0px";
                                 }
                                 break;
                             case 'top':
-                                slider.style.height = param.size;
-                                if (param.squeeze) body.style.top = param.size;
-                                if (param.push) {
-                                    body.style.top = param.size;
-                                    body.style.bottom = '-' + param.size;
+                                if (!param.move) {
+                                    slider.style.height = param.size;
+                                    if (param.squeeze) body.style.top = param.size;
+                                    if (param.push) {
+                                        body.style.top = param.size;
+                                        body.style.bottom = '-' + param.size;
+                                    }
+                                }
+                                else {
+                                    slider.style.top = "0px";
                                 }
                                 break;
                             case 'bottom':
-                                slider.style.height = param.size;
-                                if (param.squeeze) body.style.bottom = param.size;
-                                if (param.push) {
-                                    body.style.bottom = param.size;
-                                    body.style.top = '-' + param.size;
+                                if (!param.move) {
+                                    slider.style.height = param.size;
+                                    if (param.squeeze) body.style.bottom = param.size;
+                                    if (param.push) {
+                                        body.style.bottom = param.size;
+                                        body.style.top = '-' + param.size;
+                                    }
+                                }
+                                else {
+                                    slider.style.bottom = "0px";
                                 }
                                 break;
                         }
