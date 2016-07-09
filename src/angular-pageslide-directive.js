@@ -15,7 +15,6 @@ angular
                 psClass: '@',
                 psSize: '@',
                 psZindex: '@',
-                psSqueeze: '@',
                 psCloak: '@',
                 psPush: '@',
                 psMove: '@',
@@ -35,7 +34,6 @@ angular
                 param.size = $scope.psSize || '300px';
                 param.zindex = $scope.psZindex || 1000;
                 param.className = $scope.psClass || 'ng-pageslide';
-                param.squeeze = $scope.psSqueeze === 'true';
                 param.push = $scope.psPush === 'true';
                 param.move = $scope.psMove === 'true';
                 param.container = $scope.psContainer || false;
@@ -51,7 +49,7 @@ angular
 
                 body = param.container ? document.getElementById(param.container) : document.body;
 
-                if (param.squeeze || param.push) {
+                if (param.push) {
                     body.style.position = 'absolute';
                     body.style.transitionDuration = param.speed + 's';
                     body.style.webkitTransitionDuration = param.speed + 's';
@@ -162,20 +160,18 @@ angular
                             case 'right':
                                 if (!param.move) {
                                     slider.style.width = '0px';
-                                    if (param.squeeze) body.style.right = '0px';
                                     if (param.push) {
                                         body.style.right = '0px';
                                         body.style.left = '0px';
                                     }
                                 }
-                                else { 
+                                else {
                                     slider.style.right = "-" + slider.style.width;
                                 }
                                 break;
                             case 'left':
                                 if (!param.move) {
                                     slider.style.width = '0px';
-                                    if (param.squeeze) body.style.left = '0px';
                                     if (param.push) {
                                         body.style.left = '0px';
                                         body.style.right = '0px';
@@ -188,7 +184,6 @@ angular
                             case 'top':
                                 if (!param.move) {
                                     slider.style.height = '0px';
-                                    if (param.squeeze) body.style.top = '0px';
                                     if (param.push) {
                                         body.style.top = '0px';
                                         body.style.bottom = '0px';
@@ -201,7 +196,6 @@ angular
                             case 'bottom':
                                 if (!param.move) {
                                     slider.style.height = '0px';
-                                    if (param.squeeze) body.style.bottom = '0px';
                                     if (param.push) {
                                         body.style.bottom = '0px';
                                         body.style.top = '0px';
@@ -232,7 +226,6 @@ angular
                             case 'right':
                                 if (!param.move) {
                                     slider.style.width = param.size;
-                                    if (param.squeeze) body.style.right = param.size;
                                     if (param.push) {
                                         body.style.right = param.size;
                                         body.style.left = '-' + param.size;
@@ -245,7 +238,6 @@ angular
                             case 'left':
                                 if (!param.move) {
                                     slider.style.width = param.size;
-                                    if (param.squeeze) body.style.left = param.size;
                                     if (param.push) {
                                         body.style.left = param.size;
                                         body.style.right = '-' + param.size;
@@ -258,7 +250,6 @@ angular
                             case 'top':
                                 if (!param.move) {
                                     slider.style.height = param.size;
-                                    if (param.squeeze) body.style.top = param.size;
                                     if (param.push) {
                                         body.style.top = param.size;
                                         body.style.bottom = '-' + param.size;
@@ -271,7 +262,6 @@ angular
                             case 'bottom':
                                 if (!param.move) {
                                     slider.style.height = param.size;
-                                    if (param.squeeze) body.style.bottom = param.size;
                                     if (param.push) {
                                         body.style.bottom = param.size;
                                         body.style.top = '-' + param.size;
