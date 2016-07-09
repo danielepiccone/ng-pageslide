@@ -251,15 +251,17 @@ describe('ng-pageslide: ', function() {
           '</div>'
         ].join(''));
 
+        var right;
+
         scope.is_open = true;
         scope.$digest();
-        var width = document.querySelector('.ng-pageslide').style.width;
-        expect(width).toBe('300px');
+        right = document.querySelector('.ng-pageslide').style.right;
+        expect(right).toBe('0px');
 
         scope.is_open = false;
         scope.$digest();
-        width = document.querySelector('.ng-pageslide').style.width;
-        expect(width).toBe('0px');
+        right = document.querySelector('.ng-pageslide').style.right;
+        expect(right).toBe('-300px');
         done();
       });
 
