@@ -45,7 +45,12 @@ angular
 
                 var content, slider, body, isOpen = false;
 
-                body = param.container ? document.getElementById(param.container) : document.body;
+                if (param.container) {
+                    body = document.getElementById(param.container);
+                    body.style.overflow = 'hidden';
+                } else {
+                    body = document.body;
+                }
 
                 if (param.push) {
                     body.style.position = 'absolute';
