@@ -16,7 +16,6 @@ angular
                 psSize: '@',
                 psZindex: '@',
                 psPush: '@',
-                psMove: '@',
                 psContainer: '@',
                 psKeyListener: '@',
                 psBodyClass: '@',
@@ -34,7 +33,7 @@ angular
                 param.zindex = $scope.psZindex || 1000;
                 param.className = $scope.psClass || 'ng-pageslide';
                 param.push = $scope.psPush === 'true';
-                param.move = $scope.psMove === 'true';
+                param.move = true;
                 param.container = $scope.psContainer || false;
                 param.keyListener = $scope.psKeyListener === 'true';
                 param.bodyClass = $scope.psBodyClass || false;
@@ -152,9 +151,6 @@ angular
                 /* Closed */
                 function psClose(slider, param) {
                     if (slider && slider.style.width !== 0) {
-                        if (!param.move) {
-                            content.css('display', 'none');
-                        }
                         switch (param.side) {
                             case 'right':
                                 if (!param.move) {
@@ -167,41 +163,45 @@ angular
                                 else {
                                     slider.style.right = "-" + slider.style.width;
                                 }
+                                if (param.push) {
+                                    body.style.right = '0px';
+                                    body.style.left = '0px';
+                                }
                                 break;
                             case 'left':
                                 if (!param.move) {
                                     slider.style.width = '0px';
-                                    if (param.push) {
-                                        body.style.left = '0px';
-                                        body.style.right = '0px';
-                                    }
                                 }
                                 else {
                                     slider.style.left = "-" + slider.style.width;
+                                }
+                                if (param.push) {
+                                    body.style.left = '0px';
+                                    body.style.right = '0px';
                                 }
                                 break;
                             case 'top':
                                 if (!param.move) {
                                     slider.style.height = '0px';
-                                    if (param.push) {
-                                        body.style.top = '0px';
-                                        body.style.bottom = '0px';
-                                    }
                                 }
                                 else {
                                     slider.style.top = "-" + slider.style.height;
+                                }
+                                if (param.push) {
+                                    body.style.top = '0px';
+                                    body.style.bottom = '0px';
                                 }
                                 break;
                             case 'bottom':
                                 if (!param.move) {
                                     slider.style.height = '0px';
-                                    if (param.push) {
-                                        body.style.bottom = '0px';
-                                        body.style.top = '0px';
-                                    }
                                 }
                                 else {
                                     slider.style.bottom = "-" + slider.style.height;
+                                }
+                                if (param.push) {
+                                    body.style.bottom = '0px';
+                                    body.style.top = '0px';
                                 }
                                 break;
                         }
@@ -225,56 +225,52 @@ angular
                             case 'right':
                                 if (!param.move) {
                                     slider.style.width = param.size;
-                                    if (param.push) {
-                                        body.style.right = param.size;
-                                        body.style.left = '-' + param.size;
-                                    }
                                 }
                                 else {
                                     slider.style.right = "0px";
+                                }
+                                if (param.push) {
+                                    body.style.right = param.size;
+                                    body.style.left = '-' + param.size;
                                 }
                                 break;
                             case 'left':
                                 if (!param.move) {
                                     slider.style.width = param.size;
-                                    if (param.push) {
-                                        body.style.left = param.size;
-                                        body.style.right = '-' + param.size;
-                                    }
                                 }
                                 else {
                                     slider.style.left = "0px";
+                                }
+                                if (param.push) {
+                                    body.style.left = param.size;
+                                    body.style.right = '-' + param.size;
                                 }
                                 break;
                             case 'top':
                                 if (!param.move) {
                                     slider.style.height = param.size;
-                                    if (param.push) {
-                                        body.style.top = param.size;
-                                        body.style.bottom = '-' + param.size;
-                                    }
                                 }
                                 else {
                                     slider.style.top = "0px";
+                                }
+                                if (param.push) {
+                                    body.style.top = param.size;
+                                    body.style.bottom = '-' + param.size;
                                 }
                                 break;
                             case 'bottom':
                                 if (!param.move) {
                                     slider.style.height = param.size;
-                                    if (param.push) {
-                                        body.style.bottom = param.size;
-                                        body.style.top = '-' + param.size;
-                                    }
                                 }
                                 else {
                                     slider.style.bottom = "0px";
                                 }
+                                if (param.push) {
+                                    body.style.bottom = param.size;
+                                    body.style.top = '-' + param.size;
+                                }
                                 break;
                         }
-
-                        $timeout(function() {
-                            content.css('display', 'block');
-                        }, (param.speed * 1000));
 
                         $scope.psOpen = true;
 
