@@ -6,6 +6,7 @@
     "Daniele Piccone <mail@danielepiccone.com> (http://www.danielepiccone.com)",
     "Tim Borny <bornytm@gmail.com>"
   ],
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git@github.com:dpiccone/ng-pageslide.git"
