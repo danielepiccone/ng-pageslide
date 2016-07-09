@@ -406,15 +406,14 @@ describe('ng-pageslide: ', function() {
           expect(slider.html()).toContain('height: 100%;');
           expect(slider.html()).toContain('top: 0px;');
           expect(slider.html()).toContain('bottom: 0px;');
-          expect(slider.html()).toContain('left: 0px;');
           //when opening the slider
           scope.is_open = true;
           scope.$digest();
-          expect(slider.html()).toContain('width: 300px;');
+          expect(slider.html()).toContain('left: 0px;');
           //when closing the slider
           scope.is_open = false;
           scope.$digest();
-          expect(slider.html()).toContain('width: 0px;');
+          expect(slider.html()).toContain('left: -300px;');
           done();
         });
       });
@@ -434,25 +433,24 @@ describe('ng-pageslide: ', function() {
           done();
         });
 
+        // TODO this should check the body as well
         it('should set the appropriate styles', function (done) {
           // Check for DOM Manipulation
           var slider = angular.element(document.body);
           expect(slider.html()).toContain('height: 100%;');
           expect(slider.html()).toContain('top: 0px;');
           expect(slider.html()).toContain('bottom: 0px;');
-          expect(slider.html()).toContain('left: 0px;');
           //when opening the slider
           scope.is_open = true;
           scope.$digest();
-          expect(slider.html()).toContain('width: 300px;');
+          expect(slider.html()).toContain('left: 0px;');
           //TODO: find out why these are not being set in the test
           // expect(slider.html()).toContain('left: 300px;');
           // expect(slider.html()).toContain('right: -300px;');
           //when closing the slider
           scope.is_open = false;
           scope.$digest();
-          expect(slider.html()).toContain('width: 0px;');
-          expect(slider.html()).toContain('left: 0px;');
+          expect(slider.html()).toContain('left: -300px;');
           done();
         });
       });
@@ -478,17 +476,16 @@ describe('ng-pageslide: ', function() {
           // Check for DOM Manipulation
           var slider = angular.element(document.body);
           expect(slider.html()).toContain('width: 100%;');
-          expect(slider.html()).toContain('top: 0px;');
           expect(slider.html()).toContain('left: 0px;');
           expect(slider.html()).toContain('right: 0px;');
           //when opening the slider
           scope.is_open = true;
           scope.$digest();
-          expect(slider.html()).toContain('height: 300px;');
+          expect(slider.html()).toContain('top: 0px;');
           //when closing the slider
           scope.is_open = false;
           scope.$digest();
-          expect(slider.html()).toContain('height: 0px;');
+          expect(slider.html()).toContain('top: -300px;');
           done();
         });
       });
@@ -508,25 +505,24 @@ describe('ng-pageslide: ', function() {
           done();
         });
 
+        // TODO this should check the body as well
         it('should set the appropriate styles', function (done) {
           // Check for DOM Manipulation
           var slider = angular.element(document.body);
           expect(slider.html()).toContain('width: 100%;');
-          expect(slider.html()).toContain('top: 0px;');
           expect(slider.html()).toContain('left: 0px;');
           expect(slider.html()).toContain('right: 0px;');
           //when opening the slider
           scope.is_open = true;
           scope.$digest();
-          expect(slider.html()).toContain('height: 300px;');
+          expect(slider.html()).toContain('top: 0px;');
           //TODO: find out why these are not being set in the test
           // expect(slider.html()).toContain('top: 300px;');
           // expect(slider.html()).toContain('bottom: -300px;');
           //when closing the slider
           scope.is_open = false;
           scope.$digest();
-          expect(slider.html()).toContain('height: 0px;');
-          expect(slider.html()).toContain('top: 0px;');
+          expect(slider.html()).toContain('top: -300px;');
           done();
         });
       });
@@ -552,21 +548,21 @@ describe('ng-pageslide: ', function() {
           // Check for DOM Manipulation
           var slider = angular.element(document.body);
           expect(slider.html()).toContain('width: 100%;');
-          expect(slider.html()).toContain('bottom: 0px;');
           expect(slider.html()).toContain('left: 0px;');
           expect(slider.html()).toContain('right: 0px;');
           //when opening the slider
           scope.is_open = true;
           scope.$digest();
-          expect(slider.html()).toContain('height: 300px;');
+          expect(slider.html()).toContain('bottom: 0px;');
           //when closing the slider
           scope.is_open = false;
           scope.$digest();
-          expect(slider.html()).toContain('height: 0px;');
+          expect(slider.html()).toContain('bottom: -300px;');
           done();
         });
       });
 
+      // TODO this hsould check the body as well
       describe('when push is set', function () {
         beforeEach(function (done) {
           compilePageslide([
@@ -586,21 +582,19 @@ describe('ng-pageslide: ', function() {
           // Check for DOM Manipulation
           var slider = angular.element(document.body);
           expect(slider.html()).toContain('width: 100%;');
-          expect(slider.html()).toContain('bottom: 0px;');
           expect(slider.html()).toContain('left: 0px;');
           expect(slider.html()).toContain('right: 0px;');
           //when opening the slider
           scope.is_open = true;
           scope.$digest();
-          expect(slider.html()).toContain('height: 300px;');
+          expect(slider.html()).toContain('bottom: 0px;');
           //TODO: find out why these are not being set in the test
           // expect(slider.html()).toContain('bottom: 300px;');
           // expect(slider.html()).toContain('top: -300px;');
           //when closing the slider
           scope.is_open = false;
           scope.$digest();
-          expect(slider.html()).toContain('height: 0px;');
-          expect(slider.html()).toContain('bottom: 0px;');
+          expect(slider.html()).toContain('bottom: -300px;');
           done();
         });
       });
