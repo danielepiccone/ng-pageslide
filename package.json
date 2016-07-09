@@ -2,6 +2,11 @@
   "name": "angular-pageslide-directive",
   "author": "Daniele Piccone <mail@danielepiccone.com>",
   "main": "dist/angular-pageslide-directive.js",
+  "repository" : {
+    "type" : "git",
+    "url" : "git@github.com:dpiccone/ng-pageslide.git"
+  },
+  "homepage": "https://github.com/dpiccone/ng-pageslide",
   "keywords": [
     "angular",
     "pageslide",
