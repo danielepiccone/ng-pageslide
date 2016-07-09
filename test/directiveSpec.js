@@ -108,30 +108,6 @@ describe('ng-pageslide: ', function() {
         });
       });
 
-      describe('and has set squeeze to true', function () {
-        beforeEach(function (done) {
-          compilePageslide([
-            '<div pageslide ps-squeeze="true" ps-open="is_open">',
-            '<div>test</div>',
-            '</div>'
-          ].join(''));
-          done();
-        });
-
-        it('should set the width ', function (done) {
-          var body = angular.element(document.body);
-          scope.is_open = true;
-          scope.$digest();
-          //TODO: find out why this fails on Travis CI but not locally
-          // expect(body.css('transition')).toContain('0.5s');
-          expect(body.css('-webkit-transition')).toContain('0.5s');
-          expect(body.html()).toContain('width: 300px;');
-          scope.is_open = false;
-          scope.$digest();
-          expect(body.css('right')).toEqual('0px');
-          done();
-        });
-      });
       describe('and has set push to true', function () {
         beforeEach(function (done) {
           compilePageslide([
