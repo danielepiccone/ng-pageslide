@@ -9,7 +9,7 @@
     "modal",
     "pane"
   ],
-  "version": "1.4.1",
+  "version": "1.4.2",
   "licese": "MIT",
   "devDependencies": {
     "grunt": "0.4.5",
