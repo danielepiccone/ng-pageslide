@@ -33,7 +33,6 @@ angular
                 param.zindex = $scope.psZindex || 1000;
                 param.className = $scope.psClass || 'ng-pageslide';
                 param.push = $scope.psPush === 'true';
-                param.move = true;
                 param.container = $scope.psContainer || false;
                 param.keyListener = $scope.psKeyListener === 'true';
                 param.bodyClass = $scope.psBodyClass || false;
@@ -103,13 +102,9 @@ angular
                 slider.style.height = 0;
                 slider.style.transitionDuration = param.speed + 's';
                 slider.style.webkitTransitionDuration = param.speed + 's';
-                slider.style.transitionProperty = 'width, height';
-
-                if(param.move){
-                    slider.style.width = param.size;
-                    slider.style.height = param.size;
-                    slider.style.transitionProperty = 'top, bottom, left, right';
-                }
+                slider.style.width = param.size;
+                slider.style.height = param.size;
+                slider.style.transitionProperty = 'top, bottom, left, right';
 
                 function onTransitionEnd() {
                     if ($scope.psOpen) {
@@ -158,52 +153,28 @@ angular
                     if (slider && slider.style.width !== 0) {
                         switch (param.side) {
                             case 'right':
-                                if (!param.move) {
-                                    slider.style.width = '0px';
-                                    if (param.push) {
-                                        body.style.right = '0px';
-                                        body.style.left = '0px';
-                                    }
-                                }
-                                else {
-                                    slider.style.right = "-" + slider.style.width;
-                                }
+                                slider.style.right = "-" + slider.style.width;
                                 if (param.push) {
                                     body.style.right = '0px';
                                     body.style.left = '0px';
                                 }
                                 break;
                             case 'left':
-                                if (!param.move) {
-                                    slider.style.width = '0px';
-                                }
-                                else {
-                                    slider.style.left = "-" + slider.style.width;
-                                }
+                                slider.style.left = "-" + slider.style.width;
                                 if (param.push) {
                                     body.style.left = '0px';
                                     body.style.right = '0px';
                                 }
                                 break;
                             case 'top':
-                                if (!param.move) {
-                                    slider.style.height = '0px';
-                                }
-                                else {
-                                    slider.style.top = "-" + slider.style.height;
-                                }
+                                slider.style.top = "-" + slider.style.height;
                                 if (param.push) {
                                     body.style.top = '0px';
                                     body.style.bottom = '0px';
                                 }
                                 break;
                             case 'bottom':
-                                if (!param.move) {
-                                    slider.style.height = '0px';
-                                }
-                                else {
-                                    slider.style.bottom = "-" + slider.style.height;
-                                }
+                                slider.style.bottom = "-" + slider.style.height;
                                 if (param.push) {
                                     body.style.bottom = '0px';
                                     body.style.top = '0px';
@@ -228,48 +199,28 @@ angular
                     if (slider.style.width !== 0) {
                         switch (param.side) {
                             case 'right':
-                                if (!param.move) {
-                                    slider.style.width = param.size;
-                                }
-                                else {
-                                    slider.style.right = "0px";
-                                }
+                                slider.style.right = "0px";
                                 if (param.push) {
                                     body.style.right = param.size;
                                     body.style.left = '-' + param.size;
                                 }
                                 break;
                             case 'left':
-                                if (!param.move) {
-                                    slider.style.width = param.size;
-                                }
-                                else {
-                                    slider.style.left = "0px";
-                                }
+                                slider.style.left = "0px";
                                 if (param.push) {
                                     body.style.left = param.size;
                                     body.style.right = '-' + param.size;
                                 }
                                 break;
                             case 'top':
-                                if (!param.move) {
-                                    slider.style.height = param.size;
-                                }
-                                else {
-                                    slider.style.top = "0px";
-                                }
+                                slider.style.top = "0px";
                                 if (param.push) {
                                     body.style.top = param.size;
                                     body.style.bottom = '-' + param.size;
                                 }
                                 break;
                             case 'bottom':
-                                if (!param.move) {
-                                    slider.style.height = param.size;
-                                }
-                                else {
-                                    slider.style.bottom = "0px";
-                                }
+                                slider.style.bottom = "0px";
                                 if (param.push) {
                                     body.style.bottom = param.size;
                                     body.style.top = '-' + param.size;
