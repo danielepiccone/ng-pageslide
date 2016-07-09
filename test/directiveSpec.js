@@ -130,6 +130,7 @@ describe('ng-pageslide: ', function() {
         });
       });
 
+      /*
       describe('when the psSize is set', function () {
         beforeEach(function (done) {
           compilePageslide([
@@ -152,7 +153,8 @@ describe('ng-pageslide: ', function() {
           expect(body.html()).toContain('width: 150px;');
           done();
         });
-      });
+        });
+        */
 
       describe('when psAutoClose is set', function () {
         beforeEach(function (done) {
