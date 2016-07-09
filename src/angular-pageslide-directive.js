@@ -5,7 +5,7 @@ angular
         var defaults = {};
 
         return {
-            restrict: 'EAC',
+            restrict: 'EA',
             transclude: false,
             scope: {
                 psOpen: '=?',
@@ -15,7 +15,6 @@ angular
                 psClass: '@',
                 psSize: '@',
                 psZindex: '@',
-                psCloak: '@',
                 psPush: '@',
                 psMove: '@',
                 psContainer: '@',
