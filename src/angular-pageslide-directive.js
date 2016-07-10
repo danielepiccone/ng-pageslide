@@ -31,8 +31,8 @@
                     psKeyListener: '@',
                     psBodyClass: '@',
                     psClickOutside: '@',
-                    onopen: '=',
-                    onclose: '='
+                    onopen: '=?',
+                    onclose: '=?'
                 },
                 link: function ($scope, el, attrs) {
 
