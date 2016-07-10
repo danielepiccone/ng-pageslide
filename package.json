@@ -15,7 +15,7 @@
     "pane"
   ],
   "version": "1.4.3",
-  "licese": "MIT",
+  "license": "MIT",
   "devDependencies": {
     "grunt": "0.4.5",
     "grunt-contrib-concat": "0.3.0",
