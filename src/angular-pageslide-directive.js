@@ -1,7 +1,7 @@
+
 angular
-.module('pageslide-directive', [])
-.directive('pageslide', ['$document', '$timeout',
-    function ($document, $timeout) {
+    .module('pageslide-directive', [])
+    .directive('pageslide', ['$document', '$timeout', function ($document, $timeout) {
         var defaults = {};
 
         return {
@@ -85,7 +85,7 @@ angular
 
                 if (slider.tagName.toLowerCase() !== 'div' &&
                     slider.tagName.toLowerCase() !== 'pageslide')
-                    throw new Error('Pageslide can only be applied to <div> or <pageslide> elements');
+                throw new Error('Pageslide can only be applied to <div> or <pageslide> elements');
 
                 if (slider.children.length === 0)
                     throw new Error('You need to have content inside the <pageslide>');
@@ -148,7 +148,6 @@ angular
                 }
 
 
-                /* Closed */
                 function psClose(slider, param) {
                     if (slider && slider.style.width !== 0) {
                         switch (param.side) {
@@ -257,9 +256,8 @@ angular
                     }
                 }
 
-                /*
-                * Watchers
-                * */
+
+                // Watchers
 
                 $scope.$watch('psOpen', function(value) {
                     if (!!value) {
@@ -278,9 +276,8 @@ angular
                     }
                 });
 
-                /*
-                * Events
-                * */
+
+                // Events
 
                 $scope.$on('$destroy', function () {
                     if (slider.parentNode === body) {
@@ -304,5 +301,4 @@ angular
 
             }
         };
-    }
-]);
+    }]);
