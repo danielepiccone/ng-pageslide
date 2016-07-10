@@ -95,11 +95,13 @@
                     slider = el[0];
 
                     if (slider.tagName.toLowerCase() !== 'div' &&
-                        slider.tagName.toLowerCase() !== 'pageslide')
-                    throw new Error('Pageslide can only be applied to <div> or <pageslide> elements');
+                        slider.tagName.toLowerCase() !== 'pageslide') {
+                        throw new Error('Pageslide can only be applied to <div> or <pageslide> elements');
+                    }
 
-                    if (slider.children.length === 0)
+                    if (slider.children.length === 0) {
                         throw new Error('You need to have content inside the <pageslide>');
+                    }
 
                     content = angular.element(slider.children);
 
