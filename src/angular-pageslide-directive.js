@@ -133,31 +133,30 @@
 
                     switch (param.side) {
                         case 'right':
-                            slider.style.height = attrs.psCustomHeight || '100%';
-                            slider.style.top = attrs.psCustomTop || '0px';
-                            slider.style.bottom = attrs.psCustomBottom || '0px';
-                            slider.style.right = attrs.psCustomRight || '0px';
+                            slider.style.height = '100%';
+                            slider.style.top = '0px';
+                            slider.style.bottom = '0px';
+                            slider.style.right = '0px';
                             break;
                         case 'left':
-                            slider.style.height = attrs.psCustomHeight || '100%';
-                            slider.style.top = attrs.psCustomTop || '0px';
-                            slider.style.bottom = attrs.psCustomBottom || '0px';
-                            slider.style.left = attrs.psCustomLeft || '0px';
+                            slider.style.height = '100%';
+                            slider.style.top = '0px';
+                            slider.style.bottom = '0px';
+                            slider.style.left = '0px';
                             break;
                         case 'top':
-                            slider.style.width = attrs.psCustomWidth || '100%';
-                            slider.style.left = attrs.psCustomLeft || '0px';
-                            slider.style.top = attrs.psCustomTop || '0px';
-                            slider.style.right = attrs.psCustomRight || '0px';
+                            slider.style.width = '100%';
+                            slider.style.left = '0px';
+                            slider.style.top = '0px';
+                            slider.style.right = '0px';
                             break;
                         case 'bottom':
-                            slider.style.width = attrs.psCustomWidth || '100%';
-                            slider.style.bottom = attrs.psCustomBottom || '0px';
-                            slider.style.left = attrs.psCustomLeft || '0px';
-                            slider.style.right = attrs.psCustomRight || '0px';
+                            slider.style.width = '100%';
+                            slider.style.bottom = '0px';
+                            slider.style.left = '0px';
+                            slider.style.right = '0px';
                             break;
                     }
-
 
                     function psClose(slider, param) {
                         if (slider && slider.style.width !== 0) {
