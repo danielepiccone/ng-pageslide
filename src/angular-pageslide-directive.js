@@ -57,10 +57,10 @@
 
                     if (param.container) {
                         body = document.getElementById(param.container);
-                        body.style.overflow = 'hidden';
                     } else {
                         body = document.body;
                     }
+
 
                     if (param.push) {
                         body.style.position = 'absolute';
@@ -108,7 +108,7 @@
                     body.appendChild(slider);
 
                     slider.style.zIndex = param.zindex;
-                    slider.style.position = param.container !== false ? 'absolute' : 'fixed';
+                    slider.style.position = 'fixed';
                     slider.style.width = 0;
                     slider.style.height = 0;
                     slider.style.transitionDuration = param.speed + 's';

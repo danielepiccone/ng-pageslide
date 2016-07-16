@@ -50,6 +50,16 @@
                 opacity: 0;
                 pointer-events: none;
             }
+
+            #container {
+                width: 10rem;
+                height: 10rem;
+
+                p {
+                    font-size: 0.5rem!important;
+                }
+            }
+
         </style>
         <script>
             var app = angular.module("app", ["pageslide-directive"]);
@@ -77,15 +87,9 @@
             }]);
 
             angular.element(document).ready(function(){
-
                 c = angular.element(document.querySelector('#controller-demo')).scope();
             });
 
-            // Test
-            angular.element(document).ready(function () {
-                if (console.assert)
-                    console.assert(document.querySelectorAll('body > .ng-pageslide').length == 17, 'Made all of them')
-            });
         </script>
     </head>
 
