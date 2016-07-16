@@ -109,11 +109,8 @@
 
                     slider.style.zIndex = param.zindex;
                     slider.style.position = 'fixed';
-                    slider.style.width = 0;
-                    slider.style.height = 0;
                     slider.style.transitionDuration = param.speed + 's';
                     slider.style.webkitTransitionDuration = param.speed + 's';
-                    slider.style.width = param.size;
                     slider.style.height = param.size;
                     slider.style.transitionProperty = 'top, bottom, left, right';
 
@@ -131,31 +128,39 @@
 
                     slider.addEventListener('transitionend', onTransitionEnd);
 
-                    switch (param.side) {
-                        case 'right':
-                            slider.style.height = '100%';
-                            slider.style.top = '0px';
-                            slider.style.bottom = '0px';
-                            slider.style.right = '0px';
-                            break;
-                        case 'left':
-                            slider.style.height = '100%';
-                            slider.style.top = '0px';
-                            slider.style.bottom = '0px';
-                            slider.style.left = '0px';
-                            break;
-                        case 'top':
-                            slider.style.width = '100%';
-                            slider.style.left = '0px';
-                            slider.style.top = '0px';
-                            slider.style.right = '0px';
-                            break;
-                        case 'bottom':
-                            slider.style.width = '100%';
-                            slider.style.bottom = '0px';
-                            slider.style.left = '0px';
-                            slider.style.right = '0px';
-                            break;
+                    initSlider();
+
+                    function initSlider() {
+                        switch (param.side) {
+                            case 'right':
+                                slider.style.width = param.size;
+                                slider.style.height = '100%';
+                                slider.style.top = '0px';
+                                slider.style.bottom = '0px';
+                                slider.style.right = '0px';
+                                break;
+                            case 'left':
+                                slider.style.width = param.size;
+                                slider.style.height = '100%';
+                                slider.style.top = '0px';
+                                slider.style.bottom = '0px';
+                                slider.style.left = '0px';
+                                break;
+                            case 'top':
+                                slider.style.height = param.size;
+                                slider.style.width = '100%';
+                                slider.style.left = '0px';
+                                slider.style.top = '0px';
+                                slider.style.right = '0px';
+                                break;
+                            case 'bottom':
+                                slider.style.height = param.size;
+                                slider.style.width = '100%';
+                                slider.style.bottom = '0px';
+                                slider.style.left = '0px';
+                                slider.style.right = '0px';
+                                break;
+                        }
                     }
 
                     function psClose(slider, param) {
@@ -274,10 +279,9 @@
                     });
 
                     $scope.$watch('psSize', function(newValue, oldValue) {
-                        console.log('test');
                         if (oldValue !== newValue) {
                             param.size = newValue;
-                            psOpen(slider, param);
+                            initSlider();
                         }
                     });
 
