@@ -30,7 +30,7 @@
     "grunt-karma": "0.12.2",
     "karma-phantomjs-launcher": "1.0.1"
   },
-  "dependencies": {
+  "peerDependencies": {
     "angular": "1.5.5"
   },
   "scripts": {

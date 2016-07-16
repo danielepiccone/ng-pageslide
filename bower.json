@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git@github.com:dpiccone/ng-pageslide.git"
   },
-  "peerDependencies": {
+  "dependencies": {
     "angular": "1.5.5"
   },
   "devDependencies": {
