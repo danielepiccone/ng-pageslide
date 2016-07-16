@@ -159,38 +159,37 @@
                     }
 
                     function psClose(slider, param) {
-                        if (slider && slider.style.width !== 0) {
-                            switch (param.side) {
-                                case 'right':
-                                    slider.style.right = "-" + slider.style.width;
-                                    if (param.push) {
-                                        body.style.right = '0px';
-                                        body.style.left = '0px';
-                                    }
-                                    break;
-                                case 'left':
-                                    slider.style.left = "-" + slider.style.width;
-                                    if (param.push) {
-                                        body.style.left = '0px';
-                                        body.style.right = '0px';
-                                    }
-                                    break;
-                                case 'top':
-                                    slider.style.top = "-" + slider.style.height;
-                                    if (param.push) {
-                                        body.style.top = '0px';
-                                        body.style.bottom = '0px';
-                                    }
-                                    break;
-                                case 'bottom':
-                                    slider.style.bottom = "-" + slider.style.height;
-                                    if (param.push) {
-                                        body.style.bottom = '0px';
-                                        body.style.top = '0px';
-                                    }
-                                    break;
-                            }
+                        switch (param.side) {
+                            case 'right':
+                                slider.style.right = "-" + param.size;
+                                if (param.push) {
+                                    body.style.right = '0px';
+                                    body.style.left = '0px';
+                                }
+                                break;
+                            case 'left':
+                                slider.style.left = "-" + param.size;
+                                if (param.push) {
+                                    body.style.left = '0px';
+                                    body.style.right = '0px';
+                                }
+                                break;
+                            case 'top':
+                                slider.style.top = "-" + param.size;
+                                if (param.push) {
+                                    body.style.top = '0px';
+                                    body.style.bottom = '0px';
+                                }
+                                break;
+                            case 'bottom':
+                                slider.style.bottom = "-" + param.size;
+                                if (param.push) {
+                                    body.style.bottom = '0px';
+                                    body.style.top = '0px';
+                                }
+                                break;
                         }
+
                         if (param.keyListener) {
                             $document.off('keydown', handleKeyDown);
                         }
@@ -204,49 +203,47 @@
                     }
 
                     function psOpen(slider, param) {
-                        if (slider.style.width !== 0) {
-                            switch (param.side) {
-                                case 'right':
-                                    slider.style.right = "0px";
-                                    if (param.push) {
-                                        body.style.right = param.size;
-                                        body.style.left = '-' + param.size;
-                                    }
-                                    break;
-                                case 'left':
-                                    slider.style.left = "0px";
-                                    if (param.push) {
-                                        body.style.left = param.size;
-                                        body.style.right = '-' + param.size;
-                                    }
-                                    break;
-                                case 'top':
-                                    slider.style.top = "0px";
-                                    if (param.push) {
-                                        body.style.top = param.size;
-                                        body.style.bottom = '-' + param.size;
-                                    }
-                                    break;
-                                case 'bottom':
-                                    slider.style.bottom = "0px";
-                                    if (param.push) {
-                                        body.style.bottom = param.size;
-                                        body.style.top = '-' + param.size;
-                                    }
-                                    break;
-                            }
-
-                            $scope.psOpen = true;
-
-                            if (param.keyListener) {
-                                $document.on('keydown', handleKeyDown);
-                            }
-
-                            if (param.clickOutside) {
-                                $document.on('click', onBodyClick);
-                            }
-                            setBodyClass('open');
+                        switch (param.side) {
+                            case 'right':
+                                slider.style.right = "0px";
+                                if (param.push) {
+                                    body.style.right = param.size;
+                                    body.style.left = '-' + param.size;
+                                }
+                                break;
+                            case 'left':
+                                slider.style.left = "0px";
+                                if (param.push) {
+                                    body.style.left = param.size;
+                                    body.style.right = '-' + param.size;
+                                }
+                                break;
+                            case 'top':
+                                slider.style.top = "0px";
+                                if (param.push) {
+                                    body.style.top = param.size;
+                                    body.style.bottom = '-' + param.size;
+                                }
+                                break;
+                            case 'bottom':
+                                slider.style.bottom = "0px";
+                                if (param.push) {
+                                    body.style.bottom = param.size;
+                                    body.style.top = '-' + param.size;
+                                }
+                                break;
                         }
+
+                        $scope.psOpen = true;
+
+                        if (param.keyListener) {
+                            $document.on('keydown', handleKeyDown);
+                        }
+
+                        if (param.clickOutside) {
+                            $document.on('click', onBodyClick);
+                        }
+                        setBodyClass('open');
                     }
 
                     function handleKeyDown(e) {
@@ -277,11 +274,10 @@
                     });
 
                     $scope.$watch('psSize', function(newValue, oldValue) {
+                        console.log('test');
                         if (oldValue !== newValue) {
                             param.size = newValue;
-                            if ($scope.psOpen) {
-                                psOpen(slider, param);
-                            }
+                            psOpen(slider, param);
                         }
                     });
 
