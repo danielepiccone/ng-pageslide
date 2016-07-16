@@ -25,7 +25,7 @@
     "karma": "0.13.22",
     "karma-coverage": "0.5.5",
     "karma-jasmine": "0.3.8",
-    "karma-phantomjs2-launcher": "0.5.0"
+    "karma-phantomjs-launcher": "1.0.1"
   },
   "dependencies": {
     "angular": "1.5.5",
