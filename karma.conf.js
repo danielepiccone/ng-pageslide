@@ -12,12 +12,6 @@ module.exports = function (config) {
       'src/**/*.js': ['coverage']
     },
 
-    coverageReporter: {
-      type : 'html',
-      dir: 'reports',
-      subdir: 'coverage'
-    },
-
     // base path, that will be used to resolve files and exclude
     basePath: '',
 
@@ -39,7 +33,12 @@ module.exports = function (config) {
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit'
-    reporters: ['progress', 'coverage'],
+    reporters: ['progress', 'coverage', 'coveralls'],
+
+    coverageReporter: {
+          type : 'lcov',
+          dir : 'coverage/'
+    },
 
     // web server port
     port: 9876,
@@ -61,7 +60,7 @@ module.exports = function (config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['PhantomJS2'],
+    browsers: ['PhantomJS'],
 
     // If browser does not capture in given timeout [ms], kill it
     captureTimeout: 60000,

@@ -30,7 +30,7 @@ module.exports = function(grunt) {
                     configFile: 'karma.conf.js',
                     runnerPort: 9999,
                     singleRun: true,
-                    browsers: ['PhantomJS2'],
+                    browsers: ['PhantomJS'],
                     logLevel: 'ERROR'
                 }
             }

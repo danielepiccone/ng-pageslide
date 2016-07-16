@@ -108,30 +108,6 @@ describe('ng-pageslide: ', function() {
         });
       });
 
-      describe('and has set squeeze to true', function () {
-        beforeEach(function (done) {
-          compilePageslide([
-            '<div pageslide ps-squeeze="true" ps-open="is_open">',
-            '<div>test</div>',
-            '</div>'
-          ].join(''));
-          done();
-        });
-
-        it('should set the width ', function (done) {
-          var body = angular.element(document.body);
-          scope.is_open = true;
-          scope.$digest();
-          //TODO: find out why this fails on Travis CI but not locally
-          // expect(body.css('transition')).toContain('0.5s');
-          expect(body.css('-webkit-transition')).toContain('0.5s');
-          expect(body.html()).toContain('width: 300px;');
-          scope.is_open = false;
-          scope.$digest();
-          expect(body.css('right')).toEqual('0px');
-          done();
-        });
-      });
       describe('and has set push to true', function () {
         beforeEach(function (done) {
           compilePageslide([
@@ -154,6 +130,7 @@ describe('ng-pageslide: ', function() {
         });
       });
 
+      /*
       describe('when the psSize is set', function () {
         beforeEach(function (done) {
           compilePageslide([
@@ -176,7 +153,8 @@ describe('ng-pageslide: ', function() {
           expect(body.html()).toContain('width: 150px;');
           done();
         });
-      });
+        });
+        */
 
       describe('when psAutoClose is set', function () {
         beforeEach(function (done) {
@@ -275,15 +253,17 @@ describe('ng-pageslide: ', function() {
           '</div>'
         ].join(''));
 
+        var right;
+
         scope.is_open = true;
         scope.$digest();
-        var width = document.querySelector('.ng-pageslide').style.width;
-        expect(width).toBe('300px');
+        right = document.querySelector('.ng-pageslide').style.right;
+        expect(right).toBe('0px');
 
         scope.is_open = false;
         scope.$digest();
-        width = document.querySelector('.ng-pageslide').style.width;
-        expect(width).toBe('0px');
+        right = document.querySelector('.ng-pageslide').style.right;
+        expect(right).toBe('-300px');
         done();
       });
 
@@ -426,51 +406,14 @@ describe('ng-pageslide: ', function() {
           expect(slider.html()).toContain('height: 100%;');
           expect(slider.html()).toContain('top: 0px;');
           expect(slider.html()).toContain('bottom: 0px;');
-          expect(slider.html()).toContain('left: 0px;');
           //when opening the slider
           scope.is_open = true;
           scope.$digest();
-          expect(slider.html()).toContain('width: 300px;');
+          expect(slider.html()).toContain('left: 0px;');
           //when closing the slider
           scope.is_open = false;
           scope.$digest();
-          expect(slider.html()).toContain('width: 0px;');
-          done();
-        });
-      });
-      describe('when squeeze is set', function () {
-        beforeEach(function (done) {
-          compilePageslide([
-            '<div>',
-            '<div pageslide ps-open="is_open" ps-side="left" ps-squeeze="true">',
-            '<div id="target">',
-            '<p>some random content...</p>',
-            '<a id="target-close" href="#">Click to close</a>',
-            '</div>',
-            '</div>',
-            '</div>'
-          ].join(''));
-          done();
-        });
-
-        it('should set the appropriate styles', function (done) {
-          // Check for DOM Manipulation
-          var slider = angular.element(document.body);
-          expect(slider.html()).toContain('height: 100%;');
-          expect(slider.html()).toContain('top: 0px;');
-          expect(slider.html()).toContain('bottom: 0px;');
-          expect(slider.html()).toContain('left: 0px;');
-          //when opening the slider
-          scope.is_open = true;
-          scope.$digest();
-          expect(slider.html()).toContain('width: 300px;');
-          //TODO: find out why this isn't being set in the test
-          // expect(slider.html()).toContain('left: 300px;');
-          //when closing the slider
-          scope.is_open = false;
-          scope.$digest();
-          expect(slider.html()).toContain('width: 0px;');
-          expect(slider.html()).toContain('left: 0px;');
+          expect(slider.html()).toContain('left: -300px;');
           done();
         });
       });
@@ -490,25 +433,24 @@ describe('ng-pageslide: ', function() {
           done();
         });
 
+        // TODO this should check the body as well
         it('should set the appropriate styles', function (done) {
           // Check for DOM Manipulation
           var slider = angular.element(document.body);
           expect(slider.html()).toContain('height: 100%;');
           expect(slider.html()).toContain('top: 0px;');
           expect(slider.html()).toContain('bottom: 0px;');
-          expect(slider.html()).toContain('left: 0px;');
           //when opening the slider
           scope.is_open = true;
           scope.$digest();
-          expect(slider.html()).toContain('width: 300px;');
+          expect(slider.html()).toContain('left: 0px;');
           //TODO: find out why these are not being set in the test
           // expect(slider.html()).toContain('left: 300px;');
           // expect(slider.html()).toContain('right: -300px;');
           //when closing the slider
           scope.is_open = false;
           scope.$digest();
-          expect(slider.html()).toContain('width: 0px;');
-          expect(slider.html()).toContain('left: 0px;');
+          expect(slider.html()).toContain('left: -300px;');
           done();
         });
       });
@@ -534,53 +476,16 @@ describe('ng-pageslide: ', function() {
           // Check for DOM Manipulation
           var slider = angular.element(document.body);
           expect(slider.html()).toContain('width: 100%;');
-          expect(slider.html()).toContain('top: 0px;');
           expect(slider.html()).toContain('left: 0px;');
           expect(slider.html()).toContain('right: 0px;');
           //when opening the slider
           scope.is_open = true;
           scope.$digest();
-          expect(slider.html()).toContain('height: 300px;');
+          expect(slider.html()).toContain('top: 0px;');
           //when closing the slider
           scope.is_open = false;
           scope.$digest();
-          expect(slider.html()).toContain('height: 0px;');
-          done();
-        });
-      });
-      describe('when squeeze is set', function () {
-        beforeEach(function (done) {
-          compilePageslide([
-            '<div>',
-            '<div pageslide ps-open="is_open" ps-side="top" ps-squeeze="true">',
-            '<div id="target">',
-            '<p>some random content...</p>',
-            '<a id="target-close" href="#">Click to close</a>',
-            '</div>',
-            '</div>',
-            '</div>'
-          ].join(''));
-          done();
-        });
-
-        it('should set the appropriate styles', function (done) {
-          // Check for DOM Manipulation
-          var slider = angular.element(document.body);
-          expect(slider.html()).toContain('width: 100%;');
-          expect(slider.html()).toContain('top: 0px;');
-          expect(slider.html()).toContain('left: 0px;');
-          expect(slider.html()).toContain('right: 0px;');
-          //when opening the slider
-          scope.is_open = true;
-          scope.$digest();
-          expect(slider.html()).toContain('height: 300px;');
-          //TODO: find out why this isn't being set in the test
-          // expect(slider.html()).toContain('top: 300px;');
-          //when closing the slider
-          scope.is_open = false;
-          scope.$digest();
-          expect(slider.html()).toContain('height: 0px;');
-          expect(slider.html()).toContain('top: 0px;');
+          expect(slider.html()).toContain('top: -300px;');
           done();
         });
       });
@@ -600,25 +505,24 @@ describe('ng-pageslide: ', function() {
           done();
         });
 
+        // TODO this should check the body as well
         it('should set the appropriate styles', function (done) {
           // Check for DOM Manipulation
           var slider = angular.element(document.body);
           expect(slider.html()).toContain('width: 100%;');
-          expect(slider.html()).toContain('top: 0px;');
           expect(slider.html()).toContain('left: 0px;');
           expect(slider.html()).toContain('right: 0px;');
           //when opening the slider
           scope.is_open = true;
           scope.$digest();
-          expect(slider.html()).toContain('height: 300px;');
+          expect(slider.html()).toContain('top: 0px;');
           //TODO: find out why these are not being set in the test
           // expect(slider.html()).toContain('top: 300px;');
           // expect(slider.html()).toContain('bottom: -300px;');
           //when closing the slider
           scope.is_open = false;
           scope.$digest();
-          expect(slider.html()).toContain('height: 0px;');
-          expect(slider.html()).toContain('top: 0px;');
+          expect(slider.html()).toContain('top: -300px;');
           done();
         });
       });
@@ -644,57 +548,21 @@ describe('ng-pageslide: ', function() {
           // Check for DOM Manipulation
           var slider = angular.element(document.body);
           expect(slider.html()).toContain('width: 100%;');
-          expect(slider.html()).toContain('bottom: 0px;');
           expect(slider.html()).toContain('left: 0px;');
           expect(slider.html()).toContain('right: 0px;');
           //when opening the slider
           scope.is_open = true;
           scope.$digest();
-          expect(slider.html()).toContain('height: 300px;');
+          expect(slider.html()).toContain('bottom: 0px;');
           //when closing the slider
           scope.is_open = false;
           scope.$digest();
-          expect(slider.html()).toContain('height: 0px;');
-          done();
-        });
-      });
-      describe('when squeeze is set', function () {
-        beforeEach(function (done) {
-          compilePageslide([
-            '<div>',
-            '<div pageslide ps-open="is_open" ps-side="bottom" ps-squeeze="true">',
-            '<div id="target">',
-            '<p>some random content...</p>',
-            '<a id="target-close" href="#">Click to close</a>',
-            '</div>',
-            '</div>',
-            '</div>'
-          ].join(''));
-          done();
-        });
-
-        it('should set the appropriate styles', function (done) {
-          // Check for DOM Manipulation
-          var slider = angular.element(document.body);
-          expect(slider.html()).toContain('width: 100%;');
-          expect(slider.html()).toContain('bottom: 0px;');
-          expect(slider.html()).toContain('left: 0px;');
-          expect(slider.html()).toContain('right: 0px;');
-          //when opening the slider
-          scope.is_open = true;
-          scope.$digest();
-          expect(slider.html()).toContain('height: 300px;');
-          //TODO: find out why this isn't being set in the test
-          // expect(slider.html()).toContain('bottom: 300px;');
-          //when closing the slider
-          scope.is_open = false;
-          scope.$digest();
-          expect(slider.html()).toContain('height: 0px;');
-          expect(slider.html()).toContain('bottom: 0px;');
+          expect(slider.html()).toContain('bottom: -300px;');
           done();
         });
       });
 
+      // TODO this hsould check the body as well
       describe('when push is set', function () {
         beforeEach(function (done) {
           compilePageslide([
@@ -714,21 +582,19 @@ describe('ng-pageslide: ', function() {
           // Check for DOM Manipulation
           var slider = angular.element(document.body);
           expect(slider.html()).toContain('width: 100%;');
-          expect(slider.html()).toContain('bottom: 0px;');
           expect(slider.html()).toContain('left: 0px;');
           expect(slider.html()).toContain('right: 0px;');
           //when opening the slider
           scope.is_open = true;
           scope.$digest();
-          expect(slider.html()).toContain('height: 300px;');
+          expect(slider.html()).toContain('bottom: 0px;');
           //TODO: find out why these are not being set in the test
           // expect(slider.html()).toContain('bottom: 300px;');
           // expect(slider.html()).toContain('top: -300px;');
           //when closing the slider
           scope.is_open = false;
           scope.$digest();
-          expect(slider.html()).toContain('height: 0px;');
-          expect(slider.html()).toContain('bottom: 0px;');
+          expect(slider.html()).toContain('bottom: -300px;');
           done();
         });
       });

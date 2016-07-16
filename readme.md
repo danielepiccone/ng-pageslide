@@ -1,6 +1,6 @@
-# AngularJS Pageslide directive
+# AngularJS Pageslide Directive
 
-An [AngularJS](http://angularjs.org/) directive which slides another panel over your browser to reveal an additional interaction pane.
+An AngularJS directive which slides another panel over your browser to reveal an additional interaction pane.
 
 It does all the css manipulation needed to position your content off canvas.
 
@@ -9,6 +9,7 @@ See it in action [HERE](http://dpiccone.github.io/ng-pageslide/examples/)
 Examples in the repository.
 
 [![Build Status](https://travis-ci.org/dpiccone/ng-pageslide.svg?branch=master)](https://travis-ci.org/dpiccone/ng-pageslide)
+[![Coverage Status](https://coveralls.io/repos/github/dpiccone/ng-pageslide/badge.svg?branch=v2)](https://coveralls.io/github/dpiccone/ng-pageslide?branch=v2)
 
 ## Usage
 
@@ -52,17 +53,13 @@ ps-open (optional) = Boolean true/false used to open and close the panel (option
 ps-auto-close (optional) = true if you want the panel to close on location change
 ps-key-listener (optional) = close the sidebar with the ESC key (defaults to false)
 ps-click-outside (optional) = close the sidebar by clicking outside (defaults to true)
+ps-push (optional) = push the main body to show the panel (defaults to false)
 
 // Style
 ps-class (optional) = The class for the pageslide (default: "ng-pageslide")
 ps-speed (optional) = The speed of the transition (optional)
 ps-size (optional) = desired height/width of panel (defaults to 300px)
 ps-zindex (optional) = desired z-index (defaults to 1000)
-
-// Effects
-ps-push (optional) = push the main body to show the panel (defaults to false)*
-ps-squeeze (optional) = squeeze body to fit the panel (defaults to false)*
-* these options make assumptions about the layout, will set attributes on body
 
 ```
 
