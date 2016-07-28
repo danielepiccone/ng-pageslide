@@ -15,6 +15,8 @@ Examples in the repository.
 
 Use within your Angular app
 
+`npm install --save angular-pageslide-directive`
+
 ```
 var app = angular.module("app", ["pageslide-directive"]);
 ```
