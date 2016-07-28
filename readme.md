@@ -17,9 +17,7 @@ Use within your Angular app
 
 `npm install --save angular-pageslide-directive`
 
-```
-var app = angular.module("app", ["pageslide-directive"]);
-```
+`var app = angular.module("app", ["pageslide-directive"]);`
 
 Just use the ```<pageslide>``` element or attribute inside a controller scope like this:
 
