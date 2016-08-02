@@ -17,23 +17,25 @@
   "version": "2.0.1",
   "license": "MIT",
   "devDependencies": {
+    "angular-mocks": "1.5.5",
     "grunt": "0.4.5",
     "grunt-contrib-concat": "0.3.0",
     "grunt-contrib-jshint": "0.6.5",
     "grunt-contrib-uglify": "0.2.7",
+    "grunt-karma": "0.12.2",
+    "http-server": "0.9.0",
     "jasmine-core": "2.4.1",
     "karma": "0.13.22",
     "karma-coverage": "0.5.5",
     "karma-coveralls": "1.1.2",
     "karma-jasmine": "0.3.8",
-    "angular-mocks": "1.5.5",
-    "grunt-karma": "0.12.2",
     "karma-phantomjs-launcher": "1.0.1"
   },
   "peerDependencies": {
     "angular": "1.5.5"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "examples": "http-server ./examples"
   }
 }
