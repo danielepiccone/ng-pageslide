@@ -49,6 +49,8 @@
                     param.bodyClass = $scope.psBodyClass || false;
                     param.clickOutside = $scope.psClickOutside !== 'false';
 
+                    param.push = param.push && !param.container;
+
                     el.addClass(param.className);
 
                     /* DOM manipulation */
@@ -59,14 +61,6 @@
                         body = document.getElementById(param.container);
                     } else {
                         body = document.body;
-                    }
-
-
-                    if (param.push) {
-                        body.style.position = 'absolute';
-                        body.style.transitionDuration = param.speed + 's';
-                        body.style.webkitTransitionDuration = param.speed + 's';
-                        body.style.transitionProperty = 'top, bottom, left, right';
                     }
 
                     function onBodyClick(e) {
@@ -113,6 +107,19 @@
                     slider.style.webkitTransitionDuration = param.speed + 's';
                     slider.style.height = param.size;
                     slider.style.transitionProperty = 'top, bottom, left, right';
+
+                    if (param.push) {
+                        body.style.position = 'absolute';
+                        body.style.transitionDuration = param.speed + 's';
+                        body.style.webkitTransitionDuration = param.speed + 's';
+                        body.style.transitionProperty = 'top, bottom, left, right';
+                    }
+
+                    if (param.container) {
+                        slider.style.position = 'absolute';
+                        body.style.position = 'relative';
+                        body.style.overflow = 'hidden';
+                    }
 
                     function onTransitionEnd() {
                         if ($scope.psOpen) {
