@@ -6,8 +6,8 @@
         <meta http-equiv="X-UA-Compatible" content="chrome=1" />
         <meta name="description" content="Ng-pageslide : AngularJS sliding panel for serving additional content" />
 
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-        <script src="../src/angular-pageslide-directive.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+        <script src="angular-pageslide-directive.js"></script>
         <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/foundation/5.0.0/css/foundation.min.css">
         <title>AngularJS Pageslide directive demo</title>
         <style>
@@ -51,9 +51,10 @@
                 pointer-events: none;
             }
 
-            #container {
-                width: 10rem;
-                height: 10rem;
+            #container1, #container2 {
+                width: 100%;
+                height: 20rem;
+                border: 1px solid lightGrey;
 
                 p {
                     font-size: 0.5rem!important;
@@ -61,6 +62,7 @@
             }
 
         </style>
+
         <script>
             var app = angular.module("app", ["pageslide-directive"]);
 
@@ -85,10 +87,6 @@
                     alert('Close');
                 }
             }]);
-
-            angular.element(document).ready(function(){
-                c = angular.element(document.querySelector('#controller-demo')).scope();
-            });
 
         </script>
     </head>
@@ -274,6 +272,41 @@
                         </div>
                     </pageslide>
                 </div>
+
+                <div id='container1'>
+                    <p>
+                    Pastrami pork belly strip steak meatball boudin pork. Beef doner pastrami leberkas. Frankfurter swine boudin doner. Bacon drumstick chicken landjaeger filet mignon pancetta. Corned beef leberkas frankfurter kevin. Tongue frankfurter pastrami, pork biltong alcatra leberkas meatloaf boudin strip steak spare ribs pork chop turkey.
+                    </p>
+                </div>
+
+                <div ng-controller="pageslideCtrl">
+                    <h3>In a container</h3>
+                    <p>Check to open: <input type="checkbox" ng-model="checked" ></p>
+                    <pageslide ps-push='true' ps-open="checked" ps-container='container1' >
+                        <div style="padding:20px">
+                            <h2>Yo Pageslide</h2>
+                            <p>meh</p>
+                        </div>
+                    </pageslide>
+                </div>
+
+                <div id='container2'>
+                    <p>
+                    Pastrami pork belly strip steak meatball boudin pork. Beef doner pastrami leberkas. Frankfurter swine boudin doner. Bacon drumstick chicken landjaeger filet mignon pancetta. Corned beef leberkas frankfurter kevin. Tongue frankfurter pastrami, pork biltong alcatra leberkas meatloaf boudin strip steak spare ribs pork chop turkey.
+                    </p>
+                </div>
+
+                <div ng-controller="pageslideCtrl">
+                    <h3>In a container with directions</h3>
+                    <p>Check to open: <input type="checkbox" ng-model="checked" ></p>
+                    <pageslide ps-side='bottom' ps-open="checked" ps-container='container2' >
+                        <div style="padding:20px">
+                            <h2>Yo Pageslide</h2>
+                            <p>meh</p>
+                        </div>
+                    </pageslide>
+                </div>
+
             </section>
         </div>
 
