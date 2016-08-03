@@ -79,15 +79,15 @@ describe('ng-pageslide: ', function() {
         });
 
         it('should contain the pageslide with the custom defined container', function (done) {
-          expect(angular.element(document.querySelector('#customContainer')).html())
-          .toContain('pageslide');
-          done();
+            expect(angular.element(document.querySelector('#customContainer')).html())
+                .toContain('pageslide');
+            done();
         });
-        it('should set the position to absolute', function (done) {
-          //TODO: find out why it won't set to absolute, but is setting fixed fine
-          var slider = document.querySelector('#customContainer');
-          expect(angular.element(slider).css('position')).toEqual('');
-          done();
+
+        it('should set the position to relative', function (done) {
+            var slider = document.querySelector('#customContainer');
+            expect(angular.element(slider).css('position')).toEqual('relative');
+            done();
         });
       });
 
