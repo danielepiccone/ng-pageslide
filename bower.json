@@ -11,7 +11,7 @@
     "url": "git@github.com:dpiccone/ng-pageslide.git"
   },
   "dependencies": {
-    "angular": "1.5.5"
+    "angular": "1.5.x"
   },
   "devDependencies": {
     "grunt": "0.4.5",
