@@ -207,7 +207,7 @@
                         }
 
                         if (param.clickOutside) {
-                            $document.off('click', onBodyClick);
+                            $document.off('touchend click', onBodyClick);
                         }
                         isOpen = false;
                         setBodyClass('closed');
@@ -253,7 +253,7 @@
                         }
 
                         if (param.clickOutside) {
-                            $document.on('click', onBodyClick);
+                            $document.on('touchend click', onBodyClick);
                         }
                         setBodyClass('open');
                     }
@@ -298,7 +298,7 @@
                     $scope.$on('$destroy', function () {
                         if (slider.parentNode === body) {
                             if (param.clickOutside) {
-                                $document.off('click', onBodyClick);
+                                $document.off('touchend click', onBodyClick);
                             }
                             body.removeChild(slider);
                         }
@@ -319,5 +319,3 @@
             };
         }]);
 }));
-
-
