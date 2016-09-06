@@ -307,6 +307,11 @@
                     // Events
 
                     $scope.$on('$destroy', function () {
+                        if (param.resize) {
+                            body.style.right = '0px';
+                            body.style.left = '0px';
+                        }
+
                         if (slider.parentNode === body) {
                             if (param.clickOutside) {
                                 $document.off('touchend click', onBodyClick);
