@@ -31,8 +31,8 @@
                     psKeyListener: '@',
                     psBodyClass: '@',
                     psClickOutside: '@',
-                    onopen: '&?',
-                    onclose: '&?'
+                    onopen: '=?',
+                    onclose: '=?'
                 },
                 link: function ($scope, el, attrs) {
 
@@ -128,11 +128,11 @@
 
                     function onTransitionEnd() {
                         if ($scope.psOpen) {
-                            if ($scope.onopen) {
+                            if ($scope.onopen === 'function') {
                                 $scope.$apply($scope.onopen);
                             }
                         } else {
-                            if ($scope.onclose) {
+                            if (typeof $scope.onclose === 'function') {
                                 $scope.$apply($scope.onclose);
                             }
                         }
