@@ -78,7 +78,7 @@
                     function setBodyClass(value){
                         if (param.bodyClass) {
                             var bodyClass = param.className + '-body';
-                            var bodyClassRe = new RegExp(' ' + bodyClass + '-closed| ' + bodyClass + '-open');
+                            var bodyClassRe = new RegExp(bodyClass + '-closed|' + bodyClass + '-open');
                             body.className = body.className.replace(bodyClassRe, '');
                             body.className += ' ' + bodyClass + '-' + value;
                         }
