@@ -92,8 +92,8 @@ describe('ng-pageslide: ', function() {
       });
 
       describe('and has defined the body class', function () {
-        //TODO: right now, it looks like there is a mixup between className and bodyClass, most likely a bug
         beforeEach(function (done) {
+          document.body.className = 'foobar';
           compilePageslide([
             '<div pageslide ps-body-class="customBodyClass" ps-class="customBodyClass" ps-open="is_open">',
             '<div>test</div>',
@@ -102,8 +102,18 @@ describe('ng-pageslide: ', function() {
           done();
         });
 
+        afterEach(function (done) {
+          document.body.className = '';
+          done();
+        });
+
         it('should add the class to the pageslide element', function (done) {
           expect(angular.element(document.querySelector('.customBodyClass')).html()).toBeDefined();
+          done();
+        });
+
+        it('should add the class to the body, defaulting to closed', function (done) {
+          expect(document.body.className).toBe('foobar customBodyClass-body-closed');
           done();
         });
       });
