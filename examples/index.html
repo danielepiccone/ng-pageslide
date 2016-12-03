@@ -81,10 +81,12 @@
 
                 $scope.onopen = function () {
                     alert('Open');
+                    console.log(this, $scope);
                 }
 
                 $scope.onclose = function () {
                     alert('Close');
+                    console.log($scope);
                 }
             }]);
 
