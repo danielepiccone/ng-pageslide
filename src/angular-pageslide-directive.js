@@ -64,7 +64,8 @@
                     }
 
                     function onBodyClick(e) {
-                        if(isOpen && !slider.contains(e.target)) {
+                        var target = e.touches && e.touches[0] || e.target;
+                        if(isOpen && !slider.contains(target)) {
                             isOpen = false;
                             $scope.psOpen = false;
                             $scope.$apply();
