@@ -128,7 +128,7 @@
 
                     function onTransitionEnd() {
                         if ($scope.psOpen) {
-                            if ($scope.onopen === 'function') {
+                            if (typeof $scope.onopen === 'function') {
                                 $scope.$apply($scope.onopen);
                             }
                         } else {
