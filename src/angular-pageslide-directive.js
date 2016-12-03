@@ -80,7 +80,12 @@
                             var bodyClass = param.className + '-body';
                             var bodyClassRe = new RegExp(bodyClass + '-closed|' + bodyClass + '-open');
                             body.className = body.className.replace(bodyClassRe, '');
-                            body.className += ' ' + bodyClass + '-' + value;
+                            var newBodyClassName = bodyClass + '-' + value;
+                            if (body.className[body.className.length -1] !== ' ') {
+                                body.className += ' ' + newBodyClassName;
+                            } else {
+                                body.className += newBodyClassName;
+                            }
                         }
                     }
 
