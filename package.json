@@ -36,6 +36,7 @@
     "angular": "1.5.x"
   },
   "scripts": {
+    "prepublish": "grunt",
     "test": "grunt test",
     "examples": "http-server ./examples"
   }
