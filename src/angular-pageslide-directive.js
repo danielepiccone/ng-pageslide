@@ -128,12 +128,12 @@
 
                     function onTransitionEnd() {
                         if ($scope.psOpen) {
-                            if (typeof $scope.onopen === 'function') {
-                                $scope.onopen();
+                            if ($scope.onopen === 'function') {
+                                $scope.$apply($scope.onopen);
                             }
                         } else {
                             if (typeof $scope.onclose === 'function') {
-                                $scope.onclose();
+                                $scope.$apply($scope.onclose);
                             }
                         }
                     }
