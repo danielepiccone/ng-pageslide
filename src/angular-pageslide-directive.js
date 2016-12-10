@@ -48,6 +48,7 @@
                     param.keyListener = scope.psKeyListener === 'true';
                     param.bodyClass = scope.psBodyClass || false;
                     param.clickOutside = scope.psClickOutside !== 'false';
+                    param.autoClose = scope.psAutoClose || false;
 
                     param.push = param.push && !param.container;
 
@@ -312,7 +313,7 @@
                         slider.removeEventListener('transitionend', onTransitionEnd);
                     });
 
-                    if (scope.psAutoClose) {
+                    if (param.autoClose) {
                         scope.$on('$locationChangeStart', function() {
                             psClose(slider, param);
                         });
