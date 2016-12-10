@@ -17,6 +17,7 @@
   "version": "2.1.3",
   "license": "MIT",
   "devDependencies": {
+    "angular": "1.5.5",
     "angular-mocks": "1.5.5",
     "grunt": "0.4.5",
     "grunt-cli": "1.2.0",
