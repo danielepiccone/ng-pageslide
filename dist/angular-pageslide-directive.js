@@ -31,23 +31,24 @@
                     psKeyListener: '@',
                     psBodyClass: '@',
                     psClickOutside: '@',
-                    onopen: '=?',
-                    onclose: '=?'
+                    onopen: '&?',
+                    onclose: '&?'
                 },
-                link: function ($scope, el, attrs) {
+                link: function (scope, el, attrs) {
 
                     var param = {};
 
-                    param.side = $scope.psSide || 'right';
-                    param.speed = $scope.psSpeed || '0.5';
-                    param.size = $scope.psSize || '300px';
-                    param.zindex = $scope.psZindex || 1000;
-                    param.className = $scope.psClass || 'ng-pageslide';
-                    param.push = $scope.psPush === 'true';
-                    param.container = $scope.psContainer || false;
-                    param.keyListener = $scope.psKeyListener === 'true';
-                    param.bodyClass = $scope.psBodyClass || false;
-                    param.clickOutside = $scope.psClickOutside !== 'false';
+                    param.side = scope.psSide || 'right';
+                    param.speed = scope.psSpeed || '0.5';
+                    param.size = scope.psSize || '300px';
+                    param.zindex = scope.psZindex || 1000;
+                    param.className = scope.psClass || 'ng-pageslide';
+                    param.push = scope.psPush === 'true';
+                    param.container = scope.psContainer || false;
+                    param.keyListener = scope.psKeyListener === 'true';
+                    param.bodyClass = scope.psBodyClass || false;
+                    param.clickOutside = scope.psClickOutside !== 'false';
+                    param.autoClose = scope.psAutoClose || false;
 
                     param.push = param.push && !param.container;
 
@@ -64,13 +65,18 @@
                     }
 
                     function onBodyClick(e) {
-                        if(isOpen && !slider.contains(e.target)) {
+                        var target = e.touches && e.touches[0] || e.target;
+                        if(
+                            isOpen &&
+                            body.contains(target) &&
+                            !slider.contains(target)
+                        ) {
                             isOpen = false;
-                            $scope.psOpen = false;
-                            $scope.$apply();
+                            scope.psOpen = false;
+                            scope.$apply();
                         }
 
-                        if($scope.psOpen) {
+                        if(scope.psOpen) {
                             isOpen = true;
                         }
                     }
@@ -127,13 +133,13 @@
                     }
 
                     function onTransitionEnd() {
-                        if ($scope.psOpen) {
-                            if (typeof $scope.onopen === 'function') {
-                                $scope.$apply($scope.onopen);
+                        if (scope.psOpen) {
+                            if (typeof scope.onopen === 'function') {
+                                scope.onopen()();
                             }
                         } else {
-                            if (typeof $scope.onclose === 'function') {
-                                $scope.$apply($scope.onclose);
+                            if (typeof scope.onclose === 'function') {
+                                scope.onclose()();
                             }
                         }
                     }
@@ -216,7 +222,7 @@
                         }
                         isOpen = false;
                         setBodyClass('closed');
-                        $scope.psOpen = false;
+                        scope.psOpen = false;
                     }
 
                     function psOpen(slider, param) {
@@ -251,7 +257,7 @@
                                 break;
                         }
 
-                        $scope.psOpen = true;
+                        scope.psOpen = true;
 
                         if (param.keyListener) {
                             $document.on('keydown', handleKeyDown);
@@ -274,7 +280,7 @@
                             // http://stackoverflow.com/questions/12729122/angularjs-prevent-error-digest-already-in-progress-when-calling-scope-apply
 
                             $timeout(function () {
-                                $scope.$apply();
+                                scope.$apply();
                             });
                         }
                     }
@@ -282,7 +288,7 @@
 
                     // Watchers
 
-                    $scope.$watch('psOpen', function(value) {
+                    scope.$watch('psOpen', function(value) {
                         if (!!value) {
                             psOpen(slider, param);
                         } else {
@@ -290,7 +296,7 @@
                         }
                     });
 
-                    $scope.$watch('psSize', function(newValue, oldValue) {
+                    scope.$watch('psSize', function(newValue, oldValue) {
                         if (oldValue !== newValue) {
                             param.size = newValue;
                             initSlider();
@@ -300,7 +306,7 @@
 
                     // Events
 
-                    $scope.$on('$destroy', function () {
+                    scope.$on('$destroy', function () {
                         if (slider.parentNode === body) {
                             if (param.clickOutside) {
                                 $document.off('touchend click', onBodyClick);
@@ -311,11 +317,11 @@
                         slider.removeEventListener('transitionend', onTransitionEnd);
                     });
 
-                    if ($scope.psAutoClose) {
-                        $scope.$on('$locationChangeStart', function() {
+                    if (param.autoClose) {
+                        scope.$on('$locationChangeStart', function() {
                             psClose(slider, param);
                         });
-                        $scope.$on('$stateChangeStart', function() {
+                        scope.$on('$stateChangeStart', function() {
                             psClose(slider, param);
                         });
                     }
