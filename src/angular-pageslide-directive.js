@@ -147,6 +147,9 @@
                     slider.addEventListener('transitionend', onTransitionEnd);
 
                     initSlider();
+                    //if the slide is supposed to be closed, ensure its closed so we can avoid onload close
+                    if (angular.isDefined(scope.psOpen) && scope.psOpen === false)
+                        psClose(slider, param);
 
                     function initSlider() {
                         switch (param.side) {
