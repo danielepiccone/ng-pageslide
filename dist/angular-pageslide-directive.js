@@ -117,13 +117,13 @@
                     slider.style.transitionDuration = param.speed + 's';
                     slider.style.webkitTransitionDuration = param.speed + 's';
                     slider.style.height = param.size;
-                    slider.style.transitionProperty = 'top, bottom, left, right';
+                    slider.style.transitionProperty = 'transform';
 
                     if (param.push) {
                         body.style.position = 'absolute';
                         body.style.transitionDuration = param.speed + 's';
                         body.style.webkitTransitionDuration = param.speed + 's';
-                        body.style.transitionProperty = 'top, bottom, left, right';
+                        body.style.transitionProperty = 'margin';
                     }
 
                     if (param.container) {
@@ -156,6 +156,7 @@
                                 slider.style.top = '0px';
                                 slider.style.bottom = '0px';
                                 slider.style.right = '0px';
+                                slider.style.transform = 'translateX(0)';
                                 break;
                             case 'left':
                                 slider.style.width = param.size;
@@ -163,6 +164,7 @@
                                 slider.style.top = '0px';
                                 slider.style.bottom = '0px';
                                 slider.style.left = '0px';
+                                slider.style.transform = 'translateX(0)';
                                 break;
                             case 'top':
                                 slider.style.height = param.size;
@@ -170,6 +172,7 @@
                                 slider.style.left = '0px';
                                 slider.style.top = '0px';
                                 slider.style.right = '0px';
+                                slider.style.transform = 'translateY(0)';
                                 break;
                             case 'bottom':
                                 slider.style.height = param.size;
@@ -177,6 +180,7 @@
                                 slider.style.bottom = '0px';
                                 slider.style.left = '0px';
                                 slider.style.right = '0px';
+                                slider.style.transform = 'translateY(0)';
                                 break;
                         }
                     }
@@ -184,31 +188,27 @@
                     function psClose(slider, param) {
                         switch (param.side) {
                             case 'right':
-                                slider.style.right = "-" + param.size;
+                                slider.style.transform = 'translateX(100%)';
                                 if (param.push) {
-                                    body.style.right = '0px';
-                                    body.style.left = '0px';
+                                    body.style.marginRight = '0px';
                                 }
                                 break;
                             case 'left':
-                                slider.style.left = "-" + param.size;
+                                slider.style.transform = 'translateX(-100%)';
                                 if (param.push) {
-                                    body.style.left = '0px';
-                                    body.style.right = '0px';
+                                    body.style.marginLeft = '0px';
                                 }
                                 break;
                             case 'top':
-                                slider.style.top = "-" + param.size;
+                                slider.style.transform = 'translateY(-100%)';
                                 if (param.push) {
-                                    body.style.top = '0px';
-                                    body.style.bottom = '0px';
+                                    body.style.marginTop = '0px';
                                 }
                                 break;
                             case 'bottom':
-                                slider.style.bottom = "-" + param.size;
+                                slider.style.transform = 'translateY(100%)';
                                 if (param.push) {
-                                    body.style.bottom = '0px';
-                                    body.style.top = '0px';
+                                    body.style.marginTop = '0px';
                                 }
                                 break;
                         }
@@ -228,31 +228,33 @@
                     function psOpen(slider, param) {
                         switch (param.side) {
                             case 'right':
-                                slider.style.right = "0px";
+                                slider.style.transform = 'translateX(0)';
                                 if (param.push) {
-                                    body.style.right = param.size;
-                                    body.style.left = '-' + param.size;
+                                    body.style.marginRight = param.size;
                                 }
                                 break;
                             case 'left':
-                                slider.style.left = "0px";
+                                slider.style.transform = 'translateX(0)';
                                 if (param.push) {
-                                    body.style.left = param.size;
-                                    body.style.right = '-' + param.size;
+                                    body.style.marginLeft = param.size;
                                 }
                                 break;
                             case 'top':
-                                slider.style.top = "0px";
+                                slider.style.transform = 'translateY(0)';
                                 if (param.push) {
-                                    body.style.top = param.size;
-                                    body.style.bottom = '-' + param.size;
+                                    body.style.marginTop = param.size;
                                 }
                                 break;
                             case 'bottom':
-                                slider.style.bottom = "0px";
+                                slider.style.transform = 'translateY(0)';
                                 if (param.push) {
-                                    body.style.bottom = param.size;
-                                    body.style.top = '-' + param.size;
+                                    var offset;
+                                    if (/calc\(/i.test(param.size)) {
+                                        offset = param.size.replace('calc(', 'calc(-');
+                                    } else {
+                                        offset = "-" + param.size;
+                                    }
+                                    body.style.marginTop = offset;
                                 }
                                 break;
                         }

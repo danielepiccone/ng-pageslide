@@ -14,7 +14,7 @@
     "modal",
     "pane"
   ],
-  "version": "2.1.4",
+  "version": "2.1.5",
   "license": "MIT",
   "devDependencies": {
     "angular": "1.5.5",
