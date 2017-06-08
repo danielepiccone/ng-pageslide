@@ -134,8 +134,8 @@ describe('ng-pageslide: ', function() {
           scope.$digest();
           scope.is_open = false;
           scope.$digest();
-          expect(body.css('right')).toEqual('0px');
-          expect(body.css('left')).toEqual('0px');
+          expect(body.css('marginRight')).toEqual('0px');
+          expect(body.css('marginLeft')).toEqual('0px');
           done();
         });
       });
@@ -263,17 +263,17 @@ describe('ng-pageslide: ', function() {
           '</div>'
         ].join(''));
 
-        var right;
+        var transform;
 
         scope.is_open = true;
         scope.$digest();
-        right = document.querySelector('.ng-pageslide').style.right;
-        expect(right).toBe('0px');
+        transform = document.querySelector('.ng-pageslide').style.transform;
+        expect(transform).toBe('translateX(0px)');
 
         scope.is_open = false;
         scope.$digest();
-        right = document.querySelector('.ng-pageslide').style.right;
-        expect(right).toBe('-300px');
+        transform = document.querySelector('.ng-pageslide').style.transform;
+        expect(transform).toBe('translateX(100%)');
         done();
       });
 
@@ -419,11 +419,11 @@ describe('ng-pageslide: ', function() {
           //when opening the slider
           scope.is_open = true;
           scope.$digest();
-          expect(slider.html()).toContain('left: 0px;');
+          expect(slider.html()).toContain('translateX(0px);');
           //when closing the slider
           scope.is_open = false;
           scope.$digest();
-          expect(slider.html()).toContain('left: -300px;');
+          expect(slider.html()).toContain('translateX(-100%);');
           done();
         });
       });
@@ -453,14 +453,14 @@ describe('ng-pageslide: ', function() {
           //when opening the slider
           scope.is_open = true;
           scope.$digest();
-          expect(slider.html()).toContain('left: 0px;');
+          expect(slider.html()).toContain('translateX(0px);');
           //TODO: find out why these are not being set in the test
           // expect(slider.html()).toContain('left: 300px;');
           // expect(slider.html()).toContain('right: -300px;');
           //when closing the slider
           scope.is_open = false;
           scope.$digest();
-          expect(slider.html()).toContain('left: -300px;');
+          expect(slider.html()).toContain('translateX(-100%);');
           done();
         });
       });
@@ -491,11 +491,11 @@ describe('ng-pageslide: ', function() {
           //when opening the slider
           scope.is_open = true;
           scope.$digest();
-          expect(slider.html()).toContain('top: 0px;');
+          expect(slider.html()).toContain('translateY(0px);');
           //when closing the slider
           scope.is_open = false;
           scope.$digest();
-          expect(slider.html()).toContain('top: -300px;');
+          expect(slider.html()).toContain('translateY(-100%);');
           done();
         });
       });
@@ -525,14 +525,14 @@ describe('ng-pageslide: ', function() {
           //when opening the slider
           scope.is_open = true;
           scope.$digest();
-          expect(slider.html()).toContain('top: 0px;');
+          expect(slider.html()).toContain('translateY(0px);');
           //TODO: find out why these are not being set in the test
           // expect(slider.html()).toContain('top: 300px;');
           // expect(slider.html()).toContain('bottom: -300px;');
           //when closing the slider
           scope.is_open = false;
           scope.$digest();
-          expect(slider.html()).toContain('top: -300px;');
+          expect(slider.html()).toContain('translateY(-100%);');
           done();
         });
       });
@@ -563,11 +563,11 @@ describe('ng-pageslide: ', function() {
           //when opening the slider
           scope.is_open = true;
           scope.$digest();
-          expect(slider.html()).toContain('bottom: 0px;');
+          expect(slider.html()).toContain('translateY(0px);');
           //when closing the slider
           scope.is_open = false;
           scope.$digest();
-          expect(slider.html()).toContain('bottom: -300px;');
+          expect(slider.html()).toContain('translateY(100%);');
           done();
         });
       });
@@ -597,14 +597,14 @@ describe('ng-pageslide: ', function() {
           //when opening the slider
           scope.is_open = true;
           scope.$digest();
-          expect(slider.html()).toContain('bottom: 0px;');
+          expect(slider.html()).toContain('translateY(0%);');
           //TODO: find out why these are not being set in the test
           // expect(slider.html()).toContain('bottom: 300px;');
           // expect(slider.html()).toContain('top: -300px;');
           //when closing the slider
           scope.is_open = false;
           scope.$digest();
-          expect(slider.html()).toContain('bottom: -300px;');
+          expect(slider.html()).toContain('translateY(100%);');
           done();
         });
       });
