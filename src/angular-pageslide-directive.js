@@ -114,16 +114,10 @@
 
                     slider.style.zIndex = param.zindex;
                     slider.style.position = 'fixed';
-                    slider.style.transitionDuration = param.speed + 's';
-                    slider.style.webkitTransitionDuration = param.speed + 's';
                     slider.style.height = param.size;
-                    slider.style.transitionProperty = 'top, bottom, left, right';
 
                     if (param.push) {
                         body.style.position = 'absolute';
-                        body.style.transitionDuration = param.speed + 's';
-                        body.style.webkitTransitionDuration = param.speed + 's';
-                        body.style.transitionProperty = 'top, bottom, left, right';
                     }
 
                     if (param.container) {
@@ -226,6 +220,16 @@
                     }
 
                     function psOpen(slider, param) {
+                        // apply transitions now that slide is positioned and 
+                        // just before we move it into view.
+                        slider.style.transitionDuration = param.speed + 's';
+                        slider.style.webkitTransitionDuration = param.speed + 's';
+                        slider.style.transitionProperty = 'top, bottom, left, right';
+                        if (param.push) {
+                            body.style.transitionDuration = param.speed + 's';
+                            body.style.webkitTransitionDuration = param.speed + 's';
+                            body.style.transitionProperty = 'top, bottom, left, right';
+                        }
                         switch (param.side) {
                             case 'right':
                                 slider.style.right = "0px";
