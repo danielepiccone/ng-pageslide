@@ -17,8 +17,8 @@
   "version": "2.1.4",
   "license": "MIT",
   "devDependencies": {
-    "angular": "1.5.5",
-    "angular-mocks": "1.5.5",
+    "angular": "1.x",
+    "angular-mocks": "1.x",
     "grunt": "0.4.5",
     "grunt-cli": "1.2.0",
     "grunt-contrib-concat": "0.3.0",
@@ -34,7 +34,7 @@
     "karma-phantomjs-launcher": "1.0.1"
   },
   "peerDependencies": {
-    "angular": "1.5.x"
+    "angular": "1.x"
   },
   "scripts": {
     "prepublish": "grunt",

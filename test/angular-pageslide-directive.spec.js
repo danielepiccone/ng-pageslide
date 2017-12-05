@@ -3,19 +3,24 @@ describe('ng-pageslide: ', function() {
 
   var $compile;
   var $timeout;
-  var $document = jasmine.createSpyObj('$document', ['on', 'off']);
+  var $document;
   var scope;
   var isolateScope;
   var element;
   var compilePageslide;
 
   beforeEach(function (done) {
+    $document = document;
+    $document.on = jasmine.createSpy('on')
+    $document.off = jasmine.createSpy('off')
+
     module('pageslide-directive', [
       '$provide',
       function ($provide) {
         $provide.value('$document', $document);
       }
     ]);
+
     compilePageslide = function (html) {
       inject([
         '$compile',
