@@ -4,12 +4,12 @@ An AngularJS directive which slides another panel over your browser to reveal an
 
 It does all the css manipulation needed to position your content off canvas.
 
-See it in action [HERE](http://dpiccone.github.io/ng-pageslide/examples/)
+See it in action [HERE](http://danielepiccone.github.io/ng-pageslide/examples/)
 
 Examples in the repository, run them with `npm run examples`
 
-[![Build Status](https://travis-ci.org/dpiccone/ng-pageslide.svg?branch=master)](https://travis-ci.org/dpiccone/ng-pageslide)
-[![Coverage Status](https://coveralls.io/repos/github/dpiccone/ng-pageslide/badge.svg?branch=v2)](https://coveralls.io/github/dpiccone/ng-pageslide?branch=v2)
+[![Build Status](https://travis-ci.org/danielepiccone/ng-pageslide.svg?branch=master)](https://travis-ci.org/danielepiccone/ng-pageslide)
+[![Coverage Status](https://coveralls.io/repos/github/danielepiccone/ng-pageslide/badge.svg?branch=v2)](https://coveralls.io/github/danielepiccone/ng-pageslide?branch=v2)
 
 ## Usage
 
