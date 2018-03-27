@@ -25,6 +25,7 @@
                     psSpeed: '@',
                     psClass: '@',
                     psSize: '@',
+                    psBuffer: '@',
                     psZindex: '@',
                     psPush: '@',
                     psContainer: '@',
@@ -41,6 +42,7 @@
                     param.side = scope.psSide || 'right';
                     param.speed = scope.psSpeed || '0.5';
                     param.size = scope.psSize || '300px';
+                    param.buffer = scope.psBuffer || '0px';
                     param.zindex = scope.psZindex || 1000;
                     param.className = scope.psClass || 'ng-pageslide';
                     param.push = scope.psPush === 'true';
@@ -57,6 +59,9 @@
                     /* DOM manipulation */
 
                     var content, slider, body, isOpen = false;
+
+                    var intSize = parseInt(param.size.match(/\d+/g)[0], 10);
+                    var intBuffer = parseInt(param.buffer.match(/\d+/g)[0], 10);
 
                     if (param.container) {
                         body = document.getElementById(param.container);
@@ -182,30 +187,31 @@
                     }
 
                     function psClose(slider, param) {
+                        var offset = intSize + intBuffer;
                         switch (param.side) {
                             case 'right':
-                                slider.style.right = "-" + param.size;
+                                slider.style.right = "-" + offset + 'px';
                                 if (param.push) {
                                     body.style.right = '0px';
                                     body.style.left = '0px';
                                 }
                                 break;
                             case 'left':
-                                slider.style.left = "-" + param.size;
+                                slider.style.left = "-" + offset + 'px';
                                 if (param.push) {
                                     body.style.left = '0px';
                                     body.style.right = '0px';
                                 }
                                 break;
                             case 'top':
-                                slider.style.top = "-" + param.size;
+                                slider.style.top = "-" + offset + 'px';
                                 if (param.push) {
                                     body.style.top = '0px';
                                     body.style.bottom = '0px';
                                 }
                                 break;
                             case 'bottom':
-                                slider.style.bottom = "-" + param.size;
+                                slider.style.bottom = "-" + offset + 'px';
                                 if (param.push) {
                                     body.style.bottom = '0px';
                                     body.style.top = '0px';
