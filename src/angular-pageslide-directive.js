@@ -149,34 +149,39 @@
                     initSlider();
 
                     function initSlider() {
+                        // fix initSlider : remove unused properties and keep open/close panel when change size / side
                         switch (param.side) {
                             case 'right':
                                 slider.style.width = param.size;
                                 slider.style.height = '100%';
                                 slider.style.top = '0px';
                                 slider.style.bottom = '0px';
-                                slider.style.right = '0px';
+                                slider.style.right = (scope.psOpen ? '0px' : '-'+param.size);
+                                slider.style.left = null;
                                 break;
                             case 'left':
                                 slider.style.width = param.size;
                                 slider.style.height = '100%';
                                 slider.style.top = '0px';
                                 slider.style.bottom = '0px';
-                                slider.style.left = '0px';
+                                slider.style.left = (scope.psOpen ? '0px' : '-'+param.size);
+                                slider.style.right = null;
                                 break;
                             case 'top':
                                 slider.style.height = param.size;
                                 slider.style.width = '100%';
                                 slider.style.left = '0px';
-                                slider.style.top = '0px';
+                                slider.style.top = (scope.psOpen ? '0px' : '-'+param.size);
                                 slider.style.right = '0px';
+                                slider.style.bottom = null;
                                 break;
                             case 'bottom':
                                 slider.style.height = param.size;
                                 slider.style.width = '100%';
-                                slider.style.bottom = '0px';
+                                slider.style.bottom = (scope.psOpen ? '0px' : '-'+param.size);
                                 slider.style.left = '0px';
                                 slider.style.right = '0px';
+                                slider.style.top = null;
                                 break;
                         }
                     }
@@ -299,6 +304,15 @@
                     scope.$watch('psSize', function(newValue, oldValue) {
                         if (oldValue !== newValue) {
                             param.size = newValue;
+                            initSlider();
+                        }
+                    });
+
+                    // add psSide watcher
+                    scope.$watch('psSide', function(newValue, oldValue) {
+                        if (oldValue !== newValue) {
+                            param.side = newValue;
+                            console.log('> page side changed !');
                             initSlider();
                         }
                     });
