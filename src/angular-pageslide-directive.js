@@ -95,8 +95,6 @@
                         }
                     }
 
-                    setBodyClass('closed');
-
                     slider = el[0];
 
                     if (slider.tagName.toLowerCase() !== 'div' &&
@@ -146,38 +144,38 @@
 
                     slider.addEventListener('transitionend', onTransitionEnd);
 
-                    initSlider();
-
-                    function initSlider() {
+                    function initSlider(slider, param) {
                         switch (param.side) {
                             case 'right':
                                 slider.style.width = param.size;
                                 slider.style.height = '100%';
                                 slider.style.top = '0px';
                                 slider.style.bottom = '0px';
-                                slider.style.right = '0px';
                                 break;
                             case 'left':
                                 slider.style.width = param.size;
                                 slider.style.height = '100%';
                                 slider.style.top = '0px';
                                 slider.style.bottom = '0px';
-                                slider.style.left = '0px';
                                 break;
                             case 'top':
                                 slider.style.height = param.size;
                                 slider.style.width = '100%';
                                 slider.style.left = '0px';
-                                slider.style.top = '0px';
                                 slider.style.right = '0px';
                                 break;
                             case 'bottom':
                                 slider.style.height = param.size;
                                 slider.style.width = '100%';
-                                slider.style.bottom = '0px';
                                 slider.style.left = '0px';
                                 slider.style.right = '0px';
                                 break;
+                        }
+
+                        if (scope.psOpen) {
+                          psOpen(slider, param);
+                        } else {
+                          psClose(slider, param);
                         }
                     }
 
@@ -285,6 +283,9 @@
                         }
                     }
 
+                    // Initialize
+
+                    initSlider(slider, param);
 
                     // Watchers
 
@@ -299,10 +300,9 @@
                     scope.$watch('psSize', function(newValue, oldValue) {
                         if (oldValue !== newValue) {
                             param.size = newValue;
-                            initSlider();
+                            initSlider(slider, param);
                         }
                     });
-
 
                     // Events
 
