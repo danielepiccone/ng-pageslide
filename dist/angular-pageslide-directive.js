@@ -31,23 +31,26 @@
                     psKeyListener: '@',
                     psBodyClass: '@',
                     psClickOutside: '@',
-                    onopen: '=?',
-                    onclose: '=?'
+                    onopen: '&?',
+                    onclose: '&?'
                 },
-                link: function ($scope, el, attrs) {
+                link: function (scope, el, attrs) {
 
                     var param = {};
 
-                    param.side = $scope.psSide || 'right';
-                    param.speed = $scope.psSpeed || '0.5';
-                    param.size = $scope.psSize || '300px';
-                    param.zindex = $scope.psZindex || 1000;
-                    param.className = $scope.psClass || 'ng-pageslide';
-                    param.push = $scope.psPush === 'true';
-                    param.container = $scope.psContainer || false;
-                    param.keyListener = $scope.psKeyListener === 'true';
-                    param.bodyClass = $scope.psBodyClass || false;
-                    param.clickOutside = $scope.psClickOutside !== 'false';
+                    param.side = scope.psSide || 'right';
+                    param.speed = scope.psSpeed || '0.5';
+                    param.size = scope.psSize || '300px';
+                    param.zindex = scope.psZindex || 1000;
+                    param.className = scope.psClass || 'ng-pageslide';
+                    param.push = scope.psPush === 'true';
+                    param.container = scope.psContainer || false;
+                    param.keyListener = scope.psKeyListener === 'true';
+                    param.bodyClass = scope.psBodyClass || false;
+                    param.clickOutside = scope.psClickOutside !== 'false';
+                    param.autoClose = scope.psAutoClose || false;
+
+                    param.push = param.push && !param.container;
 
                     el.addClass(param.className);
 
@@ -61,22 +64,19 @@
                         body = document.body;
                     }
 
-
-                    if (param.push) {
-                        body.style.position = 'absolute';
-                        body.style.transitionDuration = param.speed + 's';
-                        body.style.webkitTransitionDuration = param.speed + 's';
-                        body.style.transitionProperty = 'top, bottom, left, right';
-                    }
-
                     function onBodyClick(e) {
-                        if(isOpen && !slider.contains(e.target)) {
+                        var target = e.touches && e.touches[0] || e.target;
+                        if(
+                            isOpen &&
+                            body.contains(target) &&
+                            !slider.contains(target)
+                        ) {
                             isOpen = false;
-                            $scope.psOpen = false;
-                            $scope.$apply();
+                            scope.psOpen = false;
+                            scope.$apply();
                         }
 
-                        if($scope.psOpen) {
+                        if(scope.psOpen) {
                             isOpen = true;
                         }
                     }
@@ -84,13 +84,16 @@
                     function setBodyClass(value){
                         if (param.bodyClass) {
                             var bodyClass = param.className + '-body';
-                            var bodyClassRe = new RegExp(' ' + bodyClass + '-closed| ' + bodyClass + '-open');
+                            var bodyClassRe = new RegExp(bodyClass + '-closed|' + bodyClass + '-open');
                             body.className = body.className.replace(bodyClassRe, '');
-                            body.className += ' ' + bodyClass + '-' + value;
+                            var newBodyClassName = bodyClass + '-' + value;
+                            if (body.className[body.className.length -1] !== ' ') {
+                                body.className += ' ' + newBodyClassName;
+                            } else {
+                                body.className += newBodyClassName;
+                            }
                         }
                     }
-
-                    setBodyClass('closed');
 
                     slider = el[0];
 
@@ -114,52 +117,65 @@
                     slider.style.height = param.size;
                     slider.style.transitionProperty = 'top, bottom, left, right';
 
+                    if (param.push) {
+                        body.style.position = 'absolute';
+                        body.style.transitionDuration = param.speed + 's';
+                        body.style.webkitTransitionDuration = param.speed + 's';
+                        body.style.transitionProperty = 'top, bottom, left, right';
+                    }
+
+                    if (param.container) {
+                        slider.style.position = 'absolute';
+                        body.style.position = 'relative';
+                        body.style.overflow = 'hidden';
+                    }
+
                     function onTransitionEnd() {
-                        if ($scope.psOpen) {
-                            if (typeof $scope.onopen === 'function') {
-                                $scope.onopen();
+                        if (scope.psOpen) {
+                            if (typeof scope.onopen === 'function') {
+                                scope.onopen()();
                             }
                         } else {
-                            if (typeof $scope.onclose === 'function') {
-                                $scope.onclose();
+                            if (typeof scope.onclose === 'function') {
+                                scope.onclose()();
                             }
                         }
                     }
 
                     slider.addEventListener('transitionend', onTransitionEnd);
 
-                    initSlider();
-
-                    function initSlider() {
+                    function initSlider(slider, param) {
                         switch (param.side) {
                             case 'right':
                                 slider.style.width = param.size;
                                 slider.style.height = '100%';
                                 slider.style.top = '0px';
                                 slider.style.bottom = '0px';
-                                slider.style.right = '0px';
                                 break;
                             case 'left':
                                 slider.style.width = param.size;
                                 slider.style.height = '100%';
                                 slider.style.top = '0px';
                                 slider.style.bottom = '0px';
-                                slider.style.left = '0px';
                                 break;
                             case 'top':
                                 slider.style.height = param.size;
                                 slider.style.width = '100%';
                                 slider.style.left = '0px';
-                                slider.style.top = '0px';
                                 slider.style.right = '0px';
                                 break;
                             case 'bottom':
                                 slider.style.height = param.size;
                                 slider.style.width = '100%';
-                                slider.style.bottom = '0px';
                                 slider.style.left = '0px';
                                 slider.style.right = '0px';
                                 break;
+                        }
+
+                        if (scope.psOpen) {
+                          psOpen(slider, param);
+                        } else {
+                          psClose(slider, param);
                         }
                     }
 
@@ -200,11 +216,11 @@
                         }
 
                         if (param.clickOutside) {
-                            $document.off('click', onBodyClick);
+                            $document.off('touchend click', onBodyClick);
                         }
                         isOpen = false;
                         setBodyClass('closed');
-                        $scope.psOpen = false;
+                        scope.psOpen = false;
                     }
 
                     function psOpen(slider, param) {
@@ -239,14 +255,14 @@
                                 break;
                         }
 
-                        $scope.psOpen = true;
+                        scope.psOpen = true;
 
                         if (param.keyListener) {
                             $document.on('keydown', handleKeyDown);
                         }
 
                         if (param.clickOutside) {
-                            $document.on('click', onBodyClick);
+                            $document.on('touchend click', onBodyClick);
                         }
                         setBodyClass('open');
                     }
@@ -262,15 +278,18 @@
                             // http://stackoverflow.com/questions/12729122/angularjs-prevent-error-digest-already-in-progress-when-calling-scope-apply
 
                             $timeout(function () {
-                                $scope.$apply();
+                                scope.$apply();
                             });
                         }
                     }
 
+                    // Initialize
+
+                    initSlider(slider, param);
 
                     // Watchers
 
-                    $scope.$watch('psOpen', function(value) {
+                    scope.$watch('psOpen', function(value) {
                         if (!!value) {
                             psOpen(slider, param);
                         } else {
@@ -278,20 +297,19 @@
                         }
                     });
 
-                    $scope.$watch('psSize', function(newValue, oldValue) {
+                    scope.$watch('psSize', function(newValue, oldValue) {
                         if (oldValue !== newValue) {
                             param.size = newValue;
-                            initSlider();
+                            initSlider(slider, param);
                         }
                     });
 
-
                     // Events
 
-                    $scope.$on('$destroy', function () {
+                    scope.$on('$destroy', function () {
                         if (slider.parentNode === body) {
                             if (param.clickOutside) {
-                                $document.off('click', onBodyClick);
+                                $document.off('touchend click', onBodyClick);
                             }
                             body.removeChild(slider);
                         }
@@ -299,11 +317,11 @@
                         slider.removeEventListener('transitionend', onTransitionEnd);
                     });
 
-                    if ($scope.psAutoClose) {
-                        $scope.$on('$locationChangeStart', function() {
+                    if (param.autoClose) {
+                        scope.$on('$locationChangeStart', function() {
                             psClose(slider, param);
                         });
-                        $scope.$on('$stateChangeStart', function() {
+                        scope.$on('$stateChangeStart', function() {
                             psClose(slider, param);
                         });
                     }
@@ -312,5 +330,3 @@
             };
         }]);
 }));
-
-
